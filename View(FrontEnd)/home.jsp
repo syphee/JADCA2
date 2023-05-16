@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div>
+	Successfully logged in.
 
+</div>
 </body>
 </html>
