@@ -35,7 +35,7 @@
             </div>
             <div class="input-block">
               <label for="login-password">Password</label>
-              <input id="login-password" type="password" name="password" required>
+              <input id="login-password" type="password" name="passwordid" required>
             </div>
           </fieldset>
           <input type="submit" class="btn-login" value="Login">
