@@ -20,13 +20,13 @@ import dbDAO.UserDAO;
  * Servlet implementation class VerifyUser
  */
 @WebServlet("/VerifyUser")
-public class VerifyUser extends HttpServlet {
+public class VerifyUserLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public VerifyUser() {
+    public VerifyUserLogin() {
         super();
         // TODO Auto-generated constructor stub
     }
