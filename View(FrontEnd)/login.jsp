@@ -30,7 +30,7 @@
 
 
 
-				<form class="form form-login" action="./../../../VerifyUser" method="post">
+				<form class="form form-login" action="./../../../VerifyUserLogin" method="post">
 					<fieldset>
 						<legend>Please, enter your email and password for login.</legend>
 						<div class="input-block">
