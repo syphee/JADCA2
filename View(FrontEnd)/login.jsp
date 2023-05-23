@@ -70,6 +70,11 @@ if (cookies != null) {
 					<input type="submit" class="btn-login" value="Login">
 
 				</form>
+				
+				<form class="form form-login" action="./../../../VerifyUserLogin" method="post">
+					<label>Login as Guest</label>
+					<input type="submit" class="btn-login" name="GuestLogin" value="Guest">
+				</form>
 
 
 
