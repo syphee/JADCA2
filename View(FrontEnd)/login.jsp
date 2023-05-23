@@ -18,6 +18,7 @@
 
 </head>
 <body>
+
 	<section class="forms-section">
 		<h1 class="section-title">SP BookStore Rentals</h1>
 		<div class="forms">
@@ -124,8 +125,6 @@
 	</div>
 		
 	</section>
-
-
 
 
 

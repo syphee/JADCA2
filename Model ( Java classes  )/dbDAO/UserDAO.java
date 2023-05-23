@@ -101,7 +101,7 @@ public class UserDAO {
 			// Step 4: Create Statement object
 			Statement stmt = conn.createStatement();
 			// Step 5: Execute SQL Command
-			String sqlStr = "SELECT * from users WHERE email = ? AND password = ?";
+			String sqlStr = "INSERT INTO users WHERE email = ? AND password = ?";
 			//
 			PreparedStatement pstmt = conn.prepareStatement(sqlStr);
 

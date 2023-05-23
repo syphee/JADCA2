@@ -16,30 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `users`
+-- Table structure for table `loaned`
 --
 
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `loaned`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `users` (
-  `userid` int NOT NULL AUTO_INCREMENT,
-  `email` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  `role` varchar(45) NOT NULL,
-  PRIMARY KEY (`userid`),
-  UNIQUE KEY `user_id_UNIQUE` (`userid`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `loaned` (
+  `rental_id` int NOT NULL AUTO_INCREMENT,
+  `rental_date` date NOT NULL,
+  `return_date` date NOT NULL,
+  `userid_fk` int NOT NULL,
+  `bookid_fk` int NOT NULL,
+  PRIMARY KEY (`rental_id`),
+  KEY `bookid_fk_idx` (`bookid_fk`),
+  KEY `userid_fk_idx` (`userid_fk`),
+  CONSTRAINT `bookid_fk` FOREIGN KEY (`bookid_fk`) REFERENCES `books` (`book_id`),
+  CONSTRAINT `userid_fk` FOREIGN KEY (`userid_fk`) REFERENCES `users` (`userid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `loaned`
 --
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'SkyeRyan.21@gmail.com','Skye123','admin'),(2,'JamesEvans@gmail.com','James123','admin'),(3,'CustomerTest@example.com','Customer123','user');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+LOCK TABLES `loaned` WRITE;
+/*!40000 ALTER TABLE `loaned` DISABLE KEYS */;
+/*!40000 ALTER TABLE `loaned` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-18 14:28:10
+-- Dump completed on 2023-05-18 14:28:11

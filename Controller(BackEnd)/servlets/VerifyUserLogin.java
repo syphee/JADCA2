@@ -19,7 +19,7 @@ import dbDAO.UserDAO;
 /**
  * Servlet implementation class VerifyUser
  */
-@WebServlet("/VerifyUser")
+@WebServlet("/VerifyUserLogin")
 public class VerifyUserLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
