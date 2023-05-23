@@ -24,7 +24,19 @@
 			    	
 			    	// to find the rememberMe cookie, and if exists, do not overwrite again
 			        if (cookie.getName().equals("rememberMe")) {
-						hasValidated = false;
+			        	
+			        	// to check if cookie matches the newly logged in user credentials, then override the cookie
+			        	// session.getAttribute("rememberMe") is the username stored in the cookie,
+			        	// user is the newly logged in user
+			        	
+			        	// if the same user has logged in , cookie will not overwrite
+			        	if(user.equals(session.getAttribute("rememberMe")) != true){
+			        		hasValidated = true;
+			        	}else{
+							hasValidated = false;
+			        	}
+			        	
+
 			        }
 			    }
 			}
