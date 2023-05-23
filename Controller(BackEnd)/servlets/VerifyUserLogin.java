@@ -59,16 +59,27 @@ public class VerifyUserLogin extends HttpServlet {
 		
 		String role;
 		String guest = "";
+		
+		// to determine if has already redirected , since we are redirecting guest ontop of the validation
+		boolean hasLogged = false;
 				
 		
 		// to retrieve body params if user decides to login as guest
 		try {
 			guest = request.getParameter("GuestLogin");
-			// to verify if user has clicked on Login as Guest
+			// to verify if user has clicked on Login as Guest, then skip the rest of the code and redirect
 			if(guest.equals("Guest")) {
 				System.out.println("Logged in as guest.");
 				loginid = "Guest";
 				role = "Guest";
+				
+				session.setAttribute("username","Guest" );
+				session.setAttribute("role", "Guest");
+				
+				System.out.println("Logged in as guest!");
+				hasLogged = true;
+				response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp");
+				
 			}
 		}
 		catch(Exception ex) {
@@ -90,21 +101,13 @@ public class VerifyUserLogin extends HttpServlet {
 		// if no login details, has not clicked log in as guest
 		if(loginid == null && guest.equals("Guest") != true || password == null && guest.equals("Guest") != true){
 			response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp");
-		}else{
+		}else if(hasLogged == false){
 			
 			// for loop to check here
 			// to call UserDAO class
 			// if wrong password input , userDAO will return a null object
 			
-			// check if user has decided to login as guest, then set attribute username and role as "Guest", then redirect
-			if(guest.equals("Guest")) {
-				session.setAttribute("username","Guest" );
-				session.setAttribute("role", "Guest");
-				
-				System.out.println("Logged in as guest!");
-				response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp");
-				
-			}else {
+
 				try {
 					
 					// the returned result from Database
@@ -165,7 +168,7 @@ public class VerifyUserLogin extends HttpServlet {
 			}
 
 		}
-	}
+	
 	
 	private void createCookie() {
 		
