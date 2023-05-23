@@ -30,13 +30,13 @@
 
 
 
-
+				<!-- Login section -->
 				<form class="form form-login" action="./../../../VerifyUserLogin" method="post">
 					<fieldset>
 						<legend>Please, enter your email and password for login.</legend>
 						<div class="input-block">
 							<label for="login-email">E-mail</label> <input id="login-email"
-								type="text" name="loginid" required>
+								type="email" name="loginid" required>
 						</div>
 						<div class="input-block">
 							<label for="login-password">Password</label> <input
@@ -54,21 +54,23 @@
 				<button type="button" class="switcher switcher-signup">
 					Sign Up <span class="underline"></span>
 				</button>
-				<form class="form form-signup">
+				
+				<!-- Sign up section -->
+				<form class="form form-signup" action="./../../../RegisterUser" method="post">
 					<fieldset>
 						<legend>Please, enter your email, password and password
 							confirmation for sign up.</legend>
 						<div class="input-block">
-							<label for="signup-email">E-mail</label> <input id="signup-email"
-								type="email" required>
+							<label for="signup-email">E-mail</label> <input id="login-email"
+								type="email" name="loginid" required>
 						</div>
 						<div class="input-block">
 							<label for="signup-password">Password</label> <input
-								id="signup-password" type="password" required>
+								id="login-password" type="password" name="password" required>
 						</div>
 						<div class="input-block">
 							<label for="signup-password-confirm">Confirm password</label> <input
-								id="signup-password-confirm" type="password" required>
+								id="login-password" type="confirmPassword" name="confirmPassword" required>
 						</div>
 					</fieldset>
 					<button type="submit" class="btn-signup">Register</button>
@@ -80,20 +82,35 @@
 		<!-- if there is content in output, display notification box -->
 		
 <%
-    
-    String errCode = request.getParameter("errCode");
+    // code params to determine err code / code
+    String Code = request.getParameter("c");
     String output = "";
+									
+	// to determine color of alert box
+	String color = "";
     
     // switch case to determine errcode present
-    if(errCode != null){
-    	if(errCode.equals("invalidLogin")){
+    if(Code != null){
+    	if(Code.equals("invalidLogin")){
     		output = "Invalid Username / Password. Please try again.";
-    				System.out.println("Invalid Login");
+    		color = "alert-danger";
+    		System.out.println("Invalid Login");
     	}
     	
-    	else if(errCode.equals("ConnectionErr")){
+    	else if(Code.equals("ConnectionErr")){
     		output = "Error with connecting to SP Rentals. Please contact the administrator.";
+    		color = "alert-danger";
     		System.out.println("Connection Error");
+    	}
+    	else if(Code.equals("invalidPassword")){
+    		output = "Passwords do not match! Please try again.";
+    		color = "alert-danger";
+			System.out.println("Password no match");
+    	}
+    	else if(Code.equals("successful_registration")){
+    		output = "User has successfully been registered. Please login.";
+    		color = "alert-success";
+			System.out.println("Successful registration");
     	}
     	else{
     		output = "";
@@ -112,7 +129,7 @@
 
 <!-- message comes here -->
 
-<div class="alert alert-danger" role="alert">
+<div class="alert <%=color %>" role="alert">
   <%=output %>
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>

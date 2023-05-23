@@ -95,7 +95,7 @@ public class VerifyUserLogin extends HttpServlet {
 					
 					// if wrong password input , userDAO will return a null object
 					output = "You have entered an invalid ID/Password";
-					response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?errCode=invalidLogin");
+					response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=invalidLogin");
 					System.out.println(output);
 				}
 			} catch (IOException e) {
@@ -109,14 +109,14 @@ public class VerifyUserLogin extends HttpServlet {
 				
 				// if error in connection with DB
 				output = "Error with connecting to SP Rentals. Please contact the administrator.";
-				response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?errCode=ConnectionErr");
+				response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=ConnectionErr");
 				System.out.println(e);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				
 				// if error with servlet
 				output = "Error with connecting to SP Rentals. Please contact the administrator.";
-				response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?errCode=ConnectionErr");
+				response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=ConnectionErr");
 				System.out.println(e);
 				System.out.println("Unknown Error");
 			}
