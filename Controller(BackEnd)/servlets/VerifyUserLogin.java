@@ -55,7 +55,11 @@ public class VerifyUserLogin extends HttpServlet {
 		// to call class verification
 		String loginid = request.getParameter("loginid");
 		String password = request.getParameter("password");
+		String result = request.getParameter("rememberMe");
 		
+		boolean rememberMe = Boolean.parseBoolean(result);
+		
+	
 		String output = "";
 
 		//to redirect user if tries to bypass login by entering http://localhost:8080/Practical_2/Practical%202/VerifyUser.jsp without logging in
@@ -83,6 +87,11 @@ public class VerifyUserLogin extends HttpServlet {
 					
 					session.setAttribute("username",username );
 					session.setAttribute("role", role);
+					
+					// if user has selected to remember login
+					if(result != null && rememberMe == true) {
+						session.setAttribute("rememberMe", true);
+					}
 					
 					// if successfully logged in 
 					System.out.println("Logged in!");
@@ -121,6 +130,10 @@ public class VerifyUserLogin extends HttpServlet {
 				System.out.println("Unknown Error");
 			}
 		}
+	}
+	
+	private void createCookie() {
+		
 	}
 
 }

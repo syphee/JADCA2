@@ -1,7 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
 
+// the automatic login feature
 
+// to check for cookies
+Cookie[] cookies = request.getCookies();
+if (cookies != null) {
+    for (Cookie cookie : cookies) {
+    	
+    	// to find the rememberMe cookie
+        if (cookie.getName().equals("rememberMe")) {
+            String username = cookie.getValue();
+            
+            session.setAttribute("username",username);
+            
+            // then redirect
+            response.sendRedirect("home.jsp");
+            break;
+        }
+    }
+}
+%>
 
 <!DOCTYPE html>
 <html>
@@ -41,6 +61,10 @@
 						<div class="input-block">
 							<label for="login-password">Password</label> <input
 								id="login-password" type="password" name="password" required>
+						</div>
+						<div class="remember-me">
+							<label>Remember me</label>
+							<input type = "checkbox" name = "rememberMe" value="true"/>
 						</div>
 					</fieldset>
 					<input type="submit" class="btn-login" value="Login">
