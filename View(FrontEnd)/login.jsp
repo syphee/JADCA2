@@ -141,6 +141,11 @@ if (cookies != null) {
     		color = "alert-success";
 			System.out.println("Successful registration");
     	}
+    	else if(Code.equals("UserExists")){
+    		output = "Username has already been taken! Please try again.";
+    		color = "alert-warning";
+			System.out.println("Username has already been taken");
+    	}
     	else{
     		output = "";
     		System.out.println("Unknown");

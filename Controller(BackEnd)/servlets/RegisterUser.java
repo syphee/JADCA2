@@ -69,28 +69,40 @@ public class RegisterUser extends HttpServlet {
 			if(password.equals(confirmPassword)) {
 				try {
 					
-					// the returned result from Database
+					// to check if user already exists
+					boolean verifyExists = UserDAO.ValidateExists(loginid,password);
 					
-					String userDetails = UserDAO.RegisterNewUser(loginid,password);
-					
-					// if there is content
-					if (userDetails.isEmpty() != true) {
+					// if user does not exist on the DB yet
+					if(verifyExists = false) {
+						// the returned result from Database			
+						String userDetails = UserDAO.RegisterNewUser(loginid,password);
 						
+						// if there is content
+						if (userDetails.isEmpty() != true) {
+							
 
-						// if successfully logged in 
-						System.out.println("Successfully created user!");
-						response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=successful_registration");
-						
-						
-						//request.getRequestDispatcher("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp").forward(request, response);
-						
-					}else{
-						
-						// if wrong password input , userDAO will return a null object
-						output = "You have entered an invalid ID/Password";
-						response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=invalidLogin");
+							// if successfully logged in 
+							System.out.println("Successfully created user!");
+							response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=successful_registration");
+							
+							
+							//request.getRequestDispatcher("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp").forward(request, response);
+							
+						}else{
+							
+							// if wrong password input , userDAO will return a null object
+							output = "You have entered an invalid ID/Password";
+							response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=invalidLogin");
+							System.out.println(output);
+						}
+					}
+					// if user already exists
+					else {
+						output = "User Already exists in the database!";
+						response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=UserExists");
 						System.out.println(output);
 					}
+					
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					System.out.println(e);
