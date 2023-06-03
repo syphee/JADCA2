@@ -1,5 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+String role = "";
+try{
+	role = session.getAttribute("role").toString();
+	if(role.equals("admin") != true || role == null){
+		System.out.println("No permissions!");
+		response.sendRedirect("home.jsp");
+	}
+	
+}catch(Exception ex){
+	System.out.println("No permissions!");
+	response.sendRedirect("home.jsp");
+}
+
+%>
 <!DOCTYPE html>
 <html lang="en">
 <!-- To add cookie / role scriptlet validation here -->
@@ -21,8 +36,8 @@
   <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
 
-  <link rel="stylesheet" href="animations.css">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../View(FrontEnd)/assets/css/styles.css">
+  <link rel="stylesheet" href="../View(FrontEnd)/assets/css/animations.css">
 
   <style>
     html,
@@ -236,11 +251,13 @@
                   <li>
                     <hr class="dropdown-divider">
                   </li>
-                  <li><a class="dropdown-item" href="#">Exit Admin Panel</a></li>
+                  <li><a class="dropdown-item" href="home.jsp">Exit Admin Panel</a></li>
                   <li>
                     <hr class="dropdown-divider">
                   </li>
-                  <li><a class="dropdown-item" href="#">Log out</a></li>
+                  <li><form action="./../../../InvalidateSession" method="post">
+	              	<input type="submit" class="dropdown-item" value="Log out">
+	              </form></li>
                 </ul>
               </div>
 
