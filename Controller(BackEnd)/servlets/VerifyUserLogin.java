@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Cookie;
 
 // import userDAO class
 import dbDAO.UserDAO;
@@ -56,6 +57,8 @@ public class VerifyUserLogin extends HttpServlet {
 		String loginid = request.getParameter("loginid");
 		String password = request.getParameter("password");
 		String result = request.getParameter("rememberMe");
+		
+		Cookie[] cookies = request.getCookies();
 		
 		String role = "";
 		String guest = "";
@@ -128,9 +131,12 @@ public class VerifyUserLogin extends HttpServlet {
 						session.setAttribute("username",username );
 						session.setAttribute("role", role);
 						
-						// if user has selected to remember login
+						// if user has selected to remember login					
+						// TODO - store user details ( username and role ) in SQL and link it with JSESSIONID
 						if(result != null && rememberMe == true) {
-							session.setAttribute("rememberMe", true);
+							//session.setAttribute("rememberMe", true);
+							createCookie(response,cookies,username,role);
+							
 						}
 						
 						// if successfully logged in 
@@ -175,8 +181,32 @@ public class VerifyUserLogin extends HttpServlet {
 		}
 	
 	
-	private void createCookie() {
+	private void createCookie(HttpServletResponse response,Cookie[] cookies,String username, String role)throws Exception {
+		
+		
+		String INPUT_sessionid = "";
+		
+		// to assign current session id
+		if(cookies != null) {
+			for(Cookie inpt : cookies) {
+				if (inpt.getName().equals("JSESSIONID")) {
+					INPUT_sessionid = inpt.getValue();
+					Cookie cookie = new Cookie("rememberMe","true");
+					response.addCookie(cookie);
+				}
+			}
+			
+		}
+		
+		
+
+		Cookie session_id = new Cookie("session_id",INPUT_sessionid);
+		response.addCookie(session_id);
+		
+		// then insert into sql db with these sesh, link user and role
+		UserDAO.saveSession(INPUT_sessionid, username, role);
 		
 	}
+	
 
 }
