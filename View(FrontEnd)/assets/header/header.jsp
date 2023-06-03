@@ -55,7 +55,8 @@
 
 				if(role.equals("admin")){
 					%>
-				<li><a class="dropdown-item" href="#">Admin Panel</a></li>
+				<li><a class="dropdown-item" href="AdminPanel.jsp">Admin Panel</a>
+				</li>
 				
 				<%} %>
 				
