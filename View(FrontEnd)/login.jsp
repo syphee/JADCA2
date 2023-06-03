@@ -6,20 +6,26 @@
 
 // to check for cookies
 Cookie[] cookies = request.getCookies();
+try{
 if (cookies != null) {
     for (Cookie cookie : cookies) {
-    	
+    	System.out.println(cookie.getName());
     	// to find the rememberMe cookie
         if (cookie.getName().equals("rememberMe")) {
             String username = cookie.getValue();
+            System.out.println("Current logged by cookie : " + username);
             
-            session.setAttribute("username",username);
+            session.setAttribute("username",(String)session.getAttribute("username"));
+            session.setAttribute("role",(String)session.getAttribute("role"));
             
             // then redirect
             response.sendRedirect("home.jsp");
             break;
         }
     }
+}
+}catch(Exception ex){
+	System.out.println("Role error");
 }
 %>
 

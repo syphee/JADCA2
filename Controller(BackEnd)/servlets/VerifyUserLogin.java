@@ -57,7 +57,7 @@ public class VerifyUserLogin extends HttpServlet {
 		String password = request.getParameter("password");
 		String result = request.getParameter("rememberMe");
 		
-		String role;
+		String role = "";
 		String guest = "";
 		
 		// to determine if has already redirected , since we are redirecting guest ontop of the validation
@@ -68,19 +68,24 @@ public class VerifyUserLogin extends HttpServlet {
 		try {
 			guest = request.getParameter("GuestLogin");
 			// to verify if user has clicked on Login as Guest, then skip the rest of the code and redirect
-			if(guest.equals("Guest")) {
-				System.out.println("Logged in as guest.");
-				loginid = "Guest";
-				role = "Guest";
-				
-				session.setAttribute("username","Guest" );
-				session.setAttribute("role", "Guest");
-				
-				System.out.println("Logged in as guest!");
-				hasLogged = true;
-				response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp");
-				
+			
+			// if guest is not null - has user info keyed in
+			if(guest.equals(null) != true) {
+				if(guest.equals("Guest")) {
+					System.out.println("Logged in as guest.");
+					loginid = "Guest";
+					role = "Guest";
+					
+					session.setAttribute("username","Guest" );
+					session.setAttribute("role", "Guest");
+					
+					System.out.println("Logged in as guest!");
+					hasLogged = true;
+					response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp");
+					
+				}				
 			}
+			
 		}
 		catch(Exception ex) {
 			System.out.println(ex);

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import javax.servlet.http.Cookie;
 /**
  * Servlet implementation class InvalidateSession
  */
@@ -38,13 +39,24 @@ public class InvalidateSession extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		session.invalidate();
+		
+		// Delete the remmeberMe cookie by overriding 
+		Cookie cookie = new Cookie("rememberMe", "");
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        
+        
+        
+        response.addCookie(cookie);
+		
+		
 
         // Get an HttpSession related to this request, if no session exist don't
         // create a new one. This is just a check to see after invalidation the
         // session will be null.
         session = request.getSession(false);
 
-        response.getWriter().println("Session : " + session);
+        //response.getWriter().println("Session : " + session);
         response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp");
 	}
 
