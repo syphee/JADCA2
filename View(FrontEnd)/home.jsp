@@ -126,6 +126,7 @@ html, body {
 		<%=user %>
 		<%=role %>
 
+	<p>Hello</p>
 	</div>
 	<%@ include file="assets/footer/footer.jsp"%>
 </body>
