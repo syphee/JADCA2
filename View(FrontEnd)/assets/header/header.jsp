@@ -24,6 +24,7 @@
 
       <!-- Search bar -->
       <ul class="nav justify-content-end col">
+      
         <li class="nav-item mb-0  my-0 d-flex flex-row align-items-end flex-row-reverse ms-1 g-col-6 ">
           <ion-icon name="search-outline" class="fs-1"></ion-icon>
           <input type="text" class="form-control" placeholder="Search" aria-label="Username"aria-describedby="basic-addon1">
@@ -32,9 +33,9 @@
             <a class="nav-link text-black fw-semibold hover-underline-animation  " href="index.html">Advanced Search</a>
           </li>
 
-        <li class="ms-5">
+        <li class="nav-item mb-0 mx-1 my-0 ">
           <div class="dropdown">
-            <button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-danger dropdown-toggle d-inline-block text-truncate" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="max-width: 200px;">
               Hello , <%=user %>
             </button>
             <ul class="dropdown-menu">
@@ -54,7 +55,8 @@
 
 				if(role.equals("admin")){
 					%>
-				<li><a class="dropdown-item" href="#">Admin Panel</a></li>
+				<li><a class="dropdown-item" href="AdminPanel.jsp">Admin Panel</a>
+				</li>
 				
 				<%} %>
 				

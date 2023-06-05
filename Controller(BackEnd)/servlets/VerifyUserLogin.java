@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Cookie;
 
 // import userDAO class
 import dbDAO.UserDAO;
@@ -57,7 +58,9 @@ public class VerifyUserLogin extends HttpServlet {
 		String password = request.getParameter("password");
 		String result = request.getParameter("rememberMe");
 		
-		String role;
+		Cookie[] cookies = request.getCookies();
+		
+		String role = "";
 		String guest = "";
 		
 		// to determine if has already redirected , since we are redirecting guest ontop of the validation
@@ -68,19 +71,24 @@ public class VerifyUserLogin extends HttpServlet {
 		try {
 			guest = request.getParameter("GuestLogin");
 			// to verify if user has clicked on Login as Guest, then skip the rest of the code and redirect
-			if(guest.equals("Guest")) {
-				System.out.println("Logged in as guest.");
-				loginid = "Guest";
-				role = "Guest";
-				
-				session.setAttribute("username","Guest" );
-				session.setAttribute("role", "Guest");
-				
-				System.out.println("Logged in as guest!");
-				hasLogged = true;
-				response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp");
-				
+			
+			// if guest is not null - has user info keyed in
+			if(guest.equals(null) != true) {
+				if(guest.equals("Guest")) {
+					System.out.println("Logged in as guest.");
+					loginid = "Guest";
+					role = "Guest";
+					
+					session.setAttribute("username","Guest" );
+					session.setAttribute("role", "Guest");
+					
+					System.out.println("Logged in as guest!");
+					hasLogged = true;
+					response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp");
+					
+				}				
 			}
+			
 		}
 		catch(Exception ex) {
 			System.out.println(ex);
@@ -123,9 +131,12 @@ public class VerifyUserLogin extends HttpServlet {
 						session.setAttribute("username",username );
 						session.setAttribute("role", role);
 						
-						// if user has selected to remember login
+						// if user has selected to remember login					
+						// TODO - store user details ( username and role ) in SQL and link it with JSESSIONID
 						if(result != null && rememberMe == true) {
-							session.setAttribute("rememberMe", true);
+							//session.setAttribute("rememberMe", true);
+							createCookie(response,cookies,username,role);
+							
 						}
 						
 						// if successfully logged in 
@@ -170,8 +181,32 @@ public class VerifyUserLogin extends HttpServlet {
 		}
 	
 	
-	private void createCookie() {
+	private void createCookie(HttpServletResponse response,Cookie[] cookies,String username, String role)throws Exception {
+		
+		
+		String INPUT_sessionid = "";
+		
+		// to assign current session id
+		if(cookies != null) {
+			for(Cookie inpt : cookies) {
+				if (inpt.getName().equals("JSESSIONID")) {
+					INPUT_sessionid = inpt.getValue();
+					Cookie cookie = new Cookie("rememberMe","true");
+					response.addCookie(cookie);
+				}
+			}
+			
+		}
+		
+		
+
+		Cookie session_id = new Cookie("session_id",INPUT_sessionid);
+		response.addCookie(session_id);
+		
+		// then insert into sql db with these sesh, link user and role
+		UserDAO.saveSession(INPUT_sessionid, username, role);
 		
 	}
+	
 
 }

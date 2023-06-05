@@ -1,25 +1,70 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@page import="dbDAO.UserDAO"%>
+
 <%
-
 // the automatic login feature
-
 // to check for cookies
+
 Cookie[] cookies = request.getCookies();
+<<<<<<< HEAD
 if (cookies != 	null) {
+=======
+boolean validate = false;
+		
+try{
+if (cookies != null) {
+	System.out.println("Finding rememberMe cookie");
+>>>>>>> ec2d21af04ef25932ee1c2d139ae4c0ec1affeaa
     for (Cookie cookie : cookies) {
-    	
+    	System.out.println(cookie.getName());
     	// to find the rememberMe cookie
         if (cookie.getName().equals("rememberMe")) {
-            String username = cookie.getValue();
-            
-            session.setAttribute("username",username);
-            
-            // then redirect
-            response.sendRedirect("home.jsp");
-            break;
+        	if(cookie.getValue().equals("true")){
+        		validate = true;
+        		
+        	}
+
         }
     }
+    
+    if(validate == true){
+    	System.out.println("Finding session ID");
+    	for(Cookie cookie2: cookies){
+    		System.out.println(cookie2.getName());
+    		if(cookie2.getName().equals("session_id")){
+    			String session_id = cookie2.getValue();
+    			Map<String, String> userDetails = UserDAO.loadSession(session_id);
+    			
+    			// to query db about sesh id and link values
+    			
+    				String username = userDetails.get("username");
+    				
+                    String role = userDetails.get("role");
+                if (username.isEmpty() != true || role.isEmpty() != true) {
+                    System.out.println("Current logged by cookie : " + username);
+                    
+                    session.setAttribute("username",username);
+                    session.setAttribute("role",role);
+                    
+                    // then redirect
+                    response.sendRedirect("home.jsp");
+                    break;
+    			}else{
+    				System.out.println("Has no saved session ID");
+    			}
+                
+    		}
+    		
+    	}
+    	
+    }
+    
+}
+}catch(Exception ex){
+	System.out.println("Role error");
 }
 %>
 

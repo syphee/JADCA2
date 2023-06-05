@@ -27,10 +27,12 @@ CREATE TABLE `users` (
   `email` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
   `role` varchar(45) NOT NULL,
+  `pic` varchar(255) NOT NULL DEFAULT 'No picture',
   PRIMARY KEY (`userid`),
   UNIQUE KEY `user_id_UNIQUE` (`userid`),
+  UNIQUE KEY `email_UNIQUE` (`email`),
   CONSTRAINT `chk_role` CHECK ((`role` in (_utf8mb4'user',_utf8mb4'admin')))
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Will only accept either "admin", or "user" explicitly.';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Will only accept either "admin", or "user" explicitly.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +41,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'SkyeRyan.21@gmail.com','Skye123','admin'),(2,'JamesEvans@gmail.com','James123','admin'),(3,'CustomerTest@example.com','Customer123','user'),(4,'testing123','abc123','user');
+INSERT INTO `users` VALUES (1,'SkyeRyan.21@gmail.com','Skye123','admin','No picture'),(2,'JamesEvans@gmail.com','James123','admin','No picture'),(3,'CustomerTest@example.com','Customer123','user','No picture'),(4,'testing123','abc123','user','No picture'),(5,'oogabooga@gmail.com','urmom','user','No picture');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-23 22:14:57
+-- Dump completed on 2023-06-03 16:11:24
