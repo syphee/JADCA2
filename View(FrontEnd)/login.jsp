@@ -9,15 +9,11 @@
 // to check for cookies
 
 Cookie[] cookies = request.getCookies();
-<<<<<<< HEAD
-if (cookies != 	null) {
-=======
 boolean validate = false;
 		
 try{
 if (cookies != null) {
 	System.out.println("Finding rememberMe cookie");
->>>>>>> ec2d21af04ef25932ee1c2d139ae4c0ec1affeaa
     for (Cookie cookie : cookies) {
     	System.out.println(cookie.getName());
     	// to find the rememberMe cookie
@@ -74,19 +70,13 @@ if (cookies != null) {
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<!--  css link  -->
 <link rel="stylesheet" type="text/css" href="login.css" />
 
-<!--  bootstrap link -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="assets/library svg/test.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-	
-	
-	
-	
 
 </head>
 <body>
@@ -234,6 +224,7 @@ if (cookies != null) {
 		
 		<div class="col">
 			<%@ include file = "assets/library svg/artsvg.html" %>
+		
 		</div>
 	</div>
 	
