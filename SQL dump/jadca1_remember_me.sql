@@ -16,33 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `users`
+-- Table structure for table `remember_me`
 --
 
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `remember_me`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `users` (
-  `userid` int NOT NULL AUTO_INCREMENT,
-  `email` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  `role` varchar(45) NOT NULL,
-  `pic` varchar(255) NOT NULL DEFAULT 'No picture',
-  PRIMARY KEY (`userid`),
-  UNIQUE KEY `user_id_UNIQUE` (`userid`),
-  UNIQUE KEY `email_UNIQUE` (`email`),
-  CONSTRAINT `chk_role` CHECK ((`role` in (_utf8mb4'user',_utf8mb4'admin')))
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Will only accept either "admin", or "user" explicitly.';
+CREATE TABLE `remember_me` (
+  `idremember_me` int NOT NULL AUTO_INCREMENT,
+  `session_id` varchar(255) NOT NULL DEFAULT 'null',
+  `username` varchar(255) NOT NULL,
+  `role` varchar(255) NOT NULL,
+  PRIMARY KEY (`idremember_me`),
+  UNIQUE KEY `session_id_UNIQUE` (`session_id`),
+  UNIQUE KEY `username_UNIQUE` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `remember_me`
 --
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'SkyeRyan.21@gmail.com','Skye123','admin','No picture'),(2,'JamesEvans@gmail.com','James123','admin','No picture'),(3,'CustomerTest@example.com','Customer123','user','No picture'),(4,'testing123','abc123','user','No picture'),(5,'oogabooga@gmail.com','urmom','user','No picture');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+LOCK TABLES `remember_me` WRITE;
+/*!40000 ALTER TABLE `remember_me` DISABLE KEYS */;
+INSERT INTO `remember_me` VALUES (51,'0CE73126072C66329DC599E8867A7555','SkyeRyan.21@gmail.com','admin');
+/*!40000 ALTER TABLE `remember_me` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-03 16:11:24
+-- Dump completed on 2023-06-05 22:55:09
