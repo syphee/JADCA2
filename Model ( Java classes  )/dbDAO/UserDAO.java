@@ -213,7 +213,57 @@ public class UserDAO {
 		
 		return doesExist;
 	}
-public static void saveSession(String session_id,String INPUT_username, String INPUT_role) throws Exception {
+	public static void saveSession(String session_id,String INPUT_username, String INPUT_role) throws Exception {
+			
+			
+			// login boolean validation
+			// boolean output = false;
+			ResultSet rs;
+			
+			// SELECT COUNT(*) AS count FROM users WHERE email = ? AND password = ? returns the number of rows that are the same when condition is met.
+			int affectedRows = 0;
+	
+	
+	
+			// get users
+			try {
+	
+				// Step1: Load JDBC Driver
+				Class.forName("com.mysql.jdbc.Driver");
+	
+				// Step 2: Define Connection URL
+				// to change password whenever accessing
+				String connURL = "jdbc:mysql://localhost/jadca1?user=root&password=spJEAL602336&serverTimezone=UTC";
+	
+				// Step 3: Establish connection to URL
+				Connection conn = DriverManager.getConnection(connURL);
+				// Step 4: Create Statement object
+				Statement stmt = conn.createStatement();
+				// Step 5: Execute SQL Command
+				String sqlStr = "insert into remember_me (session_id,username,role) values(?,?,?)";
+				
+				//
+				PreparedStatement pstmt = conn.prepareStatement(sqlStr);
+	
+				// store query
+				// 1 stands for the name,2 for id
+				pstmt.setString(1, session_id);
+				pstmt.setString(2, INPUT_username);
+				pstmt.setString(3, INPUT_role);
+	
+				// exec
+				affectedRows = pstmt.executeUpdate();
+	
+			
+				// Step 7: Close connection
+				conn.close();
+			} catch (Exception e) {
+				System.out.println("Error :" + e);
+			}
+	
+			
+		}
+	public static void deleteSession(String session_id) throws Exception {
 		
 		
 		// login boolean validation
@@ -222,96 +272,46 @@ public static void saveSession(String session_id,String INPUT_username, String I
 		
 		// SELECT COUNT(*) AS count FROM users WHERE email = ? AND password = ? returns the number of rows that are the same when condition is met.
 		int affectedRows = 0;
-
-
-
+	
+	
+	
 		// get users
 		try {
-
+	
 			// Step1: Load JDBC Driver
 			Class.forName("com.mysql.jdbc.Driver");
-
+	
 			// Step 2: Define Connection URL
 			// to change password whenever accessing
 			String connURL = "jdbc:mysql://localhost/jadca1?user=root&password=spJEAL602336&serverTimezone=UTC";
-
+	
 			// Step 3: Establish connection to URL
 			Connection conn = DriverManager.getConnection(connURL);
 			// Step 4: Create Statement object
 			Statement stmt = conn.createStatement();
 			// Step 5: Execute SQL Command
-			String sqlStr = "insert into remember_me (session_id,username,role) values(?,?,?)";
+			String sqlStr = "delete from remember_me where session_id = ?";
 			
 			//
 			PreparedStatement pstmt = conn.prepareStatement(sqlStr);
-
+	
 			// store query
 			// 1 stands for the name,2 for id
 			pstmt.setString(1, session_id);
-			pstmt.setString(2, INPUT_username);
-			pstmt.setString(3, INPUT_role);
-
+			
+	
 			// exec
 			affectedRows = pstmt.executeUpdate();
-
-		
+	
+			System.out.println("Affected rows deletion : " + affectedRows);
 			// Step 7: Close connection
 			conn.close();
 		} catch (Exception e) {
 			System.out.println("Error :" + e);
 		}
-
+	
 		
 	}
-public static void deleteSession(String session_id) throws Exception {
-	
-	
-	// login boolean validation
-	// boolean output = false;
-	ResultSet rs;
-	
-	// SELECT COUNT(*) AS count FROM users WHERE email = ? AND password = ? returns the number of rows that are the same when condition is met.
-	int affectedRows = 0;
-
-
-
-	// get users
-	try {
-
-		// Step1: Load JDBC Driver
-		Class.forName("com.mysql.jdbc.Driver");
-
-		// Step 2: Define Connection URL
-		// to change password whenever accessing
-		String connURL = "jdbc:mysql://localhost/jadca1?user=root&password=spJEAL602336&serverTimezone=UTC";
-
-		// Step 3: Establish connection to URL
-		Connection conn = DriverManager.getConnection(connURL);
-		// Step 4: Create Statement object
-		Statement stmt = conn.createStatement();
-		// Step 5: Execute SQL Command
-		String sqlStr = "delete from remember_me where session_id = ?";
-		
-		//
-		PreparedStatement pstmt = conn.prepareStatement(sqlStr);
-
-		// store query
-		// 1 stands for the name,2 for id
-		pstmt.setString(1, session_id);
-		
-
-		// exec
-		affectedRows = pstmt.executeUpdate();
-
-		System.out.println("Affected rows deletion : " + affectedRows);
-		// Step 7: Close connection
-		conn.close();
-	} catch (Exception e) {
-		System.out.println("Error :" + e);
-	}
-
-	
-}
 	public static Map<String, String> loadSession(String session_id) throws Exception {
 		
 		

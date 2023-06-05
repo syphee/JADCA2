@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <%
 String role = "";
+String user = "";
 try{
+	user = session.getAttribute("username").toString();
 	role = session.getAttribute("role").toString();
 	if(role.equals("admin") != true || role == null){
 		System.out.println("No permissions!");
@@ -236,13 +238,13 @@ try{
               <div class="dropdown text-end">
                 <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown"
                   aria-expanded="false">
-                  Welcome back , James
+                  Welcome back , <%=user %>
                 </button>
                 <ul class="dropdown-menu align-items-center justify-content-center">
                   <li><img class="dropdown-item" href="#"
                       src="https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg"
                       style="max-width: 100px;"></img></li>
-                  <li><text class="dropdown-item" href="#">James Landicho</text></li>
+                  <li><text class="dropdown-item" href="#"><%=user %></text></li>
                   <li>
                     <hr class="dropdown-divider">
                   </li>
@@ -983,18 +985,7 @@ try{
   </div>
 
 
-  <!-- To fix counting function -->
-  <script>
-    var text_max = 200;
-    document.getElementById('count_message').innerHTML('0 / ' + text_max);
 
-    function countText () {
-      var text_length = document.getElementById('count_message').innerHTML.length;
-      var text_remaining = text_max - text_length;
-
-      document.getElementById('count_message').innerHTML(text_length + ' / ' + text_max);
-    };
-  </script>
 
 
 </body>
