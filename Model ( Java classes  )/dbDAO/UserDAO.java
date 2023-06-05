@@ -42,7 +42,7 @@ public class UserDAO {
 
 			// Step 2: Define Connection URL
 			// to change password whenever accessing
-			String connURL = "jdbc:mysql://localhost/jadca1?user=root&password=spJEAL602336&serverTimezone=UTC";
+			String connURL = "jdbc:mysql://localhost/jadca1?user=root&password=Minecrafr@09&serverTimezone=UTC";
 
 			// Step 3: Establish connection to URL
 			Connection conn = DriverManager.getConnection(connURL);
@@ -58,7 +58,7 @@ public class UserDAO {
 			pstmt.setString(1, INPUT_id);
 			pstmt.setString(2, INPUT_password);
 
-			// exec
+			// execute query
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -120,7 +120,7 @@ public class UserDAO {
 				pstmt.setString(1, INPUT_email);
 				pstmt.setString(2, INPUT_password);
 
-				// exec
+				// execute query
 				AffectedRows = pstmt.executeUpdate();
 
 				System.out.println(AffectedRows + " row(s) inserted successfully.");

@@ -6,7 +6,7 @@
 
 // to check for cookies
 Cookie[] cookies = request.getCookies();
-if (cookies != null) {
+if (cookies != 	null) {
     for (Cookie cookie : cookies) {
     	
     	// to find the rememberMe cookie
@@ -29,13 +29,19 @@ if (cookies != null) {
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+<!--  css link  -->
 <link rel="stylesheet" type="text/css" href="login.css" />
 
+<!--  bootstrap link -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="assets/library svg/test.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+	
+	
+	
+	
 
 </head>
 <body>
@@ -183,7 +189,6 @@ if (cookies != null) {
 		
 		<div class="col">
 			<%@ include file = "assets/library svg/artsvg.html" %>
-		
 		</div>
 	</div>
 	

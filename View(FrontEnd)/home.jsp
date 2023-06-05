@@ -11,7 +11,6 @@
     boolean hasValidated = true;
 	
     // check if user has bypassed login
-    
     if(user != null || role != null){
         // set cookie if user has requested to remember user
         if (session.getAttribute("rememberMe") != null) {
@@ -75,6 +74,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/library svg/test.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
 
   <!-- Ionicons -->
   <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
@@ -92,12 +92,13 @@
     html,
     body {
       height: 100%;
+      overflow-y: auto;
       
     }
 
   </style>
 </head>
-<body class="bg-black">
+<body class="bg-white">
 <%@ include file = "assets/header/header.jsp" %>
 	<div>
 		Successfully logged in.
@@ -105,6 +106,99 @@
 		<%=role %>
 
 	</div>
+	
+	<!--  Book content starts here -->
+
+<!--  
+<div class="card-deck">
+  <div class="card" style="width: 14rem;">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+  </div>
+  <div class="card" style="width: 14rem;">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+  </div>
+  <div class="card" style="width: 14rem;">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+  </div>
+</div>
+
+-->
+
+
+<div id="bookContainer" style="display:grid;">
+<%@page import="java.sql.*" %>
+<% 
+try {
+  // Establish a connection to the MySQL database
+  Class.forName("com.mysql.jdbc.Driver");
+	
+  String connURL = "jdbc:mysql://localhost/jadca1?user=root&password=Minecrafr@09&serverTimezone=UTC";
+  
+  Connection conn = DriverManager.getConnection(connURL);
+
+
+  // Execute a SQL query to fetch book data from the MySQL database
+  String query = "SELECT * FROM books";
+  Statement stmt = conn.createStatement();
+  ResultSet rs = stmt.executeQuery(query);
+  
+  // Iterate over the result set and display book data
+  while (rs.next()) {
+    String title = rs.getString("title");
+    String author = rs.getString("author");
+    String description = rs.getString("description");
+    %>
+    
+   
+    
+<div class="card-deck">
+  <div class="card" style="width: 14rem;">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title"><%=title %></h5>
+      <p class="card-text"><%=description %></p>
+      <p class="card-text"><small class="text-muted"><%=author %></small></p>
+    </div>
+   </div>
+    </div>
+    <% 
+  }
+  
+  // Close the database connection
+  rs.close();
+  stmt.close();
+  conn.close();
+} catch (ClassNotFoundException | SQLException e) {
+  e.printStackTrace();
+}
+%>
+
+
+</div>
+
+%>
+
+
+<!--  footer here -->
+<div>
 	<%@ include file = "assets/footer/footer.jsp" %>
+
+</div>
+
 </body>
 </html>
