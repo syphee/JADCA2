@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	<%@page import="java.util.Map"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="java.util.Map"%>
 <%@page import="dbDAO.UserDAO"%>
 
 <%  
@@ -25,9 +24,11 @@
 	}
 	
 	// if user has enabled remmeber me
+	// login and save session id
 	
 	if (cookies != null && rememberMe == true) {
-		System.out.println("Finding session ID");
+		System.out.println("HOME.JSP - User has selected to remember me");
+		System.out.println("HOME.JSP - Finding session ID");
     	for(Cookie cookie: cookies){
     		
     		if(cookie.getName().equals("session_id")){
@@ -76,6 +77,18 @@
     		}
     		
     	}
+    	
+    // if user decides not to use the rememberMe functionality
+	}else{
+		System.out.println("HOME.JSP - User normal login");
+		try{
+			user = session.getAttribute("username").toString();
+			role = session.getAttribute("role").toString();
+			
+		}catch(Exception ex){
+			System.out.println("login failed.");
+			response.sendRedirect("login.jsp");
+		}
 	}
 
 
