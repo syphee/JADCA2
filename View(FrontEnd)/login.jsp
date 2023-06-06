@@ -19,6 +19,7 @@ if (cookies != null) {
     	// to find the rememberMe cookie
         if (cookie.getName().equals("rememberMe")) {
         	if(cookie.getValue().equals("true")){
+        		System.out.println("LOGIN.JSP - Found remember me cookie!");
         		validate = true;
         		
         	}
@@ -27,7 +28,7 @@ if (cookies != null) {
     }
     
     if(validate == true){
-    	System.out.println("Finding session ID");
+    	System.out.println("LOGIN.JSP - Finding session ID");
     	for(Cookie cookie2: cookies){
     		System.out.println(cookie2.getName());
     		if(cookie2.getName().equals("session_id")){
