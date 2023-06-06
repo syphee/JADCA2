@@ -224,7 +224,7 @@ if (cookies != null) {
 		
 		<div class="col">
 			<%@ include file = "assets/library svg/artsvg.html" %>
-		
+
 		</div>
 	</div>
 	
