@@ -33,7 +33,6 @@ public class UserDAO {
 		String name;
 		String password;
 		String role;
-
 		int id;
 
 		// get users

@@ -1,4 +1,4 @@
-<footer class="footer bg-light" style="position:relative;height:auto">
+<footer class="footer bg-light" style="position:fixed;bottom:0;">
  <div class="mx-0 my-5">
       <div class="text-center container">
         <div class="row ">
