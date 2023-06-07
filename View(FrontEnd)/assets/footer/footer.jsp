@@ -1,5 +1,5 @@
-<footer class="footer bg-light">
-    <div class="mx-0 my-5"  style="height: 100%;">
+<footer class="footer bg-light" style="position:relative;height:auto">
+ <div class="mx-0 my-5">
       <div class="text-center container">
         <div class="row ">
           <div class="col">
@@ -46,19 +46,11 @@
         </div>
         
 
-        
-
-        
-
       </div>
       
       
-      
-
-      
-
-    </div>
-
+   
+</div>
     
       
-  </footer>
+ </footer>

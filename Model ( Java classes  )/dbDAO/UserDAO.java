@@ -49,6 +49,7 @@ public class UserDAO {
 			// to change password whenever accessing
 			String connURL = "jdbc:mysql://localhost/jadca1?user=root&password="+ SQLpassword + "&serverTimezone=UTC";
 
+
 			// Step 3: Establish connection to URL
 			Connection conn = DriverManager.getConnection(connURL);
 			// Step 4: Create Statement object
@@ -63,7 +64,7 @@ public class UserDAO {
 			pstmt.setString(1, INPUT_id);
 			pstmt.setString(2, INPUT_password);
 
-			// exec
+			// execute query
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -125,7 +126,7 @@ public class UserDAO {
 				pstmt.setString(1, INPUT_email);
 				pstmt.setString(2, INPUT_password);
 
-				// exec
+				// execute query
 				AffectedRows = pstmt.executeUpdate();
 
 				System.out.println(AffectedRows + " row(s) inserted successfully.");
@@ -216,6 +217,7 @@ public class UserDAO {
 		
 		return doesExist;
 	}
+
 	public static void saveSession(String session_id,String INPUT_username, String INPUT_role) throws Exception {
 			
 			
@@ -275,6 +277,7 @@ public class UserDAO {
 		
 		// SELECT COUNT(*) AS count FROM users WHERE email = ? AND password = ? returns the number of rows that are the same when condition is met.
 		int affectedRows = 0;
+
 	
 	
 	
@@ -293,6 +296,7 @@ public class UserDAO {
 			// Step 4: Create Statement object
 			Statement stmt = conn.createStatement();
 			// Step 5: Execute SQL Command
+
 			String sqlStr = "delete from remember_me where session_id = ?";
 			
 			//
@@ -312,6 +316,7 @@ public class UserDAO {
 		} catch (Exception e) {
 			System.out.println("Error :" + e);
 		}
+
 	
 		
 	}
