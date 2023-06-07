@@ -17,6 +17,10 @@ try{
 }
 
 %>
+
+<%
+String URI = "";
+%>
 <!DOCTYPE html>
 <html lang="en">
 <!-- To add cookie / role scriptlet validation here -->
@@ -312,18 +316,18 @@ try{
                 <hr class="bg-secondary my-1 opacity-100">
     
                 <div class="container col align-items-center">
-    
-                  <!-- Picture -->
+                <form action="<%= request.getContextPath()%>/addBook" name="form1" method="post" enctype="multipart/form-data">
+                <!-- Picture -->
                   <div class="row my-5">
                     <div class="col">
                       Picture
                     </div>
                     <div class="col">
-                      <input id="login-password" type="button" name="password" value="Add Picture"
-                        class="btn border border-secondary-subtle" required>
+                      <input type="file" name="file" onChange="previewImage(event)" accept="image/*"/>
+                      <img src="<%= request.getContextPath()%>/assets/<%=URI%>" id="preview" style="max-width:100px;"/>
                     </div>
                   </div>
-    
+                  
                   <!-- Title -->
                   <div class="row my-5">
                     <div class="col">
@@ -333,7 +337,6 @@ try{
                       <input class="form-control" placeholder="Title" id="floatingTextarea">
                     </div>
                   </div>
-    
                   <!-- Author -->
                   <div class="row my-5">
                     <div class="col">
@@ -403,12 +406,17 @@ try{
                     </div>
                     
                   </div>
-                  
-                </div>
-                <div>
-                  <input type="submit" value="Add book" class="btn btn-primary">
+                  <div>
+                  <input type="submit" name="btnSubmit" value="AddBook" class="btn btn-primary">
     
                 </div>
+                  
+					
+				</form>
+              
+                </div>
+                
+                
 
             </div>     
           </div>
@@ -987,7 +995,20 @@ try{
 
 
 
-
+<script>
+function previewImage(event) {
+	  var input = event.target;
+	  if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	    reader.onload = function(e) {
+	      var preview = document.getElementById('preview');
+	      preview.src = e.target.result;
+	      preview.style.display = 'block';
+	    };
+	    reader.readAsDataURL(input.files[0]);
+	  }
+	}
+</script>
 </body>
 
 </html>

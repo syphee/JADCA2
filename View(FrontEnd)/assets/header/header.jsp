@@ -44,7 +44,7 @@
               <li><hr class="dropdown-divider"></li>
               <li>
               		<!-- Log out -->
-	              <form action="./../../../InvalidateSession" method="post">
+	              <form action="<%= request.getContextPath()%>/InvalidateSession" method="post">
 	              	<input type="submit" class="dropdown-item" value="Log out">
 	              </form>
               </li>

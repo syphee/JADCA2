@@ -16,7 +16,7 @@ public class BookDAO {
 	final static String SQLpassword = "spJEAL602336";
 	
 	public static void AddBook(String INPUT_title, String INPUT_author, String INPUT_price, String INPUT_quantity,
-			String INPUT_pub_date, String INPUT_genre,String INPUT_ISBN, String INPUT_rating, String INPUT_description,
+			String INPUT_pub_date, String INPUT_genre_id,String INPUT_ISBN, String INPUT_rating, String INPUT_description,
 			String INPUT_picture) throws Exception {
 		
 		//declaration of variables
@@ -44,7 +44,7 @@ public class BookDAO {
 			date = new SimpleDateFormat("dd/MM/yyyy").parse(INPUT_pub_date).toString();
 		}
 		
-		String genre = sanitizeInput(INPUT_genre);
+		int genre_id = Integer.parseInt(sanitizeInput(INPUT_genre_id));
 		
 		String description = sanitizeInput(INPUT_description);
 		
@@ -75,7 +75,7 @@ public class BookDAO {
 			cs.setInt(4, quantity);
 			cs.setDate(5, java.sql.Date.valueOf(date));
 			cs.setString(6, ISBN);
-			cs.setString(7, genre);
+			cs.setInt(7, genre_id);
 			cs.setDouble(8, rating);
 			cs.setString(9, description);
 			cs.setString(10, picture);
