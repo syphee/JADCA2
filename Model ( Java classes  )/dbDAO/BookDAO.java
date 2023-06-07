@@ -13,6 +13,8 @@ import java.util.Date;
 import java.util.regex.*;
 
 public class BookDAO {
+	final static String SQLpassword = "spJEAL602336";
+	
 	public static void AddBook(String INPUT_title, String INPUT_author, String INPUT_price, String INPUT_quantity,
 			String INPUT_pub_date, String INPUT_genre,String INPUT_ISBN, String INPUT_rating, String INPUT_description,
 			String INPUT_picture) throws Exception {
@@ -56,7 +58,7 @@ public class BookDAO {
 			Class.forName("com.mysql.jdbc.Driver");
 
 			// Step 2: Define Connection URL
-			String connURL = "jdbc:mysql://localhost/db1?user=root&password=spJEAL602336&serverTimezone=UTC";
+			String connURL = "jdbc:mysql://localhost/db1?user=root&password="+ SQLpassword + "&serverTimezone=UTC";
 
 			// Step 3: Establish connection to URL
 			Connection conn = DriverManager.getConnection(connURL);

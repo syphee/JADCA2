@@ -16,6 +16,47 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Temporary view structure for view `showallbooks`
+--
+
+DROP TABLE IF EXISTS `showallbooks`;
+/*!50001 DROP VIEW IF EXISTS `showallbooks`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `showallbooks` AS SELECT 
+ 1 AS `book_id`,
+ 1 AS `title`,
+ 1 AS `author`,
+ 1 AS `price`,
+ 1 AS `quantity`,
+ 1 AS `publication_date`,
+ 1 AS `ISBN`,
+ 1 AS `genre_id`,
+ 1 AS `rating`,
+ 1 AS `description`,
+ 1 AS `pic`,
+ 1 AS `genre`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Final view structure for view `showallbooks`
+--
+
+/*!50001 DROP VIEW IF EXISTS `showallbooks`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `showallbooks` AS select `books`.`book_id` AS `book_id`,`books`.`title` AS `title`,`books`.`author` AS `author`,`books`.`price` AS `price`,`books`.`quantity` AS `quantity`,`books`.`publication_date` AS `publication_date`,`books`.`ISBN` AS `ISBN`,`books`.`genre_id` AS `genre_id`,`books`.`rating` AS `rating`,`books`.`description` AS `description`,`books`.`pic` AS `pic`,`genres`.`name` AS `genre` from (`genres` left join `books` on((`genres`.`genre_id` = `books`.`genre_id`))) where (`books`.`book_id` is not null) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
 -- Dumping routines for database 'jadca1'
 --
 /*!50003 DROP PROCEDURE IF EXISTS `addBook` */;
@@ -60,6 +101,27 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `selectBookByTitle` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `selectBookByTitle`(IN inputString VARCHAR(255))
+BEGIN
+SELECT books.*, genres.name as genre
+FROM books
+right JOIN genres ON genres.genre_id = books.genre_id where books.book_id is not null and books.title like CONCAT('%', inputString , '%');
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -70,5 +132,6 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-05 22:55:09
+
+-- Dump completed on 2023-06-07 16:43:24
 
