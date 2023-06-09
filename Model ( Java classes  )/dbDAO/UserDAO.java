@@ -36,7 +36,6 @@ public class UserDAO {
 		String name;
 		String password;
 		String role;
-
 		int id;
 
 		// get users
@@ -108,6 +107,7 @@ public class UserDAO {
 
 				// Step 2: Define Connection URL
 				// to change password whenever accessing
+
 				String connURL = "jdbc:mysql://localhost/jadca1?user=root&password="+ SQLpassword + "&serverTimezone=UTC";
 
 				// Step 3: Establish connection to URL
@@ -178,7 +178,9 @@ public class UserDAO {
 
 			// Step 2: Define Connection URL
 			// to change password whenever accessing
+
 			String connURL = "jdbc:mysql://localhost/jadca1?user=root&password="+ SQLpassword + "&serverTimezone=UTC";
+
 
 			// Step 3: Establish connection to URL
 			Connection conn = DriverManager.getConnection(connURL);
@@ -238,7 +240,9 @@ public class UserDAO {
 	
 				// Step 2: Define Connection URL
 				// to change password whenever accessing
+
 				String connURL = "jdbc:mysql://localhost/jadca1?user=root&password="+ SQLpassword + "&serverTimezone=UTC";
+
 	
 				// Step 3: Establish connection to URL
 				Connection conn = DriverManager.getConnection(connURL);
@@ -289,7 +293,9 @@ public class UserDAO {
 	
 			// Step 2: Define Connection URL
 			// to change password whenever accessing
+
 			String connURL = "jdbc:mysql://localhost/jadca1?user=root&password="+ SQLpassword + "&serverTimezone=UTC";
+
 	
 			// Step 3: Establish connection to URL
 			Connection conn = DriverManager.getConnection(connURL);
@@ -345,7 +351,9 @@ public class UserDAO {
 
 			// Step 2: Define Connection URL
 			// to change password whenever accessing
+
 			String connURL = "jdbc:mysql://localhost/jadca1?user=root&password="+ SQLpassword + "&serverTimezone=UTC";
+
 
 			// Step 3: Establish connection to URL
 			Connection conn = DriverManager.getConnection(connURL);
