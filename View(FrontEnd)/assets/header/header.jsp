@@ -2,7 +2,7 @@
  <nav class=" bg-light ">
 	 <div class="text-focus-in container">
 	 	  <header class="text-center fs-1 ">
-      <a href="#" class="text-dark px-4 "><text class="text-white bg-danger px-1 rounded-1 ">SP</text> <text class="border-start border-dark mx-2 "></text> A R K.</text></a>
+      <a href="home.jsp" class="text-dark px-4 "><text class="text-white bg-danger px-1 rounded-1 ">SP</text> <text class="border-start border-dark mx-2 "></text> A R K.</text></a>
       
     </header>
 
