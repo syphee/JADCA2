@@ -22,13 +22,16 @@ import java.util.Map;
 import java.util.regex.*;
 
 public class BookDAO {
+	
+	// james sql pass : spJEAL602336
+	// skye's sql pass : 
 	final static String SQLpassword = "spJEAL602336";
 	
 	// right click the book-imgs folder , show in system explorer and paste it in the bookImgFolderDir variable
 	// James directory : D:\\Eclipse\\school work\\CA1\\CA1\\src\\main\\webapp\\BookstoreCA1\\JAD-CA1\\View(FrontEnd)\\assets\\book-imgs\\
 	// Skye's directory :
-	final static String bookImgFolderDir = "D:\\Eclipse\\school work\\CA1\\CA1\\src\\main\\webapp\\BookstoreCA1\\JAD-CA1\\View(FrontEnd)\\assets\\book-imgs\\";
-	
+	//final static String bookImgFolderDir = "D:\\Eclipse\\school work\\CA1\\CA1\\src\\main\\webapp\\BookstoreCA1\\JAD-CA1\\View(FrontEnd)\\assets\\book-imgs\\";
+	final static String bookImgFolderDir = "/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/book-imgs/";
 	// to verify existence of book
 	// throws an exception if book exists
 	public static void verifyBook(String INPUT_title, String INPUT_ISBN) throws Exception{
@@ -213,11 +216,9 @@ public class BookDAO {
 		
 		// Save the file to book-imgs folder
         File outputFile = new File(bookImgFolderDir + picture);
+        System.out.println("BookDAO - File is being stored at directory : " + outputFile.getAbsolutePath());
         
-		
-		
-		
-		
+	
         try (InputStream inputStream = filePart.getInputStream()) {
             Files.copy(inputStream, outputFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
         }
