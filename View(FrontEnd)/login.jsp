@@ -96,7 +96,7 @@ if (cookies != null) {
 
 
 				<!-- Login section -->
-				<form class="form form-login" action="./../../../VerifyUserLogin" method="post">
+				<form class="form form-login" action="<%= request.getContextPath()%>/VerifyUserLogin" method="post">
 					<fieldset>
 						<legend>Please, enter your email and password for login.</legend>
 						<div class="input-block">
@@ -116,7 +116,7 @@ if (cookies != null) {
 
 				</form>
 				
-				<form class="form form-login" action="./../../../VerifyUserLogin" method="post">
+				<form class="form form-login" action="<%= request.getContextPath()%>/VerifyUserLogin" method="post">
 					<label>Login as Guest</label>
 					<input type="submit" class="btn-login" name="GuestLogin" value="Guest">
 				</form>
@@ -130,7 +130,7 @@ if (cookies != null) {
 				</button>
 				
 				<!-- Sign up section -->
-				<form class="form form-signup" action="./../../../RegisterUser" method="post">
+				<form class="form form-signup" action="<%= request.getContextPath()%>/RegisterUser" method="post">
 					<fieldset>
 						<legend>Please, enter your email, password and password
 							confirmation for sign up.</legend>
