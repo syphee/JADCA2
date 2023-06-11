@@ -45,7 +45,7 @@
 											<textarea class="form-control" name="description"
 												placeholder="Add a description for the book here"
 												id="floatingTextarea2" style="height: 100px"
-												style="resize: none;" maxlength="255" onchange="countText()"></textarea>
+												style="resize: none;" maxlength="255" "></textarea>
 											<span class="pull-right label label-default"
 												id="count_message"></span>
 

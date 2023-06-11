@@ -9,42 +9,34 @@ System.out.println(request.getContextPath());
 String output = "";
 String role = "";
 String user = "";
-try{
+try {
 	user = session.getAttribute("username").toString();
 	role = session.getAttribute("role").toString();
-	if(role.equals("admin") != true || role == null){
+	if (role.equals("admin") != true || role == null) {
 		System.out.println("No permissions!");
 		response.sendRedirect("home.jsp");
 	}
-	
-}catch(Exception ex){
+
+} catch (Exception ex) {
 	System.out.println("No permissions!");
 	response.sendRedirect("/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp");
 }
-
 %>
 
 <%
-
-
 String URI = "";
 
 //constructing bootstrap card
-	String color = "";
-	String output2 = "";
-	String message = "";
-	color = request.getParameter("c");
-    output2 = request.getParameter("o");
-    if(color != null || output2 != null){
-    message = "<div class=\"alert " +color + " role=\"alert\">\r\n"
-     		+ output2 + "\r\n"
-     		+ "  <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>\r\n"
-     		+ "</div>";
-    }
-    
-     		
-     		
-     
+String color = "";
+String output2 = "";
+String message = "";
+color = request.getParameter("c");
+output2 = request.getParameter("o");
+if (color != null || output2 != null) {
+	message = "<div class=\"alert " + color + " role=\"alert\">\r\n" + output2 + "\r\n"
+	+ "  <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>\r\n"
+	+ "</div>";
+}
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,10 +64,12 @@ String URI = "";
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
 
-<link rel="stylesheet" href="/CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/styles.css">
-<link rel="stylesheet"href="/CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/animations.css">
+<link rel="stylesheet"
+	href="/CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/styles.css">
+<link rel="stylesheet"
+	href="/CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/animations.css">
 
-	
+
 
 <style>
 html, body {
@@ -86,7 +80,7 @@ html, body {
 </head>
 
 <body>
-<%=message %>
+	<%=message%>
 
 	<div class="container-fluid accordion">
 		<div class="row flex-nowrap ">
@@ -296,14 +290,14 @@ html, body {
 								<button class="btn btn-light dropdown-toggle" type="button"
 									data-bs-toggle="dropdown" aria-expanded="false">
 									Welcome back ,
-									<%=user %>
+									<%=user%>
 								</button>
 								<ul
 									class="dropdown-menu align-items-center justify-content-center">
 									<li><img class="dropdown-item" href="#"
 										src="https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg"
 										style="max-width: 100px;"></img></li>
-									<li><text class="dropdown-item" href="#"><%=user %></text></li>
+									<li><text class="dropdown-item" href="#"><%=user%></text></li>
 									<li>
 										<hr class="dropdown-divider">
 									</li>
@@ -312,12 +306,13 @@ html, body {
 									<li>
 										<hr class="dropdown-divider">
 									</li>
-									<li><a class="dropdown-item" href="<%=path %>/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp">Exit
+									<li><a class="dropdown-item"
+										href="<%=path%>/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp">Exit
 											Admin Panel</a></li>
 									<li>
 										<hr class="dropdown-divider">
 									</li>
-									<li><form action="<%=path %>/InvalidateSession"
+									<li><form action="<%=path%>/InvalidateSession"
 											method="post">
 											<input type="submit" class="dropdown-item" value="Log out">
 										</form></li>
@@ -329,7 +324,7 @@ html, body {
 				</div>
 
 				<!-- Content Main Panel -->
-				
+
 				<hr class="bg-secondary my-1 opacity-100">
 				<div id="arkCONTENT" class="accordion">
 					<!-- Dashboard -->
@@ -358,28 +353,10 @@ html, body {
 					<%@ include file="assets/bookPanel/addBook/addBookFeature.jsp"%>
 					<!-- Edit Book -->
 					<%@ include file="assets/bookPanel/editBook/editBookFeature.jsp"%>
+					
 					<!-- Delete Book -->
+
 					<%@ include file="assets/bookPanel/deleteBook/deleteBookFeature.jsp"%>
-
-
-
-					<!-- Manage Users -->
-					<!-- Add User -->
-					<%@ include file="assets/userPanel/addUser/addUserFeature.jsp"%>
-
-					<!-- Info to be autofilled with scriplets. -->
-					<!-- Edit User -->
-					<%@ include file="assets/userPanel/editUser/editUserFeature.jsp"%>
-					<!-- Delete User -->
-					<%@ include file="assets/userPanel/deleteUser/deleteUserFeature.jsp"%>
-
-
-
-
-				</div>
-
-
-
 			</main>
 
 			<!-- Main content -->
@@ -391,19 +368,19 @@ html, body {
 
 
 	<script>
-function previewImage(event) {
-	  var input = event.target;
-	  if (input.files && input.files[0]) {
-	    var reader = new FileReader();
-	    reader.onload = function(e) {
-	      var preview = document.getElementById('preview');
-	      preview.src = e.target.result;
-	      preview.style.display = 'block';
-	    };
-	    reader.readAsDataURL(input.files[0]);
-	  }
-	}
-</script>
+		function previewImage(event) {
+			var input = event.target;
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					var preview = document.getElementById('preview');
+					preview.src = e.target.result;
+					preview.style.display = 'block';
+				};
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+	</script>
 </body>
 
 </html>

@@ -125,6 +125,7 @@ if (cookies != null && rememberMe == true) {
 <style>
 html, body {
 	height: 100%;
+	overflow:auto;
 }
 </style>
 </head>
@@ -136,7 +137,7 @@ html, body {
 		<%=role%>
 	</div>
 
-	<div class="row row-cols-1 row-cols-md-3 g-4">
+	<div class="container row row-cols-1 row-cols-md-3 g-4">
 
 		<%
 		//connecting to database to get the details first
