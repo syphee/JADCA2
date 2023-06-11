@@ -1,41 +1,28 @@
 package servlets;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
 import dbDAO.BookDAO;
 
 /**
- * Servlet implementation class addBook
+ * Servlet implementation class editBook
  */
-@WebServlet("/addBook")
-@MultipartConfig(
-        fileSizeThreshold   = 1024 * 1024 * 1,  // 1 MB
-        maxFileSize         = 1024 * 1024 * 10, // 10 MB
-        maxRequestSize      = 1024 * 1024 * 15, // 15 MB
-        location            = "D:\\Eclipse\\school work\\CA1\\CA1\\src\\main\\webapp\\BookstoreCA1\\JAD-CA1\\View(FrontEnd)\\assets\\book-imgs"
-)
-public class addBook extends HttpServlet {
+@WebServlet("/editBook")
+public class editBook extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public addBook() {
+    public editBook() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -51,8 +38,9 @@ public class addBook extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// TODO Auto-generated method stub
 		
 		String role = "";
 		String user = "";
@@ -64,15 +52,7 @@ public class addBook extends HttpServlet {
 		String color = "";
 		String output2 = "";
 		
-		
-		
-		
-        // Get the file part from the request and other params
-		//HttpSession session = request.getSession();
-
-        Part filePart = request.getPart("file");
-        
-        String title = request.getParameter("title");
+		String title = request.getParameter("title");
         String author = request.getParameter("author");
         String price = request.getParameter("price");
         String quantity = request.getParameter("quantity");
@@ -82,6 +62,9 @@ public class addBook extends HttpServlet {
         //String rating = request.getParameter("rating");
         String rating = "0";
         String description = request.getParameter("description");
+        String default_description = request.getParameter("default_description");
+        int book_id = Integer.parseInt(request.getParameter("book_id"));
+        
         
         
         System.out.println("Title: " + title);
@@ -93,21 +76,15 @@ public class addBook extends HttpServlet {
         System.out.println("ISBN: " + ISBN);
         System.out.println("Rating: " + rating);
         System.out.println("Description: " + description);
-        System.out.println("Picture: " + filePart);
+        
 
-        
-        
-        
-        
-        
-        
         try {
         	
-        	BookDAO.AddBook(title, author, price,quantity,pub_date,genre_id,ISBN,description,filePart);
+        	BookDAO.editBook(title, author, price,quantity,pub_date,genre_id,ISBN,rating,description,default_description,book_id);
         	//String output = "Added book successfully!";
-        	output2 = "Added book successfully!";
+        	output2 = "Edited book successfully!";
         	color = "alert-success";
-        	System.out.println("ADDBOOK - SUCCESS!!");
+        	System.out.println("EDITBOOK - SUCCESS!!");
         	//response.sendRedirect(request.getContextPath()+"/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel.jsp?c="+color+"&o="+output);
         	
         	// bootstrap card
@@ -122,9 +99,10 @@ public class addBook extends HttpServlet {
         }catch(Exception ex) {
         	
         	//String output = "Add book failed!";
-        	output2 = "Add book failed! Reason : " + ex;
+        	output2 = "Edit book failed! Reason : " + ex;
         	color = "alert-danger";
-        	System.out.println("ADDBOOK - FAILED!! : " + ex);
+        	System.out.println("EDITBOOK - FAILED!! : " );
+        	ex.printStackTrace();
         	//response.sendRedirect(request.getContextPath()+"/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel.jsp?c="+color+"&o="+output);
         	
         	// bootstrap card
@@ -137,12 +115,9 @@ public class addBook extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel.jsp");  
             rd.include(request, response);  
         }
-		
         
         
-        //response.sendRedirect(request.getContextPath()+"/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel.jsp");
-    }
-    
-    
+        
+	}
 
 }

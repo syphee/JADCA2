@@ -5,6 +5,11 @@
 <%@page import="java.sql.*"%>
 
 <%
+//change ur sql password here
+	final String SQLpassword = "spJEAL602336";
+%>
+
+<%
 String user = "";
 String role = "";
 
@@ -120,6 +125,7 @@ if (cookies != null && rememberMe == true) {
 <style>
 html, body {
 	height: 100%;
+	overflow:auto;
 }
 </style>
 </head>
@@ -131,7 +137,7 @@ html, body {
 		<%=role%>
 	</div>
 
-	<div class="row row-cols-1 row-cols-md-3 g-4">
+	<div class="container row row-cols-1 row-cols-md-3 g-4">
 
 		<%
 		//connecting to database to get the details first
@@ -142,7 +148,7 @@ html, body {
 			Class.forName("com.mysql.jdbc.Driver");
 
 			//step 2 define URL connection
-			String connURL = "jdbc:mysql://localhost/jadca1?user=root&password=Minecrafr@09&serverTimezone=UTC";
+			String connURL = "jdbc:mysql://localhost/jadca1?user=root&password="+ SQLpassword + "&serverTimezone=UTC";
 
 			//step 3 Establish connection
 			Connection conn = DriverManager.getConnection(connURL);
@@ -156,10 +162,10 @@ html, body {
 				int id = rs.getInt("book_id");
 				String title = rs.getString("title");
 				String author = rs.getString("author");
-				String genre = rs.getString("genre");
+				String genre = rs.getString("genre_id");
 		%>
 		<div class="col">
-			<a href="details.jsp?book_id= <%= id %>">
+			<a href="details.jsp?s=<%= title %>">
 				<div class="card h-100">
 					<div class="card-body">
 						<h5 class="card-title"><%=title%></h5>
