@@ -1,12 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.Map"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="dbDAO.UserDAO"%>
 <%@page import="java.sql.*"%>
 
 <%
 //change ur sql password here
 	final String SQLpassword = "spJEAL602336";
+%>
+
+<%
+// init cart function
+ArrayList<String> shopping_cart = (ArrayList<String>)session.getAttribute("shopping_cart");
+
+
 %>
 
 <%
@@ -113,32 +121,24 @@ if (cookies != null && rememberMe == true) {
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
 
-<link rel="stylesheet" href="animations.css">
-
 
 <link rel="stylesheet"
-	href="../View(FrontEnd)/assets/css/animations.css">
+	href="/CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/styles.css">
+<link rel="stylesheet"
+	href="/CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/animations.css">
 
-<link rel="stylesheet" href="../View(FrontEnd)/assets/css/styles.css">
-
-
-<style>
-html, body {
-	height: 100%;
-	overflow:auto;
-}
-</style>
 </head>
-<body class="bg-black">
+<body class="bg-black" style="overflow-y:auto;" >
+	<%@include file="assets/messagePopUp.jsp"%>
+	
 	<%@include file="assets/header/header.jsp"%>
-	<div>
-		Successfully logged in.
-		<%=user%>
-		<%=role%>
-	</div>
+	
 
-	<div class="container row row-cols-1 row-cols-md-3 g-4">
+	<section class="container my-5  ">
+    <h1 class="text-white fs-1">Whats new</h1>
 
+    <div class=" rounded-1 px-2 ">
+      <ul class="row ">
 		<%
 		//connecting to database to get the details first
 
@@ -163,25 +163,11 @@ html, body {
 				String title = rs.getString("title");
 				String author = rs.getString("author");
 				String genre = rs.getString("genre_id");
+				String pictureURI = rs.getString("pic");
+				String desc = rs.getString("description");
 		%>
-		<div class="col">
-			<a href="details.jsp?s=<%= title %>">
-				<div class="card h-100">
-					<div class="card-body">
-						<h5 class="card-title"><%=title%></h5>
-						<p class="card-text">
-							Author:
-							<%=author%></p>
-						<p class="card-text">
-							Genre:
-							<%=genre%></p>
-					</div>
-					<div class="card-footer">
-						<small class="text-muted">Book ID: <%=id%></small>
-					</div>
-				</div>
-			</a>
-		</div>
+		<%@include file="assets/bookCard.jsp"%>
+		
 
 
 		<%
@@ -195,14 +181,16 @@ html, body {
 
 
 
-
+		</ul>
 
 	</div>
+	<hr class="bg-danger my-1 opacity-100">
+	</section>
 
 
 
-	<div>
+
 		<%@ include file="assets/footer/footer.jsp"%>
-	</div>
+
 </body>
 </html>
