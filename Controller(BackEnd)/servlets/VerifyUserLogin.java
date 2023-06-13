@@ -107,7 +107,7 @@ public class VerifyUserLogin extends HttpServlet {
 
 					System.out.println("Logged in as guest!");
 					hasLogged = true;
-					response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp");
+					response.sendRedirect(request.getContextPath() + "/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp");
 
 				}
 			}
@@ -135,7 +135,7 @@ public class VerifyUserLogin extends HttpServlet {
 
 		// if no login details, has not clicked log in as guest
 		if (loginid == null && guest.equals("Guest") != true || password == null && guest.equals("Guest") != true) {
-			response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp");
+			response.sendRedirect(request.getContextPath() + "/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp");
 		} else if (hasLogged == false) {
 
 			// for loop to check here
@@ -168,7 +168,7 @@ public class VerifyUserLogin extends HttpServlet {
 
 					// if successfully logged in
 					System.out.println("Logged in!");
-					response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp");
+					response.sendRedirect( request.getContextPath() + "/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp");
 
 					// request.getRequestDispatcher("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp").forward(request,
 					// response);
@@ -178,7 +178,7 @@ public class VerifyUserLogin extends HttpServlet {
 					// if wrong password input , userDAO will return a null object
 					output = "You have entered an invalid ID/Password";
 					response.sendRedirect(
-							"/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=invalidLogin");
+							request.getContextPath() + "/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=invalidLogin");
 					System.out.println(output);
 				}
 			} catch (IOException e) {
@@ -191,14 +191,14 @@ public class VerifyUserLogin extends HttpServlet {
 
 				// if error in connection with DB
 				output = "Error with connecting to SP Rentals. Please contact the administrator.";
-				response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=ConnectionErr");
+				response.sendRedirect(request.getContextPath() + "/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=ConnectionErr");
 				System.out.println(e);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 
 				// if error with servlet
 				output = "Error with connecting to SP Rentals. Please contact the administrator.";
-				response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=ConnectionErr");
+				response.sendRedirect(request.getContextPath() + "/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=ConnectionErr");
 				System.out.println(e);
 				System.out.println("Unknown Error");
 			}
