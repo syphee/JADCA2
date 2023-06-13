@@ -267,6 +267,13 @@ try{
                 <div class="row">
                     <%=total + (total * 0.08) + delivery_fee %> 
                 </div>
+                <div class="row">
+                    <form method="post" action="<%=request.getContextPath()%>/bookPayment">
+            			<input type="submit" class="btn btn-danger" value="Pay">
+	       				
+            		</form>
+                </div>
+               
             </div>
         </div>
         
