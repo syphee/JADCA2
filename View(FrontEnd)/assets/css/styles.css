@@ -2,8 +2,19 @@
 a{
     text-decoration: none;
 }
-.footer{
-    position: absolute;
-  bottom: 0;
-  width: 100%;
+footer{
+	position:fixed;
+	
+	bottom:0;
+}
+
+html{
+	height:100%;
+	
+}
+
+body {
+	position:relative;
+	
+	overflow:auto;
 }

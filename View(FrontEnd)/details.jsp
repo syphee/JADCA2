@@ -17,7 +17,16 @@ try {
 <%
 //change ur sql password here
 	final String SQLpassword = "spJEAL602336";
+	
 %>
+<%
+// init cart function
+ArrayList<String> shopping_cart = (ArrayList<String>)session.getAttribute("shopping_cart");
+
+
+%>
+
+<%@page import="java.util.ArrayList"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -50,9 +59,9 @@ try {
 
 
 <link rel="stylesheet"
-	href="../View(FrontEnd)/assets/css/animations.css">
-
-<link rel="stylesheet" href="../View(FrontEnd)/assets/css/styles.css">
+	href="/CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/styles.css">
+<link rel="stylesheet"
+	href="/CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/animations.css">
 
 
 <style type="text/css">
@@ -70,7 +79,7 @@ text-size: 1rem;
 
 <body class="bg-black">
 	<%@include file="assets/header/header.jsp" %>
-
+	<%@include file="assets/messagePopUp.jsp"%>
 
 <h2>Hello There this is to show that it works.</h2>
 
