@@ -39,7 +39,7 @@ CREATE TABLE `books` (
   UNIQUE KEY `ISBN_UNIQUE` (`ISBN`),
   UNIQUE KEY `book_id_UNIQUE` (`book_id`),
   KEY `fk_genre_id_idx` (`genre_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,7 +48,7 @@ CREATE TABLE `books` (
 
 LOCK TABLES `books` WRITE;
 /*!40000 ALTER TABLE `books` DISABLE KEYS */;
-INSERT INTO `books` VALUES (1,'The Great Gatsby','Florence Romaguera',30,10,'2008-07-04','9781234567890',1,4.5,'Description 1','No picture available'),(2,'To Kill a Mockingbird','Joanne Ferry I',20,5,'2022-02-01','9780987654321',1,3.8,'Description 2','No picture available'),(3,'1984','Berenice Bartell',25,8,'2022-03-01','9785678901234',1,4.2,'Description 3','No picture available'),(4,'Pride and Prejudice','Bella Conn',15,12,'2022-04-01','9785432109876',1,4.8,'Description 4','No picture available'),(5,'Guns and Blade','Monique NOTNicolas',40,3,'2022-05-01','9780123456789',1,3.5,'Description 5','No picture available');
+INSERT INTO `books` VALUES (1,'The Great Gatsby','Florence Romaguera',30,10,'2008-07-04','9781234567890',1,4.5,'Description 1','default_cover.png'),(2,'To Kill a Mockingbird','Joanne Ferry I',20,5,'2022-02-01','9780987654321',1,3.8,'Description 2','default_cover.png'),(3,'1984','Berenice Bartell',25,8,'2022-03-01','9785678901234',1,4.2,'Description 3','default_cover.png'),(4,'Pride and Prejudice','Bella Conn',15,12,'2022-04-01','9785432109876',1,4.8,'Description 4','default_cover.png'),(5,'Guns and Blade','Monique NOTNicolas',40,3,'2022-05-01','9780123456789',1,3.5,'Description 5','default_cover.png'),(9,'light fury','yejiii',13,1,'2023-06-08','1231231231231',10,0,'yes','0ce30986c02dd3c35b31cf1d50aa1c6a.png'),(12,'light furry','yejii',13,1,'2023-06-08','1231231231232',15,0,'poo','6c8a88cfcd299f25598e1329be664168.png');
 /*!40000 ALTER TABLE `books` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -61,4 +61,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-07 22:08:11
+-- Dump completed on 2023-06-13 19:42:03
