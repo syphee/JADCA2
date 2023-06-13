@@ -249,6 +249,11 @@ public class BookDAO {
         
 		String picture = fileName;
 		
+		// if has no picture input from user
+		if(picture.trim().isBlank()) {
+			picture = "default_cover.png";
+		}
+		
 		// Save the file to book-imgs folder
         File outputFile = new File(bookImgFolderDir + picture);
         System.out.println("BookDAO - File is being stored at directory : " + outputFile.getAbsolutePath());
