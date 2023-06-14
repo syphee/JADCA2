@@ -159,7 +159,7 @@ html, body {
 				String genre = rs.getString("genre");
 		%>
 		<div class="col">
-			<a href="details.jsp?book_id= <%= id %>">
+			<a href="details.jsp?book_id=<%= id %>">
 				<div class="card h-100">
 					<div class="card-body">
 						<h5 class="card-title"><%=title%></h5>

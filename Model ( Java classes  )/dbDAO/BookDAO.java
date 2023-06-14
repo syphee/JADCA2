@@ -109,7 +109,7 @@ public class BookDAO {
 	public static String sanitizeInput(String UNSANITIZED_input) {
 		String output = "";
 
-		Patternx validateStr = Pattern.compile("[a-zA-Z0-9_]*.");
+		Pattern validateStr = Pattern.compile("[a-zA-Z0-9_]*.");
 		Pattern validateInt = Pattern.compile("[0-9]+");
 		Pattern validateDouble = Pattern.compile("([0-9]+\\.[0-9]+)|(\\.[0-9]+)");
 		Pattern validateDate = Pattern.compile("[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}");
