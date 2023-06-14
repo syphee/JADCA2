@@ -25,6 +25,7 @@ ArrayList<String> shopping_cart = (ArrayList<String>)session.getAttribute("shopp
 
 <%
 //change ur sql password here
+
 	final String SQLpassword = "spJEAL602336";
 String book_query = "";
 String genre_query ="";
@@ -76,6 +77,7 @@ if(sort_query.equals("popularity")){
 }else if(sort_query.equals("date_added")){
 	q4 = "ORDER BY publication_date DESC";
 }
+
 
 
 %>

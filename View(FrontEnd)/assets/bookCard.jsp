@@ -1,6 +1,6 @@
 <li class="col ">
           <h5 class="card-title fs-3 text-white"><text class="bg-danger p-1 rounded-pill d-inline-block text-truncate" style="max-width: 300px;"><%=title %></text></h5>
-          <div class="card bg-black" style="width: 18rem;">
+          <div class="card bg-black" style="width: 18rem; border">
             
              <img src="<%=request.getContextPath()%>/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/book-imgs/<%=pictureURI%>" class="card-img-top book-img" style="max-width: 200px;" />
             <div class="card-body">

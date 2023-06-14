@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%>
 <%
-final String SQLpassword = "spJEAL602336";
+final String SQLpassword = "Minecrafr@09";
 String path = request.getContextPath();
 
 System.out.println(request.getContextPath());
