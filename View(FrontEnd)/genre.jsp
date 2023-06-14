@@ -138,33 +138,47 @@ if (cookies != null && rememberMe == true) {
 
 	
 			<section class="container my-5 ">
-    <h1 class="text-white fs-1">Select Genre to filter</h1>
-		<div class="pull-right">
-				<a href="genre.jsp">
-				<button class="btn btn-small btn-primary" >
-					All
-				</button>
-				</a>
-				
-				<a href="genre.jsp?genreId=1">
-				<button class="btn btn-small btn-primary" >
-					Adventure
-				</button>
-				</a>
-				
-				<a href="genre.jsp?genreId=2">
-				<button class="btn btn-small btn-primary" >
-					Romance
-				</button>
-				</a>
-				
-				<a href="genre.jsp?genreId=3">
-				<button class="btn btn-small btn-primary" >
-					Action
-				</button>
-				</a>
-				
-			</div>
+<form action="genre.jsp" method="post">
+	<select name="genreId" class="btn btn-danger dropdown-toggle col-3">
+    	<option id="1" value="Select genre" selected>Select genre</option>
+    <%
+    String output = "";
+    try {
+        Class.forName("com.mysql.jdbc.Driver");
+        String connURL = "jdbc:mysql://localhost/jadca1?user=root&password="+ SQLpassword + "&serverTimezone=UTC";
+        ResultSet rs;
+        String genre = "";
+        int genre_id = 0;
+        output = "";
+
+        
+        Connection conn = DriverManager.getConnection(connURL);
+        Statement stmt = conn.createStatement();
+        
+        String sqlStr = "SELECT * from genres";
+        PreparedStatement pstmt = conn.prepareStatement(sqlStr);
+        rs = pstmt.executeQuery();
+        
+        
+
+        
+        while (rs.next()) {
+            genre_id = rs.getInt("genre_id");
+            genre = rs.getString("name");
+            output += "<option id=\"" + genre_id + "\" value=\"" + genre + "\">" + genre +"</option>";
+        }
+
+        System.out.println("Genre output - \n" + output);
+        conn.close();
+    } catch (Exception e) {
+        System.out.println("Error: " + e);
+    }
+    %>
+    
+    <%= output %>
+</select>
+    <input type="submit" class="btn btn-danger" name="submit" value="yourmother">
+</form>
     <div class=" rounded-1 px-2 ">
       <ul class="row ">
 		<%
@@ -186,10 +200,14 @@ if (cookies != null && rememberMe == true) {
 			ResultSet rs;
 			
 			if (genreId == null) {
+				//debugging statement here checking if the genre is correct
+				System.out.println("Selected genreId: " + genreId);
 				stmt = conn.prepareStatement("Select * from books");
 				
 			} else {
-				stmt = conn.prepareStatement("Select * from books where genre_id = ?");
+				//debugging statement here checking if the genre is correct
+				System.out.println("Selected genreId: " + genreId);
+				stmt = conn.prepareStatement("select * from books, genres where books.genre_id = genres.genre_id and books.genre_id = ?;");
 				stmt.setString(1,genreId);
 			}
 			
