@@ -204,6 +204,7 @@ while (rs.next()) {
 	String genre = rs.getString("genre_id");
 	String desc = rs.getString("description");
 	String pictureURI = rs.getString("pic");
+	int quantity = rs.getInt("quantity");
 %>
   
   	<%@include file="assets/bookCard.jsp"%>

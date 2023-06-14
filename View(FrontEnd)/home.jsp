@@ -179,6 +179,7 @@ if (cookies != null && rememberMe == true) {
 				String genre = rs.getString("genre_id");
 				String pictureURI = rs.getString("pic");
 				String desc = rs.getString("description");
+				int quantity = rs.getInt("quantity");
 		%>
 
 		<%@include file="assets/bookCard.jsp"%>
@@ -230,6 +231,7 @@ if (cookies != null && rememberMe == true) {
 				String genre = rs.getString("genre_id");
 				String pictureURI = rs.getString("pic");
 				String desc = rs.getString("description");
+				int quantity = rs.getInt("quantity");
 		%>
 		<%@include file="assets/bookCard.jsp"%>
 		
@@ -279,6 +281,7 @@ if (cookies != null && rememberMe == true) {
 				String genre = rs.getString("genre_id");
 				String pictureURI = rs.getString("pic");
 				String desc = rs.getString("description");
+				int quantity = rs.getInt("quantity");
 		%>
 		<%@include file="assets/bookCard.jsp"%>
 		
