@@ -1,12 +1,14 @@
 <%	
 String user = "";
 String role = "";
+String pic = "";
 
 
 
 try {
 			user = session.getAttribute("username").toString();
 			role = session.getAttribute("role").toString();
+			pic = session.getAttribute("pic").toString();
 
 		} catch (Exception ex) {
 			System.out.println("login failed.");

@@ -50,6 +50,21 @@ public class RegisterUser extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 
+		
+		// get current page of user before passed on to servlet
+		String currentPage = request.getHeader("Referer");
+		String contextPath = request.getContextPath();
+
+		// .getScheme() to get the http:// length
+		if (currentPage != null && currentPage.startsWith(request.getScheme())) {
+		    // Remove the protocol and server name
+		    currentPage = currentPage.substring(currentPage.indexOf(contextPath) + contextPath.length());
+		}
+
+		System.out.println("Relative path of previous page: " + currentPage);
+		
+		
+
 		// to call class verification, make sure that both input passwords are the same
 		String loginid = request.getParameter("loginid");
 		String password = request.getParameter("password");
@@ -83,7 +98,7 @@ public class RegisterUser extends HttpServlet {
 
 							// if successfully logged in 
 							System.out.println("Successfully created user!");
-							response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=successful_registration");
+							response.sendRedirect(request.getContextPath() + "/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=successful_registration");
 							
 							
 							//request.getRequestDispatcher("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp").forward(request, response);
@@ -92,14 +107,14 @@ public class RegisterUser extends HttpServlet {
 							
 							// if wrong password input , userDAO will return a null object
 							output = "You have entered an invalid ID/Password";
-							response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=invalidLogin");
+							response.sendRedirect(request.getContextPath() + "/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=invalidLogin");
 							System.out.println(output);
 						}
 					}
 					// if user already exists
 					else {
 						output = "User Already exists in the database!";
-						response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=UserExists");
+						response.sendRedirect(request.getContextPath() + "/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=UserExists");
 						System.out.println(output);
 					}
 					
@@ -114,21 +129,21 @@ public class RegisterUser extends HttpServlet {
 					
 					// if error in connection with DB
 					output = "Error with connecting to SP Rentals. Please contact the administrator.";
-					response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=ConnectionErr");
+					response.sendRedirect(request.getContextPath() + "/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=ConnectionErr");
 					System.out.println(e);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					
 					// if error with servlet
 					output = "Error with connecting to SP Rentals. Please contact the administrator.";
-					response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=ConnectionErr");
+					response.sendRedirect(request.getContextPath() + "/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=ConnectionErr");
 					System.out.println(e);
 					System.out.println("Unknown Error");
 				}
 				
 			}else {
 				output = "Passwords do not match!";
-				response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=invalidLogin");
+				response.sendRedirect(request.getContextPath() + "/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=invalidLogin");
 				System.out.println(output);
 			}
 
