@@ -3,11 +3,13 @@
 <%@page import="java.util.Map"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dbDAO.UserDAO"%>
+<%@page import="dbDAO.sqlPassword"%>
 <%@page import="java.sql.*"%>
 
 <%
 //change ur sql password here
-	final String SQLpassword = "Minecrafr@09	";
+	final String SQLpassword = sqlPassword.getSQLPassword();
+	
 %>
 
 <%

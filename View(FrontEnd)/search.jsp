@@ -1,3 +1,12 @@
+
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+    <!--  imports here -->
+<%@page import="java.sql.*"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dbDAO.sqlPassword" %>
+
 <%	
 String user = "";
 String role = "";
@@ -26,7 +35,7 @@ ArrayList<String> shopping_cart = (ArrayList<String>)session.getAttribute("shopp
 <%
 //change ur sql password here
 
-	final String SQLpassword = "spJEAL602336";
+	final String SQLpassword = sqlPassword.getSQLPassword();
 String book_query = "";
 String genre_query ="";
 String author_query ="";
@@ -81,12 +90,6 @@ if(sort_query.equals("popularity")){
 
 
 %>
-
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-    <!--  imports here -->
-<%@page import="java.sql.*"%>
-<%@page import="java.util.ArrayList"%>
 
 
 <!DOCTYPE html>

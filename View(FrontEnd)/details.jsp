@@ -1,3 +1,13 @@
+
+
+<%@page import="java.util.ArrayList"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+    <!--  imports here -->
+<%@page import="java.sql.*"%>
+<%@page import="dbDAO.sqlPassword"%>
+
 <%	
 String user = "";
 String role = "";
@@ -18,7 +28,7 @@ try {
 
 <%
 //change ur sql password here
-	final String SQLpassword = "Minecrafr@09";
+	final String SQLpassword = sqlPassword.getSQLPassword();
 	
 %>
 <%
@@ -27,13 +37,6 @@ ArrayList<String> shopping_cart = (ArrayList<String>)session.getAttribute("shopp
 
 
 %>
-
-<%@page import="java.util.ArrayList"%>
-
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-    <!--  imports here -->
-<%@page import="java.sql.*"%>
 
 
 <!DOCTYPE html>

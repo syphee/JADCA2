@@ -20,7 +20,8 @@ import java.sql.*;
 public class UserDAO {
 	
 	// change ur sql password here
-	final static String SQLpassword = "Minecrafr@09";
+	final static String SQLpassword = sqlPassword.getSQLPassword();
+	
 
 	// added in throws exception to catch database errors
 	
