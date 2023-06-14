@@ -6,30 +6,21 @@
 <%@page import="java.sql.*"%>
 
 <%
+String genreId = request.getParameter("genreId");
+
 //change ur sql password here
-	final String SQLpassword = "Minecrafr@09	";
+	final String SQLpassword = "Minecrafr@09";
 %>
 
 <%
 // init cart function
-ArrayList<String> shopping_cart;
-
-shopping_cart = (ArrayList<String>)session.getAttribute("shopping_cart");
-// get cart
-
-// to setattribute shopping_cart again
-if(shopping_cart == null){
-	response.sendRedirect("login.jsp");
-}
+ArrayList<String> shopping_cart = (ArrayList<String>)session.getAttribute("shopping_cart");
 
 
 %>
-
 <%
 String user = "";
 String role = "";
-String pic = "";
-
 boolean rememberMe = false;
 
 Cookie[] cookies = request.getCookies();
@@ -70,7 +61,6 @@ if (cookies != null && rememberMe == true) {
 
 			session.setAttribute("username", user);
 			session.setAttribute("role", role);
-			session.setAttribute("pic",pic);
 
 			break;
 
@@ -82,7 +72,6 @@ if (cookies != null && rememberMe == true) {
 		try {
 			user = session.getAttribute("username").toString();
 			role = session.getAttribute("role").toString();
-			pic = session.getAttribute("pic").toString();
 
 		} catch (Exception ex) {
 			System.out.println("login failed.");
@@ -101,7 +90,6 @@ if (cookies != null && rememberMe == true) {
 	try {
 		user = session.getAttribute("username").toString();
 		role = session.getAttribute("role").toString();
-		pic = session.getAttribute("pic").toString();
 
 	} catch (Exception ex) {
 		System.out.println("login failed.");
@@ -110,13 +98,12 @@ if (cookies != null && rememberMe == true) {
 }
 %>
 
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login Page</title>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
 
 <!-- Bootstrap -->
 <link rel="stylesheet"
@@ -139,16 +126,59 @@ if (cookies != null && rememberMe == true) {
 <link rel="stylesheet"
 	href="/CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/animations.css">
 
+
+
 </head>
-<body class="bg-black" style="overflow-y:auto;" >
+<body class="bg-black" style="overflow-y; height:100%;">
 	<%@include file="assets/messagePopUp.jsp"%>
 	
 	<%@include file="assets/header/header.jsp"%>
 	
+<div class="container wrapper">
 
-	<section class="container my-5  ">
-    <h1 class="text-white fs-1">Whats new</h1>
+	
+			<section class="container my-5 ">
+<form action="genre.jsp" method="post">
+	<select name="genreId" class="btn btn-danger dropdown-toggle col-3">
+    	<option id="1" value="Select genre" selected>Select genre</option>
+    <%
+    String output = "";
+    try {
+        Class.forName("com.mysql.jdbc.Driver");
+        String connURL = "jdbc:mysql://localhost/jadca1?user=root&password="+ SQLpassword + "&serverTimezone=UTC";
+        ResultSet rs;
+        String genre = "";
+        int genre_id = 0;
+        output = "";
 
+        
+        Connection conn = DriverManager.getConnection(connURL);
+        Statement stmt = conn.createStatement();
+        
+        String sqlStr = "SELECT * from genres";
+        PreparedStatement pstmt = conn.prepareStatement(sqlStr);
+        rs = pstmt.executeQuery();
+        
+        
+
+        
+        while (rs.next()) {
+            genre_id = rs.getInt("genre_id");
+            genre = rs.getString("name");
+            output += "<option id=\"" + genre_id + "\" value=\"" + genre + "\">" + genre +"</option>";
+        }
+
+        System.out.println("Genre output - \n" + output);
+        conn.close();
+    } catch (Exception e) {
+        System.out.println("Error: " + e);
+    }
+    %>
+    
+    <%= output %>
+</select>
+    <input type="submit" class="btn btn-danger" name="submit" value="yourmother">
+</form>
     <div class=" rounded-1 px-2 ">
       <ul class="row ">
 		<%
@@ -166,9 +196,22 @@ if (cookies != null && rememberMe == true) {
 			Connection conn = DriverManager.getConnection(connURL);
 
 			//step 4 create prepared statement + ResultSet
-			PreparedStatement stmt = conn.prepareStatement("select * from books  ORDER BY publication_date DESC LIMIT 3");
-
-			ResultSet rs = stmt.executeQuery();
+			PreparedStatement stmt;
+			ResultSet rs;
+			
+			if (genreId == null) {
+				//debugging statement here checking if the genre is correct
+				System.out.println("Selected genreId: " + genreId);
+				stmt = conn.prepareStatement("Select * from books");
+				
+			} else {
+				//debugging statement here checking if the genre is correct
+				System.out.println("Selected genreId: " + genreId);
+				stmt = conn.prepareStatement("select * from books, genres where books.genre_id = genres.genre_id and books.genre_id = ?;");
+				stmt.setString(1,genreId);
+			}
+			
+			rs = stmt.executeQuery();
 
 			while (rs.next()) {
 				int id = rs.getInt("book_id");
@@ -178,14 +221,16 @@ if (cookies != null && rememberMe == true) {
 				String pictureURI = rs.getString("pic");
 				String desc = rs.getString("description");
 		%>
-
 		<%@include file="assets/bookCard.jsp"%>
 		
 
 
-
 		<%
 		}
+			
+			rs.close();
+			stmt.close();
+			conn.close();
 
 		} catch (Exception e) {
 		out.print("Error : " + e);
@@ -199,109 +244,10 @@ if (cookies != null && rememberMe == true) {
 
 	</div>
 	<hr class="bg-danger my-1 opacity-100">
-	<h1 class="text-white fs-1">Whats popular</h1>
-	<div class=" rounded-1 px-2 ">
-      <ul class="row ">
-		<%
-		//connecting to database to get the details first
-
-		try {
-
-			//step 1 Load jdbc driver
-			Class.forName("com.mysql.jdbc.Driver");
-
-			//step 2 define URL connection
-			String connURL = "jdbc:mysql://localhost/jadca1?user=root&password="+ SQLpassword + "&serverTimezone=UTC";
-
-			//step 3 Establish connection
-			Connection conn = DriverManager.getConnection(connURL);
-
-			//step 4 create prepared statement + ResultSet
-			PreparedStatement stmt = conn.prepareStatement("select * from books  ORDER BY rating DESC LIMIT 3");
-
-			ResultSet rs = stmt.executeQuery();
-
-			while (rs.next()) {
-				int id = rs.getInt("book_id");
-				String title = rs.getString("title");
-				String author = rs.getString("author");
-				String genre = rs.getString("genre_id");
-				String pictureURI = rs.getString("pic");
-				String desc = rs.getString("description");
-		%>
-		<%@include file="assets/bookCard.jsp"%>
-		
-
-
-		<%
-		}
-
-		} catch (Exception e) {
-		out.print("Error : " + e);
-		}
-		%>
-
-
-
-
-		</ul>
-
-	</div>
-	<hr class="bg-danger my-1 opacity-100">
-	<h1 class="text-white fs-1">Recently viewed</h1>
-	<div class=" rounded-1 px-2 ">
-      <ul class="row ">
-		<%
-		//connecting to database to get the details first
-
-		try {
-
-			//step 1 Load jdbc driver
-			Class.forName("com.mysql.jdbc.Driver");
-
-			//step 2 define URL connection
-			String connURL = "jdbc:mysql://localhost/jadca1?user=root&password="+ SQLpassword + "&serverTimezone=UTC";
-
-			//step 3 Establish connection
-			Connection conn = DriverManager.getConnection(connURL);
-
-			//step 4 create prepared statement + ResultSet
-			PreparedStatement stmt = conn.prepareStatement("select * from books  ORDER BY rating DESC LIMIT 3");
-
-			ResultSet rs = stmt.executeQuery();
-
-			while (rs.next()) {
-				int id = rs.getInt("book_id");
-				String title = rs.getString("title");
-				String author = rs.getString("author");
-				String genre = rs.getString("genre_id");
-				String pictureURI = rs.getString("pic");
-				String desc = rs.getString("description");
-		%>
-		<%@include file="assets/bookCard.jsp"%>
-		
-
-
-		<%
-		}
-
-		} catch (Exception e) {
-		out.print("Error : " + e);
-		}
-		%>
-
-
-
-
-		</ul>
-
-	</div>
 	</section>
 
+</div>
 
-
-
-		<%@ include file="assets/footer/footer.jsp"%>
-
+<%@ include file="assets/footer/footer.jsp"%>
 </body>
 </html>

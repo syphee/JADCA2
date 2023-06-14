@@ -20,7 +20,7 @@ import java.sql.*;
 public class UserDAO {
 	
 	// change ur sql password here
-	final static String SQLpassword = "spJEAL602336";
+	final static String SQLpassword = "Minecrafr@09";
 
 	// added in throws exception to catch database errors
 	
@@ -36,6 +36,7 @@ public class UserDAO {
 		String name;
 		String password;
 		String role;
+		String pic;
 		int id;
 
 		// get users
@@ -70,11 +71,13 @@ public class UserDAO {
 				name = rs.getString("email");
 				password = rs.getString("password");
 				role = rs.getString("role");
+				pic = rs.getString("pic");
 
 				if (INPUT_id.equals(name) && INPUT_password.equals(password)) {
 					// store the values that match into hashmap, later to be returned
 					userDetails.put("username", name);
 					userDetails.put("role", role);
+					userDetails.put("pic", pic);
 
 					break;
 				}

@@ -1,12 +1,14 @@
 <%	
 String user = "";
 String role = "";
+String pic = "";
 
 
 
 try {
 			user = session.getAttribute("username").toString();
 			role = session.getAttribute("role").toString();
+			pic = session.getAttribute("pic").toString();
 
 		} catch (Exception ex) {
 			System.out.println("login failed.");
@@ -14,8 +16,22 @@ try {
 		}
 %>
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%
+//change ur sql password here
+	final String SQLpassword = "Minecrafr@09";
+	
+%>
+<%
+// init cart function
+ArrayList<String> shopping_cart = (ArrayList<String>)session.getAttribute("shopping_cart");
+
+
+%>
+
+<%@page import="java.util.ArrayList"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
     <!--  imports here -->
 <%@page import="java.sql.*"%>
 
@@ -45,9 +61,9 @@ try {
 
 
 <link rel="stylesheet"
-	href="../View(FrontEnd)/assets/css/animations.css">
-
-<link rel="stylesheet" href="../View(FrontEnd)/assets/css/styles.css">
+	href="/CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/styles.css">
+<link rel="stylesheet"
+	href="/CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/animations.css">
 
 
 <style type="text/css">
@@ -65,36 +81,47 @@ text-size: 1rem;
 
 <body class="bg-black">
 	<%@include file="assets/header/header.jsp" %>
-
+	<%@include file="assets/messagePopUp.jsp"%>
 
 <h2>Hello There this is to show that it works.</h2>
 
 <%
-try {
-String bookID = request.getParameter("book_id");
-	
+try{
+
+String book_query = request.getParameter("s");
+
 
 //step 1 Load jdbc driver
 Class.forName("com.mysql.jdbc.Driver");
 
 //step 2 define URL connection
-String connURL = "jdbc:mysql://localhost/jadca1?user=root&password=Minecrafr@09&serverTimezone=UTC";
+String connURL = "jdbc:mysql://localhost/jadca1?user=root&password="+ SQLpassword + "&serverTimezone=UTC";
 
 //step 3 Establish connection
 Connection conn = DriverManager.getConnection(connURL);
 
-//step 4 create prepared statement + ResultSet
-PreparedStatement stmt = conn.prepareStatement("select * from books WHERE book_id = ?");
-stmt.setString(1,bookID);
+//Call routine
+			String simpleProc = "{ call selectBookByTitle(?) }";
+			CallableStatement cs = conn.prepareCall(simpleProc);
 
+			// insert book values
+			cs.setString(1, book_query);
+			
+			
+			// Step 5: Execute SQL Command
+			//String sqlStr = "SELECT * FROM member";         
+			
+			
+			
+			
 
-ResultSet rs = stmt.executeQuery();
+ResultSet rs = cs.executeQuery();
 
 while (rs.next()) {
 	int id = rs.getInt("book_id");
 	String title = rs.getString("title");
 	String author = rs.getString("author");
-	String genre = rs.getString("genre");
+	String genre = rs.getString("genre_id");
 	String desc = rs.getString("description");
 %>
 
@@ -115,6 +142,7 @@ Genre: <%=genre %> </h2>
 }
 
 %>
+
 
 <%@include file="assets/footer/footer.jsp" %>
 </body>

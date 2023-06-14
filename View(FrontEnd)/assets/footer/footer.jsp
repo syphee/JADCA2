@@ -1,5 +1,7 @@
-<footer class="footer bg-light" style="position:fixed;bottom:0;">
- <div class="mx-0 my-5">
+<footer class=" bg-light py-2" 
+style="position:sticky;
+	   bottom:0;">
+ <div class="mx-0 ">
       <div class="text-center container">
         <div class="row ">
           <div class="col">

@@ -3,6 +3,14 @@
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="dbDAO.UserDAO"%>
+<%@page import="java.util.ArrayList"%>
+
+<%
+// init cart function
+ArrayList<String> shopping_cart = new ArrayList<String>();
+session.setAttribute("shopping_cart",shopping_cart);
+
+%>
 
 <%
 // the automatic login feature
