@@ -104,6 +104,7 @@ public class VerifyUserLogin extends HttpServlet {
 
 					session.setAttribute("username", "Guest");
 					session.setAttribute("role", "Guest");
+					session.setAttribute("pic", "default_profile_pic.png");
 
 					System.out.println("Logged in as guest!");
 					hasLogged = true;
@@ -153,9 +154,11 @@ public class VerifyUserLogin extends HttpServlet {
 					// store login and role attribute of user here
 					String username = userDetails.get("username");
 					role = userDetails.get("role");
+					String pic = userDetails.get("pic");
 
 					session.setAttribute("username", username);
 					session.setAttribute("role", role);
+					session.setAttribute("pic", pic);
 
 					// if user has selected to remember login
 					// TODO - store user details ( username and role ) in SQL and link it with

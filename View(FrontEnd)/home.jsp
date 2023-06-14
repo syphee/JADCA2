@@ -28,6 +28,7 @@ if(shopping_cart == null){
 <%
 String user = "";
 String role = "";
+String pic = "";
 
 boolean rememberMe = false;
 
@@ -69,6 +70,7 @@ if (cookies != null && rememberMe == true) {
 
 			session.setAttribute("username", user);
 			session.setAttribute("role", role);
+			session.setAttribute("pic",pic);
 
 			break;
 
@@ -80,6 +82,7 @@ if (cookies != null && rememberMe == true) {
 		try {
 			user = session.getAttribute("username").toString();
 			role = session.getAttribute("role").toString();
+			pic = session.getAttribute("pic").toString();
 
 		} catch (Exception ex) {
 			System.out.println("login failed.");
@@ -98,6 +101,7 @@ if (cookies != null && rememberMe == true) {
 	try {
 		user = session.getAttribute("username").toString();
 		role = session.getAttribute("role").toString();
+		pic = session.getAttribute("pic").toString();
 
 	} catch (Exception ex) {
 		System.out.println("login failed.");

@@ -75,9 +75,9 @@
 							<%=user %>
 						</button>
 						<ul class="dropdown-menu">
-							<li><img class="dropdown-item" href="#"
-								src="https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg"
-								style="max-width: 100px;"></img></li>
+							<li><img class="dropdown-item"
+							src="<%=request.getContextPath()%>/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/user-imgs/<%=pic%>"
+							style="max-width: 100px;" /></img></img></li>
 							<li><text class="dropdown-item" href="#"><%=user%></text></li>
 							<li>
 								<hr class="dropdown-divider">

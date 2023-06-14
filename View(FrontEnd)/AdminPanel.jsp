@@ -9,9 +9,11 @@ System.out.println(request.getContextPath());
 String output = "";
 String role = "";
 String user = "";
+String pic = "";
 try {
 	user = session.getAttribute("username").toString();
 	role = session.getAttribute("role").toString();
+	pic = session.getAttribute("pic").toString();
 	if (role.equals("admin") != true || role == null) {
 		System.out.println("No permissions!");
 		response.sendRedirect("home.jsp");
@@ -75,7 +77,9 @@ if (color != null || output2 != null) {
 html, body {
 	height: 100%;
 	overflow: auto;
+	zoom: 85%
 }
+
 </style>
 </head>
 
@@ -295,9 +299,9 @@ html, body {
 								</button>
 								<ul
 									class="dropdown-menu align-items-center justify-content-center">
-									<li><img class="dropdown-item" href="#"
-										src="https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg"
-										style="max-width: 100px;"></img></li>
+									<li><img class="dropdown-item"
+							src="<%=path%>/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/user-imgs/<%=pic%>"
+							style="max-width: 100px;" /></img></li>
 									<li><text class="dropdown-item" href="#"><%=user%></text></li>
 									<li>
 										<hr class="dropdown-divider">
@@ -358,6 +362,15 @@ html, body {
 					<!-- Delete Book -->
 
 					<%@ include file="assets/bookPanel/deleteBook/deleteBookFeature.jsp"%>
+					
+					<!-- add user -->
+					<%@ include file="assets/userPanel/addUser/addUserFeature.jsp"%>
+					
+					<!-- edit user -->
+					<%@ include file="assets/userPanel/deleteUser/deleteUserFeature.jsp"%>
+					
+					<!-- delete user -->
+					<%@ include file="assets/userPanel/editUser/editUserFeature.jsp"%>
 					
 					<!-- manage stocks -->
 					<%@ include file="assets/inventoryPanel/manageInventory/manageInventoryFeature.jsp"%>

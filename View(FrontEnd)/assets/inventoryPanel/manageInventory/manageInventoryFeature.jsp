@@ -46,9 +46,7 @@
 								String pictureURI = "";
 
 								
-								String contextPath = request.getContextPath();
-												
-								
+
 								// to display all
 								output = "";
 					
