@@ -211,14 +211,15 @@ html, body {
 											data-bs-parent="#accordionExample">
 											<div class="accordion-body">
 												<ul
+												
 													class="btn-toggle-nav list-unstyled fw-normal pb-1 small ">
+													<li class="my-4 link-hover"><a href="#"  data-bs-toggle="collapse" data-bs-target="#manageStocks"
+														class="link-dark rounded hover-underline-animation text-dark">Manage stocks</a></li>
 													<li class="my-4 link-hover"><a href="#"
-														class="link-dark rounded hover-underline-animation text-dark">Add</a></li>
-													<li class="my-4 link-hover"><a href="#"
-														class="link-dark rounded hover-underline-animation text-dark">Edit
+														class="link-dark rounded hover-underline-animation text-dark">Order Stocks 
 													</a></li>
 													<li class="my-4 link-hover"><a href="#"
-														class="link-dark rounded hover-underline-animation text-dark">Delete</a></li>
+														class="link-dark rounded hover-underline-animation text-dark">View Statistics</a></li>
 													<hr class="bg-dark my-1 opacity-100">
 
 												</ul>
@@ -245,7 +246,7 @@ html, body {
 												<ul
 													class="btn-toggle-nav list-unstyled fw-normal pb-1 small ">
 													<li class="my-4 link-hover"><a href="#"
-														class="link-dark rounded hover-underline-animation text-dark">Add</a></li>
+														class="link-dark rounded hover-underline-animation text-dark">Manage User Rentals</a></li>
 													<li class="my-4 link-hover"><a href="#"
 														class="link-dark rounded hover-underline-animation text-dark">Edit
 													</a></li>
@@ -357,6 +358,12 @@ html, body {
 					<!-- Delete Book -->
 
 					<%@ include file="assets/bookPanel/deleteBook/deleteBookFeature.jsp"%>
+					
+					<!-- manage stocks -->
+					<%@ include file="assets/inventoryPanel/manageInventory/manageInventoryFeature.jsp"%>
+					
+					
+					
 			</main>
 
 			<!-- Main content -->

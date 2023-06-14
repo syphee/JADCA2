@@ -12,7 +12,15 @@
 
 <%
 // init cart function
-ArrayList<String> shopping_cart = (ArrayList<String>)session.getAttribute("shopping_cart");
+ArrayList<String> shopping_cart;
+
+shopping_cart = (ArrayList<String>)session.getAttribute("shopping_cart");
+// get cart
+
+// to setattribute shopping_cart again
+if(shopping_cart == null){
+	response.sendRedirect("login.jsp");
+}
 
 
 %>
