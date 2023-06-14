@@ -178,8 +178,10 @@ if (cookies != null && rememberMe == true) {
 				String pictureURI = rs.getString("pic");
 				String desc = rs.getString("description");
 		%>
+
 		<%@include file="assets/bookCard.jsp"%>
 		
+
 
 
 		<%
