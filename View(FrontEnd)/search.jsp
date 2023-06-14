@@ -23,7 +23,7 @@ ArrayList<String> shopping_cart = (ArrayList<String>)session.getAttribute("shopp
 
 <%
 //change ur sql password here
-	final String SQLpassword = "spJEAL602336";
+	final String SQLpassword = "Minecrafr@09";
 	
 %>
 

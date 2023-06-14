@@ -6,8 +6,10 @@
 <%@page import="java.sql.*"%>
 
 <%
+String genreId = request.getParameter("genreId");
+
 //change ur sql password here
-	final String SQLpassword = "Minecrafr@09	";
+	final String SQLpassword = "Minecrafr@09";
 %>
 
 <%
@@ -16,11 +18,9 @@ ArrayList<String> shopping_cart = (ArrayList<String>)session.getAttribute("shopp
 
 
 %>
-
 <%
 String user = "";
 String role = "";
-
 boolean rememberMe = false;
 
 Cookie[] cookies = request.getCookies();
@@ -98,13 +98,12 @@ if (cookies != null && rememberMe == true) {
 }
 %>
 
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login Page</title>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
 
 <!-- Bootstrap -->
 <link rel="stylesheet"
@@ -127,16 +126,45 @@ if (cookies != null && rememberMe == true) {
 <link rel="stylesheet"
 	href="/CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/animations.css">
 
+
+
 </head>
-<body class="bg-black" style="overflow-y:auto;" >
+<body class="bg-black" style="overflow-y; height:100%;">
 	<%@include file="assets/messagePopUp.jsp"%>
 	
 	<%@include file="assets/header/header.jsp"%>
 	
+<div class="container wrapper">
 
-	<section class="container my-5  ">
-    <h1 class="text-white fs-1">Whats new</h1>
-
+	
+			<section class="container my-5 ">
+    <h1 class="text-white fs-1">Select Genre to filter</h1>
+		<div class="pull-right">
+				<a href="genre.jsp">
+				<button class="btn btn-small btn-primary" >
+					All
+				</button>
+				</a>
+				
+				<a href="genre.jsp?genreId=1">
+				<button class="btn btn-small btn-primary" >
+					Adventure
+				</button>
+				</a>
+				
+				<a href="genre.jsp?genreId=2">
+				<button class="btn btn-small btn-primary" >
+					Romance
+				</button>
+				</a>
+				
+				<a href="genre.jsp?genreId=3">
+				<button class="btn btn-small btn-primary" >
+					Action
+				</button>
+				</a>
+				
+			</div>
     <div class=" rounded-1 px-2 ">
       <ul class="row ">
 		<%
@@ -154,9 +182,18 @@ if (cookies != null && rememberMe == true) {
 			Connection conn = DriverManager.getConnection(connURL);
 
 			//step 4 create prepared statement + ResultSet
-			PreparedStatement stmt = conn.prepareStatement("select * from books");
-
-			ResultSet rs = stmt.executeQuery();
+			PreparedStatement stmt;
+			ResultSet rs;
+			
+			if (genreId == null) {
+				stmt = conn.prepareStatement("Select * from books");
+				
+			} else {
+				stmt = conn.prepareStatement("Select * from books where genre_id = ?");
+				stmt.setString(1,genreId);
+			}
+			
+			rs = stmt.executeQuery();
 
 			while (rs.next()) {
 				int id = rs.getInt("book_id");
@@ -172,6 +209,10 @@ if (cookies != null && rememberMe == true) {
 
 		<%
 		}
+			
+			rs.close();
+			stmt.close();
+			conn.close();
 
 		} catch (Exception e) {
 		out.print("Error : " + e);
@@ -187,10 +228,8 @@ if (cookies != null && rememberMe == true) {
 	<hr class="bg-danger my-1 opacity-100">
 	</section>
 
+</div>
 
-
-
-		<%@ include file="assets/footer/footer.jsp"%>
-
+<%@ include file="assets/footer/footer.jsp"%>
 </body>
 </html>

@@ -25,12 +25,12 @@ import java.util.ArrayList;
 public class BookDAO {
 	
 	// james sql pass : spJEAL602336
-	// skye's sql pass : 
-	final static String SQLpassword = "spJEAL602336";
+	// skye's sql pass : Minecrafr@09
+	final static String SQLpassword = "Minecrafr@09";
 	
 	// right click the book-imgs folder , show in system explorer and paste it in the bookImgFolderDir variable
 	// James directory : D:\\Eclipse\\school work\\CA1\\CA1\\src\\main\\webapp\\BookstoreCA1\\JAD-CA1\\View(FrontEnd)\\assets\\book-imgs\\
-	// Skye's directory :
+	// Skye's directory : C:\Users\skyen\eclipse-workspace\skye.zip_expanded\CA1\src\main\webapp\BookstoreCA1\JAD-CA1\View(FrontEnd)\assets\book-imgs
 	final static String bookImgFolderDir = "D:\\Eclipse\\school work\\CA1\\CA1\\src\\main\\webapp\\BookstoreCA1\\JAD-CA1\\View(FrontEnd)\\assets\\book-imgs\\";
 	//final static String bookImgFolderDir = "/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/book-imgs/";
 	// to verify existence of book

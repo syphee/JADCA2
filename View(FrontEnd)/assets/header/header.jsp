@@ -21,7 +21,7 @@
 			<ul class="nav justify-content-center col ">
 				<li class="nav-item mb-0 mx-1 my-0 "><a
 					class="nav-link text-black fw-semibold hover-underline-animation  "
-					href="index.html">Genres</a></li>
+					href="genre.jsp">Genres</a></li>
 				<li class="nav-item mb-0 mx-1  my-0"><a
 					class="nav-link text-black fw-semibold hover-underline-animation"
 					href="my_life.html">What's new</a></li>
