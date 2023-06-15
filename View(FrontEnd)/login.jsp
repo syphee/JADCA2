@@ -79,16 +79,22 @@ if (cookies != null) {
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link rel="stylesheet" type="text/css" href="login.css" />
+<link rel="stylesheet" type="text/css" href="/CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/login.css" />
 
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="assets/library svg/test.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+	
+<link rel="stylesheet"
+	href="/CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/styles.css">
+<link rel="stylesheet"
+	href="/CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/animations.css">
+
 
 </head>
-<body>
+<body >
 <div class="container">
 	<div class="row">
 		<div class="col">

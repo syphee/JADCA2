@@ -17,7 +17,7 @@
 
 					<td class="col">Email</td>
 					<td class="col">Role</td>
-					<td class="col">Price</td>
+					<td class="col"></td>
 
 					<!-- to add statistics of book rentals here in the future, will need to rework on SQL table -->
 				</tr>
@@ -78,12 +78,14 @@
 							style="max-width: 100px;" /></td>
 
 						<td class="col"><input type="text" id="custId" name="email"
-							value="<%=email%>"></td>
+							value="<%=email%>" disabled></td>
 						<td class="col"><input type="text" id="custId" name="role"
-							value="<%=user_role%>"></td>
+							value="<%=user_role%>" disabled></td>
 
-
-						<td class="col"><input type="submit" name="submit"
+						
+						<td class="col">
+						<input type="hidden" name="user_id" value="<%=user_id %>"/>
+						<input type="submit" name="submit"
 							value="Delete User" /></td>
 					</tr>
 				</form>
