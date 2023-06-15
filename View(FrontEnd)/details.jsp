@@ -110,13 +110,6 @@ Connection conn = DriverManager.getConnection(connURL);
 			// insert book values
 			cs.setString(1, book_query);
 			
-			
-			// Step 5: Execute SQL Command
-			//String sqlStr = "SELECT * FROM member";         
-			
-			
-			
-			
 
 ResultSet rs = cs.executeQuery();
 
