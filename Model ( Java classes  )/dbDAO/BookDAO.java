@@ -26,7 +26,7 @@ public class BookDAO {
 	
 	// james sql pass : spJEAL602336
 	// skye's sql pass : Minecrafr@09
-	final static String SQLpassword = "Minecrafr@09";
+	final static String SQLpassword = sqlPassword.getSQLPassword();
 	
 	// right click the book-imgs folder , show in system explorer and paste it in the bookImgFolderDir variable
 	// James directory : D:\\Eclipse\\school work\\CA1\\CA1\\src\\main\\webapp\\BookstoreCA1\\JAD-CA1\\View(FrontEnd)\\assets\\book-imgs\\

@@ -3,11 +3,13 @@
 <%@page import="java.util.Map"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dbDAO.UserDAO"%>
+<%@page import="dbDAO.sqlPassword"%>
 <%@page import="java.sql.*"%>
 
 <%
 //change ur sql password here
-	final String SQLpassword = "Minecrafr@09";
+	final String SQLpassword = sqlPassword.getSQLPassword();
+	
 %>
 
 <%
@@ -177,6 +179,7 @@ if (cookies != null && rememberMe == true) {
 				String genre = rs.getString("genre_id");
 				String pictureURI = rs.getString("pic");
 				String desc = rs.getString("description");
+				int quantity = rs.getInt("quantity");
 		%>
 
 		<%@include file="assets/bookCard.jsp"%>
@@ -230,8 +233,7 @@ if (cookies != null && rememberMe == true) {
 				String genre = rs.getString("genre_id");
 				String pictureURI = rs.getString("pic");
 				String desc = rs.getString("description");
-				
-				
+				int quantity = rs.getInt("quantity");
 		%>
 		<%@include file="assets/bookCard.jsp"%>
 		
@@ -281,6 +283,7 @@ if (cookies != null && rememberMe == true) {
 				String genre = rs.getString("genre_id");
 				String pictureURI = rs.getString("pic");
 				String desc = rs.getString("description");
+				int quantity = rs.getInt("quantity");
 		%>
 		<%@include file="assets/bookCard.jsp"%>
 		

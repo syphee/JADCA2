@@ -18,3 +18,15 @@ body {
 	
 	overflow:auto;
 }
+
+
+.book-img {
+    background-color: black;
+    border: none;
+    opacity: 1;
+    transition: 0.3s;
+}
+.book-img:hover{
+    opacity: 0.6;
+    cursor: pointer;
+}

@@ -4,12 +4,25 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="dbDAO.UserDAO"%>
 <%@page import="java.sql.*"%>
+<%@page import="dbDAO.sqlPassword" %>
+
 
 <%
-String genreId = request.getParameter("genreId");
+String genreId = "";
 
+try{
+	genreId = request.getParameter("genreId");
+	System.out.println("Server has parsed genreId : " + genreId);
+}catch(Exception ex){
+	ex.printStackTrace();
+}
+
+
+%>
+
+<% 
 //change ur sql password here
-	final String SQLpassword = "Minecrafr@09";
+	final String SQLpassword = sqlPassword.getSQLPassword();
 %>
 
 <%
@@ -18,9 +31,12 @@ ArrayList<String> shopping_cart = (ArrayList<String>)session.getAttribute("shopp
 
 
 %>
+
 <%
 String user = "";
 String role = "";
+String pic = "";
+
 boolean rememberMe = false;
 
 Cookie[] cookies = request.getCookies();
@@ -61,6 +77,7 @@ if (cookies != null && rememberMe == true) {
 
 			session.setAttribute("username", user);
 			session.setAttribute("role", role);
+			session.setAttribute("pic",pic);
 
 			break;
 
@@ -72,6 +89,7 @@ if (cookies != null && rememberMe == true) {
 		try {
 			user = session.getAttribute("username").toString();
 			role = session.getAttribute("role").toString();
+			pic = session.getAttribute("pic").toString();
 
 		} catch (Exception ex) {
 			System.out.println("login failed.");
@@ -90,6 +108,7 @@ if (cookies != null && rememberMe == true) {
 	try {
 		user = session.getAttribute("username").toString();
 		role = session.getAttribute("role").toString();
+		pic = session.getAttribute("pic").toString();
 
 	} catch (Exception ex) {
 		System.out.println("login failed.");
@@ -97,7 +116,6 @@ if (cookies != null && rememberMe == true) {
 	}
 }
 %>
-
 
 <!DOCTYPE html>
 <html>
@@ -142,7 +160,7 @@ if (cookies != null && rememberMe == true) {
 	<select name="genreId" class="btn btn-danger dropdown-toggle col-3">
     	<option id="1" value="Select genre" selected>Select genre</option>
     <%
-    String output = "";
+    output = "";
     try {
         Class.forName("com.mysql.jdbc.Driver");
         String connURL = "jdbc:mysql://localhost/jadca1?user=root&password="+ SQLpassword + "&serverTimezone=UTC";
@@ -165,7 +183,7 @@ if (cookies != null && rememberMe == true) {
         while (rs.next()) {
             genre_id = rs.getInt("genre_id");
             genre = rs.getString("name");
-            output += "<option id=\"" + genre_id + "\" value=\"" + genre + "\">" + genre +"</option>";
+            output += "<option id=\"" + genre_id + "\" value=\"" + genre_id + "\">" + genre +"</option>";
         }
 
         System.out.println("Genre output - \n" + output);
@@ -220,6 +238,7 @@ if (cookies != null && rememberMe == true) {
 				String genre = rs.getString("genre_id");
 				String pictureURI = rs.getString("pic");
 				String desc = rs.getString("description");
+				int quantity = rs.getInt("quantity");
 		%>
 		<%@include file="assets/bookCard.jsp"%>
 		
