@@ -224,6 +224,41 @@ public class UserDAO {
 		return doesExist;
 	}
 
+	
+	public static void deleteUser(String INPUT_id) throws Exception {
+		String i = INPUT_id;
+		
+		int USER_ID = Integer.parseInt(i);
+    	
+    	Class.forName("com.mysql.jdbc.Driver");
+
+		// Step 2: Define Connection URL
+		String connURL = "jdbc:mysql://localhost/jadca1?user=root&password="+ SQLpassword + "&serverTimezone=UTC";
+
+		// Step 3: Establish connection to URL
+		Connection conn = DriverManager.getConnection(connURL);
+		// Step 4: Create Statement object
+
+		// Call routine
+		String simpleProc = "{ call deleteUser(?) }";
+		CallableStatement cs = conn.prepareCall(simpleProc);
+
+		// insert book values
+		cs.setInt(1, USER_ID);
+		
+		
+		// Step 5: Execute SQL Command
+		//String sqlStr = "SELECT * FROM member";         
+		
+		
+		
+		int affectedRows = cs.executeUpdate();
+		System.out.println("USERDAO - " + affectedRows + " row(s) deleted successfully.");
+		
+		
+		// Step 7: Close connection
+		conn.close();
+	}
 	public static void saveSession(String session_id,String INPUT_username, String INPUT_role) throws Exception {
 			
 			

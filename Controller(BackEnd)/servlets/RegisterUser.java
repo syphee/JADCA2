@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Map;
 
@@ -41,7 +42,10 @@ public class RegisterUser extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		PrintWriter out = response.getWriter();
+		String output = "";
+		String color = "";
 
 		response.setContentType("text/html; charset=utf-8");
 
@@ -70,7 +74,7 @@ public class RegisterUser extends HttpServlet {
 		String password = request.getParameter("password");
 		String confirmPassword = request.getParameter("confirmPassword");
 		
-		String output = "";
+
 
 		//to redirect user if tries to bypass login by entering http://localhost:8080/Practical_2/Practical%202/VerifyUser.jsp without logging in
 		if(loginid == null || password == null || confirmPassword == null){
@@ -88,7 +92,7 @@ public class RegisterUser extends HttpServlet {
 					boolean verifyExists = UserDAO.ValidateExists(loginid,password);
 					
 					// if user does not exist on the DB yet
-					if(verifyExists = false) {
+					if(verifyExists == false) {
 						// the returned result from Database			
 						String userDetails = UserDAO.RegisterNewUser(loginid,password);
 						
@@ -98,23 +102,58 @@ public class RegisterUser extends HttpServlet {
 
 							// if successfully logged in 
 							System.out.println("Successfully created user!");
-							response.sendRedirect(request.getContextPath() + "/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=successful_registration");
+							//response.sendRedirect(request.getContextPath() + currentPage);
+							output = "Added user successfully!";
+				        	color = "alert-success";
+				        	System.out.println("REGISTERUSER - SUCCESS!!");
+				        	//response.sendRedirect(request.getContextPath()+"/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel.jsp?c="+color+"&o="+output);
+				        	
+				        	// bootstrap card
+				        	String message = "<div class=\"alert " +color + " role=\"alert\">\r\n"
+				    	     		+ output + "\r\n"
+				    	     		+ "  <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>\r\n"
+				    	     		+ "</div>";
 							
+							out.println(message);
 							
-							//request.getRequestDispatcher("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp").forward(request, response);
+							request.getRequestDispatcher( currentPage).include(request, response);
 							
 						}else{
 							
 							// if wrong password input , userDAO will return a null object
 							output = "You have entered an invalid ID/Password";
-							response.sendRedirect(request.getContextPath() + "/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=invalidLogin");
+							//response.sendRedirect(request.getContextPath() + currentPage);
+
+				        	color = "alert-danger";
+				        	System.out.println("REGISTERUSER - FAILED!!");
+				        	//response.sendRedirect(request.getContextPath()+"/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel.jsp?c="+color+"&o="+output);
+				        	
+				        	// bootstrap card
+				        	String message = "<div class=\"alert " +color + " role=\"alert\">\r\n"
+				    	     		+ output + "\r\n"
+				    	     		+ "  <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>\r\n"
+				    	     		+ "</div>";
+							request.getRequestDispatcher(currentPage).include(request, response);
+							out.println(message);
 							System.out.println(output);
 						}
 					}
 					// if user already exists
 					else {
 						output = "User Already exists in the database!";
-						response.sendRedirect(request.getContextPath() + "/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=UserExists");
+						//response.sendRedirect(request.getContextPath() + currentPage);
+
+			        	color = "alert-danger";
+			        	System.out.println("EDITBOOK - SUCCESS!!");
+			        	//response.sendRedirect(request.getContextPath()+"/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel.jsp?c="+color+"&o="+output);
+			        	
+			        	// bootstrap card
+			        	String message = "<div class=\"alert " +color + " role=\"alert\">\r\n"
+			    	     		+ output + "\r\n"
+			    	     		+ "  <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>\r\n"
+			    	     		+ "</div>";
+						request.getRequestDispatcher(currentPage).include(request, response);
+						out.println(message);
 						System.out.println(output);
 					}
 					
@@ -129,21 +168,71 @@ public class RegisterUser extends HttpServlet {
 					
 					// if error in connection with DB
 					output = "Error with connecting to SP Rentals. Please contact the administrator.";
-					response.sendRedirect(request.getContextPath() + "/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=ConnectionErr");
+					//response.sendRedirect(request.getContextPath() + currentPage);
+
+		        	color = "alert-danger";
+		        	System.out.println("REGISTERUSER - FAILED!!");
+		        	//response.sendRedirect(request.getContextPath()+"/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel.jsp?c="+color+"&o="+output);
+		        	
+		        	// bootstrap card
+		        	String message = "<div class=\"alert " +color + " role=\"alert\">\r\n"
+		    	     		+ output + "\r\n"
+		    	     		+ "  <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>\r\n"
+		    	     		+ "</div>";
+					request.getRequestDispatcher(currentPage).include(request, response);
+					out.println(message);
+					System.out.println(output);
+					//response.sendRedirect(request.getContextPath() + "/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=ConnectionErr");
+					request.getRequestDispatcher(currentPage).include(request, response);
+					
 					System.out.println(e);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					
 					// if error with servlet
 					output = "Error with connecting to SP Rentals. Please contact the administrator.";
-					response.sendRedirect(request.getContextPath() + "/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=ConnectionErr");
+
+					//response.sendRedirect(request.getContextPath() + currentPage);
+
+		        	color = "alert-danger";
+		        	System.out.println("REGISTERUSER - FAILED!!");
+		        	//response.sendRedirect(request.getContextPath()+"/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel.jsp?c="+color+"&o="+output);
+		        	
+		        	// bootstrap card
+		        	String message = "<div class=\"alert " +color + " role=\"alert\">\r\n"
+		    	     		+ output + "\r\n"
+		    	     		+ "  <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>\r\n"
+		    	     		+ "</div>";
+					request.getRequestDispatcher(currentPage).include(request, response);
+					out.println(message);
+					System.out.println(output);
+					//response.sendRedirect(request.getContextPath() + "/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=ConnectionErr");
+					request.getRequestDispatcher(currentPage).include(request, response);
+					
 					System.out.println(e);
 					System.out.println("Unknown Error");
 				}
 				
 			}else {
 				output = "Passwords do not match!";
-				response.sendRedirect(request.getContextPath() + "/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=invalidLogin");
+
+				//response.sendRedirect(request.getContextPath() + currentPage);
+
+	        	color = "alert-danger";
+	        	System.out.println("REGISTERUSER - FAILED!!");
+	        	//response.sendRedirect(request.getContextPath()+"/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel.jsp?c="+color+"&o="+output);
+	        	
+	        	// bootstrap card
+	        	String message = "<div class=\"alert " +color + " role=\"alert\">\r\n"
+	    	     		+ output + "\r\n"
+	    	     		+ "  <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>\r\n"
+	    	     		+ "</div>";
+				request.getRequestDispatcher( currentPage).include(request, response);
+				out.println(message);
+				System.out.println(output);
+				//response.sendRedirect(request.getContextPath() + "/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=invalidLogin");
+				request.getRequestDispatcher(currentPage).include(request, response);
+				
 				System.out.println(output);
 			}
 
