@@ -336,7 +336,7 @@ public class BookDAO {
 
 		Pattern validateStr = Pattern.compile("[a-zA-Z0-9_ ]*.");
 
-		Pattern validateInt = Pattern.compile("[0-9]+");
+		Pattern validateInt = Pattern.compile("[0-9-]+");
 		Pattern validateDouble = Pattern.compile("([0-9]+\\.[0-9]+)|(\\.[0-9]+)");
 		Pattern validateDate = Pattern.compile("[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}");
 
@@ -350,14 +350,14 @@ public class BookDAO {
 
 		// handle Int input
 		else if (validateInt.matcher(UNSANITIZED_input).matches()) {
-			System.out.println("\nBookDAO - Handling string input of : " + UNSANITIZED_input );
+			System.out.println("\nBookDAO - Handling Int input of : " + UNSANITIZED_input );
 			int i = Integer.parseInt(UNSANITIZED_input);
 			output = Integer.toString(i);
 		}
 
 		// handle double input
 		else if (validateDouble.matcher(UNSANITIZED_input).matches()) {
-			System.out.println("\nBookDAO - Handling string input of : " + UNSANITIZED_input );
+			System.out.println("\nBookDAO - Handling double input of : " + UNSANITIZED_input );
 			double p = Double.parseDouble(UNSANITIZED_input);
 			output = String.valueOf(p);
 		} 
@@ -365,7 +365,7 @@ public class BookDAO {
 		// handle date input
 		else if (validateDate.matcher(UNSANITIZED_input).matches()) {
 
-			System.out.println("\nBookDAO - Handling string input of : " + UNSANITIZED_input );
+			System.out.println("\nBookDAO - Handling Date input of : " + UNSANITIZED_input );
 			output = UNSANITIZED_input;
 		} 
 		
