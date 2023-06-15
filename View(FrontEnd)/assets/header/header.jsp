@@ -75,6 +75,7 @@
 							<%=user %>
 						</button>
 						<ul class="dropdown-menu">
+
 							<li><img class="dropdown-item"
 							src="<%=request.getContextPath()%>/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/user-imgs/<%=pic%>"
 							style="max-width: 100px;" /></img></img></li>

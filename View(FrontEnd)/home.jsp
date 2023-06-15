@@ -225,6 +225,8 @@ if (cookies != null && rememberMe == true) {
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
+				
+				
 				int id = rs.getInt("book_id");
 				String title = rs.getString("title");
 				String author = rs.getString("author");
