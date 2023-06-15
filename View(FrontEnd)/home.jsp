@@ -12,7 +12,15 @@
 
 <%
 // init cart function
-ArrayList<String> shopping_cart = (ArrayList<String>)session.getAttribute("shopping_cart");
+ArrayList<String> shopping_cart;
+
+shopping_cart = (ArrayList<String>)session.getAttribute("shopping_cart");
+// get cart
+
+// to setattribute shopping_cart again
+if(shopping_cart == null){
+	response.sendRedirect("login.jsp");
+}
 
 
 %>
@@ -20,6 +28,7 @@ ArrayList<String> shopping_cart = (ArrayList<String>)session.getAttribute("shopp
 <%
 String user = "";
 String role = "";
+String pic = "";
 
 boolean rememberMe = false;
 
@@ -61,6 +70,7 @@ if (cookies != null && rememberMe == true) {
 
 			session.setAttribute("username", user);
 			session.setAttribute("role", role);
+			session.setAttribute("pic",pic);
 
 			break;
 
@@ -72,6 +82,7 @@ if (cookies != null && rememberMe == true) {
 		try {
 			user = session.getAttribute("username").toString();
 			role = session.getAttribute("role").toString();
+			pic = session.getAttribute("pic").toString();
 
 		} catch (Exception ex) {
 			System.out.println("login failed.");
@@ -90,6 +101,7 @@ if (cookies != null && rememberMe == true) {
 	try {
 		user = session.getAttribute("username").toString();
 		role = session.getAttribute("role").toString();
+		pic = session.getAttribute("pic").toString();
 
 	} catch (Exception ex) {
 		System.out.println("login failed.");
@@ -154,7 +166,58 @@ if (cookies != null && rememberMe == true) {
 			Connection conn = DriverManager.getConnection(connURL);
 
 			//step 4 create prepared statement + ResultSet
-			PreparedStatement stmt = conn.prepareStatement("select * from books");
+			PreparedStatement stmt = conn.prepareStatement("select * from books  ORDER BY publication_date DESC LIMIT 3");
+
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				int id = rs.getInt("book_id");
+				String title = rs.getString("title");
+				String author = rs.getString("author");
+				String genre = rs.getString("genre_id");
+				String pictureURI = rs.getString("pic");
+				String desc = rs.getString("description");
+		%>
+
+		<%@include file="assets/bookCard.jsp"%>
+		
+
+
+
+		<%
+		}
+
+		} catch (Exception e) {
+		out.print("Error : " + e);
+		}
+		%>
+
+
+
+
+		</ul>
+
+	</div>
+	<hr class="bg-danger my-1 opacity-100">
+	<h1 class="text-white fs-1">Whats popular</h1>
+	<div class=" rounded-1 px-2 ">
+      <ul class="row ">
+		<%
+		//connecting to database to get the details first
+
+		try {
+
+			//step 1 Load jdbc driver
+			Class.forName("com.mysql.jdbc.Driver");
+
+			//step 2 define URL connection
+			String connURL = "jdbc:mysql://localhost/jadca1?user=root&password="+ SQLpassword + "&serverTimezone=UTC";
+
+			//step 3 Establish connection
+			Connection conn = DriverManager.getConnection(connURL);
+
+			//step 4 create prepared statement + ResultSet
+			PreparedStatement stmt = conn.prepareStatement("select * from books  ORDER BY rating DESC LIMIT 3");
 
 			ResultSet rs = stmt.executeQuery();
 
@@ -189,6 +252,54 @@ if (cookies != null && rememberMe == true) {
 
 	</div>
 	<hr class="bg-danger my-1 opacity-100">
+	<h1 class="text-white fs-1">Recently viewed</h1>
+	<div class=" rounded-1 px-2 ">
+      <ul class="row ">
+		<%
+		//connecting to database to get the details first
+
+		try {
+
+			//step 1 Load jdbc driver
+			Class.forName("com.mysql.jdbc.Driver");
+
+			//step 2 define URL connection
+			String connURL = "jdbc:mysql://localhost/jadca1?user=root&password="+ SQLpassword + "&serverTimezone=UTC";
+
+			//step 3 Establish connection
+			Connection conn = DriverManager.getConnection(connURL);
+
+			//step 4 create prepared statement + ResultSet
+			PreparedStatement stmt = conn.prepareStatement("select * from books  ORDER BY rating DESC LIMIT 3");
+
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				int id = rs.getInt("book_id");
+				String title = rs.getString("title");
+				String author = rs.getString("author");
+				String genre = rs.getString("genre_id");
+				String pictureURI = rs.getString("pic");
+				String desc = rs.getString("description");
+		%>
+		<%@include file="assets/bookCard.jsp"%>
+		
+
+
+		<%
+		}
+
+		} catch (Exception e) {
+		out.print("Error : " + e);
+		}
+		%>
+
+
+
+
+		</ul>
+
+	</div>
 	</section>
 
 

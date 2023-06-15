@@ -1,9 +1,8 @@
-
 <div class="row accordion-body accordion-collapse collapse"
-	id="deleteBook" data-bs-parent="#arkCONTENT">
+	id="manageStocks" data-bs-parent="#arkCONTENT">
 	<div>
 		<header>
-			<h1 class="fs-1">Delete Book</h1>
+			<h1 class="fs-1">Manage Stocks</h1>
 		</header>
 		<hr class="bg-secondary my-1 opacity-100">
 
@@ -14,14 +13,12 @@
 				<tr class="row">
 					<td class="col">Picture</td>
 					<td class="col">Title</td>
-					<td class="col">Author</td>
+
 					<td class="col">Price</td>
 					<td class="col">Quantity</td>
 					<td class="col">Date published</td>
-					<td class="col">Isbn</td>
-					<td class="col">Genre</td>
-					<td class="col">Rating</td>
-					<td class="col">Description</td>
+					<td class="col">Edit Quantity </td>
+
 				</tr>
 			</thead>
 			<tbody>
@@ -40,18 +37,16 @@
 								
 								ResultSet rs;
 								String title ="";
-								String author = "";
+
 								double price = 0;
 								String date = "";
 								String isbn = "";
-								String genre = "";
+								String quantity = "";
+
 								String pictureURI = "";
-								double rating = 0;
-								String description = "";
+
 								
-								String contextPath = request.getContextPath();
-												
-								
+
 								// to display all
 								output = "";
 					
@@ -73,13 +68,12 @@
 									
 									pictureURI = rs.getString("pic");
 									title = rs.getString("title");
-									author = rs.getString("author");
+									
 									price = rs.getDouble("price");
 									date = rs.getString("publication_date");
-									genre = rs.getString("genre");
+									
 									isbn = rs.getString("ISBN");
-									rating = rs.getDouble("rating");
-									description = rs.getString("description");
+									quantity = rs.getString("quantity");
 									
 									
 									%>
@@ -89,26 +83,76 @@
 						src="<%=contextPath %>/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/book-imgs/<%=pictureURI %>"
 						style="max-width: 100px;" /></td>
 					<td class="col"><%=title %></td>
-					<td class="col"><%=author %></td>
+
 					<td class="col"><%=price %></td>
-					<td class="col"><%=date %></td>
-					<td class="col"><%=isbn %></td>
-					<td class="col"><%=genre %></td>
-					<td class="col"><%=rating %></td>
-					<td class="col"><%=description %></td>
+				
+
+					<td class="col"><%=quantity %></td>
+						<td class="col"><%=date %></td>
+
 					<td class="col">
 						<form class="form form-login"
-							action="<%= request.getContextPath()%>/deleteBook" method="post">
+							action="<%= request.getContextPath()%>/manageStock" method="post">
 							<input type="hidden" id="custId" name="bookTitle"
 								value="<%=title%>"> 
 							<input type="hidden" id="custId"
-								name="deleteBook" value="<%=isbn%>"> 
+								name="book_isbn" value="<%=isbn%>"> 
+								
+							<!-- input quantity -->
+							<input type="button" value="+" id="plus<%=isbn%>" />	
+							<input type="number" step="1" id="<%=isbn %>"  value="<%=quantity%>" name="book_quantity"/>	
+							<input type="button" value="-" id="minus<%=isbn%>" />	
+							
+							
 							<input
-								type="submit" name="submit" value="Delete book" />
+								type="submit" name="submit" value="Edit stocks" />
 						</form>
 					</td>
 
 				</tr>
+				<div>
+    <script>
+        /* make the button call the function */
+        // edit quantities by ISBN, then send to server
+        const plusButton<%=isbn%> = document.getElementById("plus<%=isbn%>");
+        plusButton<%=isbn%>.addEventListener("click", () => {
+            stepOnUp("<%=isbn%>");
+            updateVal("<%=isbn%>");
+        });
+
+        function stepOnUp(isbn) {
+            const input = document.getElementById(isbn);
+            const val = 1;
+
+            if (val) {
+                /* increment with a parameter */
+                input.stepUp(val);
+            } else {
+                /* or without a parameter. Try it with 0 */
+                input.stepUp();
+            }
+        }
+
+        const minusButton<%=isbn%> = document.getElementById("minus<%=isbn%>");
+        minusButton<%=isbn%>.addEventListener("click", () => {
+            stepOnDown("<%=isbn%>");
+            updateVal("<%=isbn%>");
+        });
+
+        function stepOnDown(isbn) {
+            const input = document.getElementById(isbn);
+            const val = -1;
+
+            if (val) {
+                /* increment with a parameter */
+                input.stepUp(val);
+            } else {
+                /* or without a parameter. Try it with 0 */
+                input.stepUp();
+            }
+        }
+    </script>
+</div>
 				<% 		
 								}
 								// Step 7: Close connection

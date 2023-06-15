@@ -1,12 +1,14 @@
 <%	
 String user = "";
 String role = "";
+String pic = "";
 
 
 
 try {
 			user = session.getAttribute("username").toString();
 			role = session.getAttribute("role").toString();
+			pic = session.getAttribute("pic").toString();
 
 		} catch (Exception ex) {
 			System.out.println("login failed.");
@@ -23,8 +25,61 @@ ArrayList<String> shopping_cart = (ArrayList<String>)session.getAttribute("shopp
 
 <%
 //change ur sql password here
-	final String SQLpassword = "Minecrafr@09";
-	
+
+	final String SQLpassword = "spJEAL602336";
+String book_query = "";
+String genre_query ="";
+String author_query ="";
+String sort_query ="";
+
+String q1 ="";
+String q2 = "";
+String q3 = "";
+String q4 ="";
+try{
+
+book_query = request.getParameter("s");
+genre_query = request.getParameter("genre");
+author_query = request.getParameter("author_query");
+sort_query = request.getParameter("sortBy");
+
+System.out.println("--------------");
+System.out.println(book_query);
+System.out.println(genre_query);
+System.out.println(author_query);
+
+if(book_query == null || book_query == "" ){
+	book_query = "";
+}else{
+	q3 = "and title LIKE CONCAT('%'," +  "\"" + book_query + "\"" +  " , '%')";
+}
+
+
+// if default option
+if(genre_query.equals("Select genre")){
+	genre_query = "";
+}
+else{
+	q1 = "and genres.name = \"" + genre_query + "\"";
+}
+
+// else find book with specified genre
+
+
+if(author_query == null  || author_query == ""){
+	author_query = "";
+}else{
+	q2 = "and author LIKE CONCAT('%', " + "\"" + author_query  + "\"" + " , '%')";
+}
+
+if(sort_query.equals("popularity")){
+	q4 = "ORDER BY rating DESC";
+}else if(sort_query.equals("date_added")){
+	q4 = "ORDER BY publication_date DESC";
+}
+
+
+
 %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -82,14 +137,31 @@ text-size: 1rem;
 	<%@include file="assets/header/header.jsp" %>
 
 	<section class="container my-5  ">
-<h2>Search results for : <%=request.getParameter("s") %></h2>
+<h2>Search results for : <%=book_query %> 
+
+<%if(genre_query.trim().isBlank() != true){%>
+	
+	and genre : <%=genre_query %>
+	
+	<% 
+}
+%>
+
+<%if(author_query.trim().isBlank() != true){%>
+	
+	and author : <%=author_query %>
+	
+	<% 
+}
+%>
+
+</h2>
+
 
 <div class=" rounded-1 px-2 ">
       <ul class="row ">
 <%
-try{
 
-String book_query = request.getParameter("s");
 
 
 //step 1 Load jdbc driver
@@ -102,11 +174,15 @@ String connURL = "jdbc:mysql://localhost/jadca1?user=root&password="+ SQLpasswor
 Connection conn = DriverManager.getConnection(connURL);
 
 //Call routine
-			String simpleProc = "{ call selectBookByTitle(?) }";
-			CallableStatement cs = conn.prepareCall(simpleProc);
+			String simpleProc = "SELECT books.*, genres.name as genre FROM books right JOIN genres ON genres.genre_id = books.genre_id where books.book_id is not null " + q1 + " "+ q2 + " "+ q3  + " "+ q4;
+			System.out.println("Final SQL Statement : " + simpleProc);
+			//SELECT books.*, genres.name as genre
+			//FROM books
+			//right JOIN genres ON genres.genre_id = books.genre_id where books.book_id is not null and genres.name = "Non-fiction" and author LIKE "%a";
 
-			// insert book values
-			cs.setString(1, book_query);
+			PreparedStatement cs = conn.prepareStatement(simpleProc);
+
+		
 			
 			
 			// Step 5: Execute SQL Command

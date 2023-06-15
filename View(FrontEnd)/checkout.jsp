@@ -13,19 +13,25 @@
 <%
 // init cart function
 ArrayList<String> shopping_cart = (ArrayList<String>)session.getAttribute("shopping_cart");
-
+if(shopping_cart.size() < 1){
+	String message = "Shopping cart is empty!";
+	
+	response.sendRedirect(request.getContextPath()+"/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp"+ "?c=false&m=" + message );
+}
 
 %>
 
 <%	
 String user = "";
 String role = "";
+String pic = "";
 
 
 
 try {
 			user = session.getAttribute("username").toString();
 			role = session.getAttribute("role").toString();
+			pic = session.getAttribute("pic").toString();
 
 		} catch (Exception ex) {
 			System.out.println("login failed.");

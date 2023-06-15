@@ -1,12 +1,14 @@
 <%	
 String user = "";
 String role = "";
+String pic = "";
 
 
 
 try {
 			user = session.getAttribute("username").toString();
 			role = session.getAttribute("role").toString();
+			pic = session.getAttribute("pic").toString();
 
 		} catch (Exception ex) {
 			System.out.println("login failed.");
@@ -46,7 +48,7 @@ ArrayList<String> shopping_cart = (ArrayList<String>)session.getAttribute("shopp
 <link rel="stylesheet" href="assets/library svg/test.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-
+	
 <!-- Ionicons -->
 <script type="module"
 	src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>

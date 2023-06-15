@@ -333,6 +333,7 @@ public class BookDAO {
 		String output = "";
 
 
+
 		Pattern validateStr = Pattern.compile("[a-zA-Z0-9_ ]*.");
 
 		Pattern validateInt = Pattern.compile("[0-9]+");
@@ -480,6 +481,61 @@ public class BookDAO {
 		    return str;
 		
 	}
+	public static void manageBookQuantity(String INPUT_ISBN,String INPUT_quantity)throws Exception {
+		
+		// init variables
+		String ISBN = "";
+		int quantity = 0 ;
+		
+		try {
+			System.out.println("BookDAO - Sanitizing inputs : " + ISBN + " and " + quantity + " for function : manageBookQuantity() !");
+			ISBN = sanitizeInput(INPUT_ISBN);
+			
+			quantity = Integer.parseInt(sanitizeInput(INPUT_quantity));
+			
+		}catch(Exception ex ) {
+			ex.printStackTrace();
+		}
+		
+		// execute SQL
+		
+		// Step1: Load JDBC Driver
+					Class.forName("com.mysql.jdbc.Driver");
+
+					// Step 2: Define Connection URL
+					String connURL = "jdbc:mysql://localhost/jadca1?user=root&password="+ SQLpassword + "&serverTimezone=UTC";
+
+					// Step 3: Establish connection to URL
+					Connection conn = DriverManager.getConnection(connURL);
+					// Step 4: Create Statement object
+
+					// Call routine
+					String simpleProc = "UPDATE books SET quantity = ? where ISBN = ?";
+					
+					PreparedStatement pstmt = conn.prepareStatement(simpleProc);
+					pstmt.setInt(1, quantity);
+					pstmt.setString(2, ISBN);
+					// insert book values
+					
+					
+					
+					
+					// Step 5: Execute SQL Command
+					//String sqlStr = "SELECT * FROM member";         
+					
+					
+					
+					int affectedRows = pstmt.executeUpdate();
+					System.out.println("BOOKDAO - " + affectedRows + " row(s) inserted successfully.");
+					
+					
+					// Step 7: Close connection
+					conn.close();
+		
+		
+		
+	}
+	
 	public static void editBook(String INPUT_title, String INPUT_author, String INPUT_price, 
 			String INPUT_quantity,String INPUT_pub_date, String INPUT_genre_id,String INPUT_ISBN,String INPUT_rating, String INPUT_description,String default_description,int book_id
 			) throws Exception {
