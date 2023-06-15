@@ -14,6 +14,7 @@
 			<thead>
 				<tr class="row">
 					<td class="col">Picture</td>
+					<td class="col">User ID</td>
 
 					<td class="col">Email</td>
 					<td class="col">Role</td>
@@ -76,6 +77,7 @@
 						<td class="col"><img
 							src="<%=request.getContextPath()%>/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/user-imgs/<%=edit_user_pic%>"
 							style="max-width: 100px;" /></td>
+							<td class="col"><%=edit_user_id %></td>
 
 						<td class="col"><input type="text" id="custId" name="email"
 							value="<%=edit_email%>" disabled></td>
@@ -118,7 +120,9 @@
 						</td>
 						
 
-						<td class="col"><input type="submit" name="submit"
+						<td class="col">
+						<input type="hidden" name="user_id" value="<%=edit_user_id %>"/>
+						<input type="submit" name="submit"
 							value="Edit User" /></td>
 					</tr>
 				</form>
