@@ -7,7 +7,7 @@
 
 <%
 //change ur sql password here
-	final String SQLpassword = "Minecrafr@09	";
+	final String SQLpassword = "Minecrafr@09";
 %>
 
 <%
@@ -159,12 +159,16 @@ if (cookies != null && rememberMe == true) {
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
+				
+				
 				int id = rs.getInt("book_id");
 				String title = rs.getString("title");
 				String author = rs.getString("author");
 				String genre = rs.getString("genre_id");
 				String pictureURI = rs.getString("pic");
 				String desc = rs.getString("description");
+				
+				
 		%>
 		<%@include file="assets/bookCard.jsp"%>
 		
