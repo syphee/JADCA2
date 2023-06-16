@@ -328,8 +328,8 @@ while (rs.next()) {
 
 		<%
     }
-    %>
-
+    
+	%>
 	</div>
 
 	<%@include file="assets/footer/footer.jsp"%>
