@@ -29,6 +29,7 @@ try {
 // init cart function
 ArrayList<String> shopping_cart = (ArrayList<String>)session.getAttribute("shopping_cart");
 
+int perPage = 16;
 
 %>
 
@@ -99,8 +100,12 @@ if(sort_query.equals("popularity")){
 }else if(sort_query.equals("date_added")){
 	q4 = "ORDER BY publication_date DESC";
 }
-//get number of books to determine offset value
 
+
+
+
+//get number of books to determine offset value
+// this is related to the pagination feature
 try{
 	//step 1 Load jdbc driver
 	Class.forName("com.mysql.jdbc.Driver");
@@ -239,7 +244,7 @@ String connURL = "jdbc:mysql://localhost/jadca1?user=root&password="+ SQLpasswor
 Connection conn = DriverManager.getConnection(connURL);
 
 //Call routine
-			String simpleProc = "SELECT books.*, genres.name as genre FROM books right JOIN genres ON genres.genre_id = books.genre_id where books.book_id is not null " + q1 + " "+ q2 + " "+ q3  + " "+ q4 + " limit 5 OFFSET ?";
+			String simpleProc = "SELECT books.*, genres.name as genre FROM books right JOIN genres ON genres.genre_id = books.genre_id where books.book_id is not null " + q1 + " "+ q2 + " "+ q3  + " "+ q4 + " limit " + perPage +  " OFFSET ?";
 			System.out.println("Final SQL Statement : " + simpleProc);
 			//SELECT books.*, genres.name as genre
 			//FROM books
@@ -247,7 +252,7 @@ Connection conn = DriverManager.getConnection(connURL);
 
 			PreparedStatement cs = conn.prepareStatement(simpleProc);
 			
-			cs.setInt(1,Integer.parseInt(pagination)*5);
+			cs.setInt(1,Integer.parseInt(pagination)*perPage);
 		
 			
 			
@@ -299,7 +304,7 @@ while (rs.next()) {
 	<div class="text-center container">
 	<%
 
-    if((Integer.parseInt(pagination)+1)*5 <= amtOfResults ){
+    if((Integer.parseInt(pagination)+1)*perPage <= amtOfResults ){
     %>
 		<form method="post" action="search.jsp">
 			<input type="submit" value="Next page" class="btn btn-danger" /> <input
@@ -328,8 +333,8 @@ while (rs.next()) {
 
 		<%
     }
-    %>
-
+    
+	%>
 	</div>
 
 	<%@include file="assets/footer/footer.jsp"%>

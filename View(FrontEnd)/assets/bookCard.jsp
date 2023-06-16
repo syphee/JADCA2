@@ -22,6 +22,11 @@
 	                	<input type="hidden" name="s" value="<%=title%>"/>
 	                	<input type="hidden" name="quick_rent" value="true"/>
 	                  	<input type="submit" class="btn btn-danger rounded rounded-pill" value="Quick rent">
+	                  	<input
+				type="hidden" value="<%=request.getParameter("s") %>" name="search" /> <input
+				type="hidden" value="<%=request.getParameter("genre") %>" name="genre" /> <input
+				type="hidden" value="<%=request.getParameter("author_query") %>" name="author_query" /> <input
+				type="hidden" value="<%=request.getParameter("sortBy") %>" name="sortBy" />
                  </form>
                 </div>
                 <div class="col">
@@ -29,6 +34,11 @@
 	                	<input type="hidden" name="s" value="<%=title%>"/>
 	                	<input type="hidden" name="quick_rent" value="false"/>
 	                  	<input type="submit" class="btn btn-danger rounded rounded-pill" value="Add to cart">
+	            <input
+				type="hidden" value="<%=request.getParameter("s") %>" name="s" /> <input
+				type="hidden" value="<%=request.getParameter("genre") %>" name="genre" /> <input
+				type="hidden" value="<%=request.getParameter("author_query") %>" name="author_query" /> <input
+				type="hidden" value="<%=request.getParameter("sortBy") %>" name="sortBy" />
                   	</form>
                 </div>
                 <%
