@@ -639,4 +639,50 @@ public class BookDAO {
 		
 
 	}
+	
+	public static void editBookStock(ArrayList<String> INPUT_cart) throws Exception{
+		
+		
+		// Step1: Load JDBC Driver
+		// go through every item in cart
+		
+		
+		// for each
+		int affectedRows = 0;
+		for(String book_title : INPUT_cart) {
+			Class.forName("com.mysql.jdbc.Driver");
+
+			// Step 2: Define Connection URL
+			String connURL = "jdbc:mysql://localhost/jadca1?user=root&password="+ SQLpassword + "&serverTimezone=UTC";
+
+			// Step 3: Establish connection to URL
+			Connection conn = DriverManager.getConnection(connURL);
+			// Step 4: Create Statement object
+
+			// Call routine
+			String simpleProc = "UPDATE books SET quantity = quantity -1 WHERE title = ?";
+			
+			PreparedStatement pstmt = conn.prepareStatement(simpleProc);
+			pstmt.setString(1, book_title);
+			// insert book values
+			
+			
+			
+			
+			// Step 5: Execute SQL Command
+			//String sqlStr = "SELECT * FROM member";         
+			
+			
+			
+			affectedRows += pstmt.executeUpdate();
+			
+			
+			// Step 7: Close connection
+			conn.close();
+		}
+		
+		System.out.println("BOOKDAO - " + affectedRows + " row(s) updated successfully.");
+		
+				
+	}
 }
