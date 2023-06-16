@@ -30,3 +30,12 @@ body {
     opacity: 0.6;
     cursor: pointer;
 }
+
+.book-text{
+	opacity:0;
+	background-color:black;
+}
+
+.book-text:hover{
+	opacity:0.5
+}

@@ -2,10 +2,10 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-    <!--  imports here -->
+<!--  imports here -->
 <%@page import="java.sql.*"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="dbDAO.sqlPassword" %>
+<%@page import="dbDAO.sqlPassword"%>
 
 <%	
 String user = "";
@@ -41,12 +41,24 @@ String genre_query ="";
 String author_query ="";
 String sort_query ="";
 
+String pagination = "" ;
+int amtOfResults = 0;
+
+
 String q1 ="";
 String q2 = "";
 String q3 = "";
 String q4 ="";
 try{
 
+pagination = request.getParameter("page");
+if(pagination == null){
+	pagination = "0";
+}
+
+
+
+System.out.println("SEARCH.JSP - Current page number : " + pagination);
 book_query = request.getParameter("s");
 genre_query = request.getParameter("genre");
 author_query = request.getParameter("author_query");
@@ -62,6 +74,7 @@ if(book_query == null || book_query == "" ){
 }else{
 	q3 = "and title LIKE CONCAT('%'," +  "\"" + book_query + "\"" +  " , '%')";
 }
+
 
 
 // if default option
@@ -86,10 +99,55 @@ if(sort_query.equals("popularity")){
 }else if(sort_query.equals("date_added")){
 	q4 = "ORDER BY publication_date DESC";
 }
+//get number of books to determine offset value
+
+try{
+	//step 1 Load jdbc driver
+	Class.forName("com.mysql.jdbc.Driver");
+
+	//step 2 define URL connection
+	String connURL = "jdbc:mysql://localhost/jadca1?user=root&password="+ SQLpassword + "&serverTimezone=UTC";
+
+	//step 3 Establish connection
+	Connection conn = DriverManager.getConnection(connURL);
+
+	//Call routine
+				String simpleProc = "SELECT COUNT(*) FROM books right JOIN genres ON genres.genre_id = books.genre_id where books.book_id is not null " + q1 + " "+ q2 + " "+ q3  + " "+ q4;
+				System.out.println("Final SQL Statement : " + simpleProc);
+				//SELECT books.*, genres.name as genre
+				//FROM books
+				//right JOIN genres ON genres.genre_id = books.genre_id where books.book_id is not null and genres.name = "Non-fiction" and author LIKE "%a";
+
+				PreparedStatement cs = conn.prepareStatement(simpleProc);
+				
+
+				
+				
+				// Step 5: Execute SQL Command
+				//String sqlStr = "SELECT * FROM member";         
+				
+				
+				
+				
+
+	ResultSet rs = cs.executeQuery();
+
+	while (rs.next()) {
+		amtOfResults = rs.getInt("COUNT(*)");
+
+	}
+}catch(Exception ex){
+	ex.printStackTrace();
+}
+
+System.out.println("Number of books found in DB : " + amtOfResults);
 
 
 
 %>
+
+
+
 
 
 <!DOCTYPE html>
@@ -123,47 +181,51 @@ if(sort_query.equals("popularity")){
 
 
 <style type="text/css">
-
 h2 {
-color:white;
-text-decoration: bold;
-text-size: 1rem;
+	color: white;
+	text-decoration: bold;
+	text-size: 1rem;
 }
-
 </style>
 
 
 </head>
 
-<body class="bg-black" style="overflow-y:auto;">
+<body class="bg-black" style="overflow-y: auto;">
 	<%@include file="assets/messagePopUp.jsp"%>
-	<%@include file="assets/header/header.jsp" %>
+	<%@include file="assets/header/header.jsp"%>
 
 	<section class="container my-5  ">
-<h2>Search results for : <%=book_query %> 
+		<h2>
+		<%=amtOfResults %> books found <br/>
+			Search results for :
+			<%=book_query %>
 
-<%if(genre_query.trim().isBlank() != true){%>
-	
-	and genre : <%=genre_query %>
-	
-	<% 
+			<%if(genre_query.trim().isBlank() != true){%>
+
+			and genre :
+			<%=genre_query %>
+
+			<% 
 }
 %>
 
-<%if(author_query.trim().isBlank() != true){%>
-	
-	and author : <%=author_query %>
-	
-	<% 
+			<%if(author_query.trim().isBlank() != true){%>
+
+			and author :
+			<%=author_query %>
+
+			<% 
 }
 %>
 
-</h2>
+		</h2>
 
 
-<div class=" rounded-1 px-2 ">
-      <ul class="row ">
-<%
+		<div class=" rounded-1 px-2 ">
+			<ul class="row ">
+
+				<%
 
 
 
@@ -177,14 +239,15 @@ String connURL = "jdbc:mysql://localhost/jadca1?user=root&password="+ SQLpasswor
 Connection conn = DriverManager.getConnection(connURL);
 
 //Call routine
-			String simpleProc = "SELECT books.*, genres.name as genre FROM books right JOIN genres ON genres.genre_id = books.genre_id where books.book_id is not null " + q1 + " "+ q2 + " "+ q3  + " "+ q4;
+			String simpleProc = "SELECT books.*, genres.name as genre FROM books right JOIN genres ON genres.genre_id = books.genre_id where books.book_id is not null " + q1 + " "+ q2 + " "+ q3  + " "+ q4 + " limit 5 OFFSET ?";
 			System.out.println("Final SQL Statement : " + simpleProc);
 			//SELECT books.*, genres.name as genre
 			//FROM books
 			//right JOIN genres ON genres.genre_id = books.genre_id where books.book_id is not null and genres.name = "Non-fiction" and author LIKE "%a";
 
 			PreparedStatement cs = conn.prepareStatement(simpleProc);
-
+			
+			cs.setInt(1,Integer.parseInt(pagination)*5);
 		
 			
 			
@@ -206,30 +269,69 @@ while (rs.next()) {
 	String pictureURI = rs.getString("pic");
 	int quantity = rs.getInt("quantity");
 %>
-  
-  	<%@include file="assets/bookCard.jsp"%>
-        
-  
-       
-  
-        
+
+				<%@include file="assets/bookCard.jsp"%>
 
 
-<%
+
+
+
+
+
+				<%
 }
 
 
 
 }catch (Exception e) {
 	out.println("Error : " + e);
+	e.printStackTrace();
 }
 
-%>
-  
-      </ul>
-    </div>
-    </section>
 
-<%@include file="assets/footer/footer.jsp" %>
+
+%>
+
+			</ul>
+		</div>
+	</section>
+
+	<div class="text-center container">
+	<%
+
+    if((Integer.parseInt(pagination)+1)*5 <= amtOfResults ){
+    %>
+		<form method="post" action="search.jsp">
+			<input type="submit" value="Next page" class="btn btn-danger" /> <input
+				type="hidden" value="<%=Integer.parseInt(pagination)+1 %>" name="page" /> <input
+				type="hidden" value="<%=request.getParameter("s") %>" name="s" /> <input
+				type="hidden" value="<%=request.getParameter("genre") %>" name="genre" /> <input
+				type="hidden" value="<%=request.getParameter("author_query") %>" name="author_query" /> <input
+				type="hidden" value="<%=request.getParameter("sortBy") %>" name="sortBy" />
+		</form>
+	<%
+    }
+    %>
+		<%
+
+    if(Integer.parseInt(pagination) != 0){
+    %>
+		<form method="post" action="search.jsp">
+			<input type="submit" value="Previous page" class="btn btn-danger" />
+			<input type="hidden" value="<%=Integer.parseInt(pagination)-1 %>" name="page" /> <input
+				type="hidden" value="<%=request.getParameter("s") %>" name="s" /> <input
+				type="hidden" value="<%=request.getParameter("genre") %>" name="genre" /> <input
+				type="hidden" value="<%=request.getParameter("author_query") %>" name="author_query" /> <input
+				type="hidden" value="<%=request.getParameter("sortBy") %>" name="sortBy" />
+
+		</form>
+
+		<%
+    }
+    %>
+
+	</div>
+
+	<%@include file="assets/footer/footer.jsp"%>
 </body>
 </html>
