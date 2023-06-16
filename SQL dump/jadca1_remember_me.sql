@@ -30,7 +30,7 @@ CREATE TABLE `remember_me` (
   PRIMARY KEY (`idremember_me`),
   UNIQUE KEY `session_id_UNIQUE` (`session_id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,6 @@ CREATE TABLE `remember_me` (
 
 LOCK TABLES `remember_me` WRITE;
 /*!40000 ALTER TABLE `remember_me` DISABLE KEYS */;
-INSERT INTO `remember_me` VALUES (51,'0CE73126072C66329DC599E8867A7555','SkyeRyan.21@gmail.com','admin');
 /*!40000 ALTER TABLE `remember_me` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-13 19:42:03
+-- Dump completed on 2023-06-16 18:50:24
