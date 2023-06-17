@@ -74,9 +74,17 @@ public class addToCart extends HttpServlet {
 		isQuickRent = request.getParameter("quick_rent");
 		ArrayList<String> shopping_cart = (ArrayList<String>)session.getAttribute("shopping_cart");
 		
+		System.out.println("Added to cart from page : " + currentPage);
 		
 		String title = "";
+		
 		title = request.getParameter("s");
+		String search_query = request.getParameter("search");
+		String genre_query = request.getParameter("genre");
+		String author_query = request.getParameter("author_query");
+		String sort_query = request.getParameter("sortBy");
+
+		
 		
 		// set session attributes according to what user has pressed
 		
@@ -110,9 +118,15 @@ public class addToCart extends HttpServlet {
 		    	     		+ "</div>";
 		        	out.print(message);  
 		        	
-		        	// substring to remove the extra / 
-		        	String redirect = (request.getContextPath() + currentPage + "?c=success&m=" + output).toString();
-		        	response.sendRedirect(redirect);
+		        	//if added to cart from home page
+		        	if(currentPage.equals("/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp")) {
+		        		String redirect = (request.getContextPath() + currentPage + "?c=success&m=" + output).toString();
+			        	response.sendRedirect(redirect);
+		        	}else {
+		        		String redirect = (request.getContextPath() + currentPage + "?c=success&m=" + output + "&search=" + search_query + "&genre=" + genre_query + "&author_query=" + author_query + "&sortBy=" + sort_query).toString();
+			        	response.sendRedirect(redirect);
+		        	}
+		        	
 		            
 		        }catch(Exception ex) {
 		        	

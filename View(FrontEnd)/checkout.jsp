@@ -186,7 +186,12 @@ try{
 
 	<div class=" my-1 row text-light">
     <div class="col">
-        <img src="<%=request.getContextPath()%>/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/book-imgs/<%=pictureURI%>" style="max-width: 100px;">
+    <form action="details.jsp" method="post">
+	                	<input type="hidden" name="s" value="<%=title%>"/>
+             			 <input type="image" alt="Submit" src="<%=request.getContextPath()%>/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/book-imgs/<%=pictureURI%>" class="card-img-top book-img hover-underline-animation" style="max-width: 100px;">
+						
+             </form>
+       
     </div>
     <div class="col-3">
         <div class="row">

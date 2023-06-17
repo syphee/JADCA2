@@ -21,13 +21,13 @@
 
 			<!-- Buttons -->
 			<ul class="nav justify-content-center col ">
-				<li class="nav-item mb-0 mx-1 my-0 "><a href="<%=request.getContextPath() %>/BookstoreCA1/JAD-CA1/View(FrontEnd)/genres.jsp"
+				<li class="nav-item mb-0 mx-1 my-0 "><a href="<%=request.getContextPath() %>/BookstoreCA1/JAD-CA1/View(FrontEnd)/genre.jsp"
 					class="nav-link text-black fw-semibold hover-underline-animation  "
 					href="genre.jsp">Genres</a></li>
-				<li class="nav-item mb-0 mx-1  my-0"><a
+				<li class="nav-item mb-0 mx-1  my-0"><a href="<%=request.getContextPath() %>/BookstoreCA1/JAD-CA1/View(FrontEnd)/search.jsp?&search=null&genre=Select%20genre&author_query=&sortBy=date_added"
 					class="nav-link text-black fw-semibold hover-underline-animation"
 					href="my_life.html">What's new</a></li>
-				<li class="nav-item mb-0 mx-1  my-0"><a
+				<li class="nav-item mb-0 mx-1  my-0"><a href="<%=request.getContextPath() %>/BookstoreCA1/JAD-CA1/View(FrontEnd)/search.jsp?&search=null&genre=Select%20genre&author_query=&sortBy=popularity"
 					class="nav-link text-black fw-semibold hover-underline-animation"
 					href="my_career.html">Popular</a></li>
 

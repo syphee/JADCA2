@@ -1,12 +1,16 @@
 package servlets;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import dbDAO.BookDAO;
 
 import java.util.ArrayList;
 /**
@@ -40,14 +44,30 @@ public class bookPayment extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		// for now its just redirect to home, reset cart
-		ArrayList<String> shopping_cart = new ArrayList<String>();
-		session.setAttribute("shopping_cart",shopping_cart);
 		
-		String message = "Thank you for using SP ARK Rental system!";
+		// load the cart
+		ArrayList<String> shopping_cart = (ArrayList<String>)session.getAttribute("shopping_cart");
+		// then clear stock
+		  try {
+	        	
+	        	BookDAO.editBookStock(shopping_cart);
+	    		// then clear cart
+	    		shopping_cart = new ArrayList<String>();
+	    		session.setAttribute("shopping_cart",shopping_cart);
+	    		
+	    		String message = "Thank you for using SP ARK Rental system!";
 
+	    		
+	    		response.sendRedirect(request.getContextPath()+"/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp"+ "?c=success&m=" + message );
+	    	
+	            
+	        }catch(Exception ex) {
+	        	String message = "Book payment failed!";
+	    		response.sendRedirect(request.getContextPath()+"/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp"+ "?c=false&m=" + message );
+
+	        }
 		
-		response.sendRedirect(request.getContextPath()+"/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp"+ "?c=success&m=" + message );
-		
+
 	}
 
 }
