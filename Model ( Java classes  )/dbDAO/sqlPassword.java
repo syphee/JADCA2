@@ -1,7 +1,7 @@
 package dbDAO;
 
 public class sqlPassword {
-	static String SQLPass = "Minecrafr@09";
+	static String SQLPass = "spJEAL602336";
 	public sqlPassword() {}
 	
 	public static String getSQLPassword() {
