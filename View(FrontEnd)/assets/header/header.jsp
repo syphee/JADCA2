@@ -1,4 +1,5 @@
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.sql.*" %>
 
 
 
@@ -83,7 +84,7 @@
 							<li>
 								<hr class="dropdown-divider">
 							</li>
-							<li><a class="dropdown-item" href="#">My profile</a></li>
+							<li><a class="dropdown-item" href="EditProfile.jsp">My profile</a></li>
 							<li><a class="dropdown-item" href="#">My rentals</a></li>
 							<li><hr class="dropdown-divider"></li>
 							<li>
