@@ -6,6 +6,8 @@
              			<input type="image" alt="Submit" src="<%=request.getContextPath()%>/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/book-imgs/<%=pictureURI%>" class="card-img-top book-img hover-underline-animation" style="max-width: 200px;" />
              </form>
             <div class="card-body">
+             <h5 class="card-title text-white"><text class=" p-1 rounded-pill d-inline-block text-truncate" style="max-width: 300px;"><%=title %></text></h5>
+             	<hr class="bg-danger my-1 opacity-100">
               <p class="card-text text-white"><%=desc %></p>
             </div>
 
