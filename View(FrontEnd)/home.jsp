@@ -110,6 +110,7 @@ if (cookies != null && rememberMe == true) {
 		response.sendRedirect("login.jsp");
 	}
 }
+
 %>
 
 <!DOCTYPE html>
@@ -180,6 +181,7 @@ if (cookies != null && rememberMe == true) {
 				String pictureURI = rs.getString("pic");
 				String desc = rs.getString("description");
 				int quantity = rs.getInt("quantity");
+				
 		%>
 
 		<%@include file="assets/bookCard.jsp"%>

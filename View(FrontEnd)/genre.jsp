@@ -195,7 +195,7 @@ if (cookies != null && rememberMe == true) {
     
     <%= output %>
 </select>
-    <input type="submit" class="btn btn-danger" name="submit" value="yourmother">
+    <input type="submit" class="btn btn-danger" name="submit" value="Filter">
 </form>
     <div class=" rounded-1 px-2 ">
       <ul class="row ">

@@ -3,6 +3,7 @@ package dbDAO;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import javax.servlet.http.HttpSession;
 
 // used hashmap as it is similar to how json stores values based on key values.
 //Object logindetails = {
@@ -478,4 +479,64 @@ public class UserDAO {
 	
 		
 	}
+
+
+	    // Other methods in the UserDAO class
+	    
+	    public static int getUserId(HttpSession session) {
+	    	
+	        int userid = 0; // Default value if no matching user found
+
+	        // Retrieve the username or email from the session
+	        String username = (String) session.getAttribute("username");
+	        String email = (String) session.getAttribute("email");
+
+	        // Create a database connection
+
+	        
+	        
+	        
+	        
+	        try {
+	            // Load the JDBC driver
+	            Class.forName("com.mysql.jdbc.Driver");
+
+	            
+				String connURL = "jdbc:mysql://localhost/jadca1?user=root&password="+ SQLpassword + "&serverTimezone=UTC";
+
+				
+				
+	            // Establish the database connection
+				Connection conn = DriverManager.getConnection(connURL);
+
+				
+	            // Prepare the SQL statement
+	            String sqlstr = "SELECT userid FROM users WHERE username = ? OR email = ?";
+	            PreparedStatement statement = conn.prepareStatement(sqlstr);
+	            statement.setString(1, username);
+	            statement.setString(2, email);
+
+	            // Execute the query
+	            ResultSet resultSet = statement.executeQuery();
+
+	            // Retrieve the userid from the result set
+	            if (resultSet.next()) {
+	                userid = resultSet.getInt("userid");
+	                
+	            }
+	            
+	            // Close the resources
+	            resultSet.close();
+	            statement.close();
+	            conn.close();
+	            
+	        } catch (ClassNotFoundException | SQLException e) {
+	            e.printStackTrace();
+	        }
+
+	        return userid;
+	    }
+	
+
+	
 }

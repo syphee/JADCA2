@@ -30,7 +30,7 @@ if (cookies != null) {
         		System.out.println("LOGIN.JSP - Found remember me cookie!");
         		validate = true;
         		
-        	}
+        	}	
 
         }
     }
