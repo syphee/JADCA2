@@ -683,7 +683,7 @@ public class BookDAO {
 			// Step 4: Create Statement object
 
 			// Call routine
-			String simpleProc = "UPDATE books SET quantity = quantity -1 WHERE title = ?";
+			String simpleProc = "UPDATE books SET quantity = quantity -1 WHERE book_id = ?";
 			
 			PreparedStatement pstmt = conn.prepareStatement(simpleProc);
 			pstmt.setString(1, book_title);

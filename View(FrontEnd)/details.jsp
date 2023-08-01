@@ -77,10 +77,12 @@ text-size: 1rem;
 <h2>Hello There this is to show that it works.</h2>
 
 <%
+String book_query = "";
 try{
 
-String book_query = request.getParameter("s");
+book_query = request.getParameter("s");
 
+int PARSED_book_query = Integer.parseInt(book_query);
 
 //step 1 Load jdbc driver
 Class.forName("com.mysql.jdbc.Driver");
@@ -92,11 +94,11 @@ String connURL = "jdbc:mysql://localhost/jadca1?user=root&password="+ SQLpasswor
 Connection conn = DriverManager.getConnection(connURL);
 
 //Call routine
-			String simpleProc = "{ call selectBookByTitle(?) }";
-			CallableStatement cs = conn.prepareCall(simpleProc);
+			String simpleProc = "SELECT * from books where book_id = ? ";
+			PreparedStatement cs = conn.prepareStatement(simpleProc);
 
 			// insert book values
-			cs.setString(1, book_query);
+			cs.setInt(1, PARSED_book_query);
 			
 
 ResultSet rs = cs.executeQuery();
@@ -122,7 +124,8 @@ Genre: <%=genre %> </h2>
 
 
 }catch (Exception e) {
-	out.println("Error : " + e);
+	System.out.println(e);
+	//response.sendRedirect("home.jsp?c=false&m=Error%20loading%20book%20details.%20Please%20contact%20the%20System%20Administrator.");
 }
 
 %>

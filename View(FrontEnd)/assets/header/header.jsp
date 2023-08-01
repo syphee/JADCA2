@@ -84,6 +84,8 @@
 							<li>
 								<hr class="dropdown-divider">
 							</li>
+							<!-- if not logged as guest -->
+							<%if(role.equals("Guest") != true ){ %>
 							<li><a class="dropdown-item" href="EditProfile.jsp">My profile</a></li>
 							<li><a class="dropdown-item" href="#">My rentals</a></li>
 							<li><hr class="dropdown-divider"></li>
@@ -94,6 +96,18 @@
 									<input type="submit" class="dropdown-item" value="Log out">
 								</form>
 							</li>
+							<%}else{ %>
+							<!-- if  guest -->
+							
+							
+							<li>
+								<!-- Log out -->
+								<form action="<%= request.getContextPath()%>/InvalidateSession"
+									method="post">
+									<input type="submit" class="dropdown-item" value="Log in">
+								</form>
+							</li>
+							<%} %>
 
 
 							<!-- Variables "role" and "user" are already inherited since header.jsp is called under home.jsp. No need to declare them again. Ignore the errors. -->

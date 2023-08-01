@@ -45,7 +45,7 @@ public class removeItem extends HttpServlet {
 		
 		
 		// get deleted book name
-		String remove_book = request.getParameter("book_title");
+		String remove_book = request.getParameter("book_id");
 		
 		// search the cart for the same book , then delete and break out from loop;
 		for(String a :  shopping_cart ) {

@@ -5,6 +5,7 @@ try{
 	search = request.getParameter("search");
 	
 	// set search to blankspace upon page load
+	
 	if(search == null){
 		search = "";
 	}

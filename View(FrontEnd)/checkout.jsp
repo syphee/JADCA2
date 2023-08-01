@@ -19,6 +19,7 @@
 // init cart function
 ArrayList<String> shopping_cart = (ArrayList<String>)session.getAttribute("shopping_cart");
 
+
 //quantity cache
 
 // Book title is key, book quantity added to cart is value
@@ -122,6 +123,7 @@ if(shopping_cart.size() < 1){
         <hr class="bg-danger my-1 opacity-100">
        
 <%
+String book_title = "";
 int total = 0;
 
 // this quantity variable to retrieve amount of books added to cart by user
@@ -141,6 +143,7 @@ for(String title:book_quantity.keySet()){
 	String desc = "";
 	String pictureURI = "";
 	double price = 0;
+	int id = 0;
 
 try{
 
@@ -158,8 +161,8 @@ try{
 	Connection conn = DriverManager.getConnection(connURL);
 
 	//Call routine
-				String simpleProc = "{ call selectBookByTitle(?) }";
-				CallableStatement cs = conn.prepareCall(simpleProc);
+				String simpleProc = "SELECT * from books where book_id = ? ";
+				PreparedStatement cs = conn.prepareStatement(simpleProc);
 
 				// insert book values
 				cs.setString(1, title);
@@ -175,8 +178,8 @@ try{
 	ResultSet rs = cs.executeQuery();
 
 	while (rs.next()) {
-		int id = rs.getInt("book_id");
-		title = rs.getString("title");
+		id = rs.getInt("book_id");
+		book_title = rs.getString("title");
 		author = rs.getString("author");
 		genre = rs.getString("genre_id");
 		desc = rs.getString("description");
@@ -206,7 +209,7 @@ try{
     </div>
     <div class="col-3">
         <div class="row">
-            <%=title %>
+            <%=book_title %>
         </div>
         <div class="row text-truncate-container">
             <p class="">
@@ -228,13 +231,13 @@ try{
     	    	<form action="<%=request.getContextPath() %>/removeItem" method="post" class="col">
 	    	
 	        <input type="submit" class="btn btn-danger" value="-">
-	        <input type="hidden" name="book_title" value="<%=title %>"/>
+	        <input type="hidden" name="book_id" value="<%=id %>"/>
     	</form>
         
        	<form action="<%=request.getContextPath() %>/addItem" method="post" class="col">
 	    	
 	        <input type="submit" class="btn btn-danger" value="+">
-	        <input type="hidden" name="book_title" value="<%=title %>"/>
+	        <input type="hidden" name="book_id" value="<%=id %>"/>
     	</form>
     	
     	</div>

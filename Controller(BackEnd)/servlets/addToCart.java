@@ -1,7 +1,13 @@
 package servlets;
 
+import dbDAO.sqlPassword;
+
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -43,7 +49,7 @@ public class addToCart extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		String SQLpassword = sqlPassword.getSQLPassword();
 		HttpSession session = request.getSession();
 		
 		// get current page of user before passed on to servlet
@@ -79,17 +85,68 @@ public class addToCart extends HttpServlet {
 		String title = "";
 		
 		title = request.getParameter("s");
+		String book_query = "";
 		String search_query = request.getParameter("search");
 		String genre_query = request.getParameter("genre");
 		String author_query = request.getParameter("author_query");
 		String sort_query = request.getParameter("sortBy");
+		
+		String add_book = request.getParameter("s");
 
 		
 		
 		// set session attributes according to what user has pressed
+		// TO check if db has enough books
+				int increment = 0;
+				for (String a : shopping_cart) {
+					if (a.equals(add_book)) {
+						increment++;
+					}
+				}
+
+				int quantity = 0;
+				String book_title = "";
+				boolean hasBooks = true;
+				
+				try {
+
+					book_query = add_book;
+
+					int PARSED_book_query = Integer.parseInt(book_query);
+
+					// step 1 Load jdbc driver
+					Class.forName("com.mysql.jdbc.Driver");
+
+					// step 2 define URL connection
+					String connURL = "jdbc:mysql://localhost/jadca1?user=root&password=" + SQLpassword + "&serverTimezone=UTC";
+
+					// step 3 Establish connection
+					Connection conn = DriverManager.getConnection(connURL);
+
+					// Call routine
+					String simpleProc = "SELECT * from books where book_id = ? ";
+					PreparedStatement cs = conn.prepareStatement(simpleProc);
+
+					// insert book values
+					cs.setInt(1, PARSED_book_query);
+
+					ResultSet rs = cs.executeQuery();
+
+					while (rs.next()) {
+						quantity = rs.getInt("quantity");
+						book_title = rs.getString("title");
+					}
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+				
+				
+				if(increment >= quantity) {
+					hasBooks = false;
+				}
 		
 		
-		
+		if(hasBooks == true) {
 		try {
 					// if quick rent
 					if(isQuickRent.equals("true")) {
@@ -148,5 +205,24 @@ public class addToCart extends HttpServlet {
 		            response.sendRedirect(redirect);
 		        }
 	}
+	else {
+		//String output = "Add book failed!";
+    	output = "There is not enough stock for Book :" + book_title + " for your purchase!";
+    	color = "alert-danger";
+    	System.out.println("ADDTOCART - FAILED!! : " );
+    	
+    	//response.sendRedirect(request.getContextPath()+"/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel.jsp?c="+color+"&o="+output);
+    	
+    	// bootstrap card
+    	String message = "<div class=\"alert " +color + " role=\"alert\">\r\n"
+	     		+ output + "\r\n"
+	     		+ "  <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>\r\n"
+	     		+ "</div>";
+    	
+    	out.print(message);  
+    	String redirect = (request.getContextPath() + currentPage + "?c=false&m=" + output).toString();
+        response.sendRedirect(redirect);
+	}
 
+}
 }

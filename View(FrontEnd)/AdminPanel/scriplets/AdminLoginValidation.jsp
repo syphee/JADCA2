@@ -104,7 +104,7 @@ if (cookies != null && rememberMe == true) {
 
 	// if user decides not to use the rememberMe functionality
 } else {
-	System.out.println("HOME.JSP - User normal login");
+	System.out.println("AdminPanel.JSP - User normal login");
 	try {
 		//user = session.getAttribute("username").toString();
 		//role = session.getAttribute("role").toString();
@@ -123,7 +123,11 @@ if (cookies != null && rememberMe == true) {
 		first_name = LoggedUserInformation.get("first_name");
 		last_name = LoggedUserInformation.get("last_name");
 		contactNumber = LoggedUserInformation.get("contact_number");
-
+		
+		if (role.equals("admin") != true || role == null) {
+			System.out.println("No permissions!");
+			response.sendRedirect(request.getContextPath()+"/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp");
+		}
 		
 	} catch (Exception ex) {
 		System.out.println("login failed.");

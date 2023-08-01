@@ -25,6 +25,13 @@ shopping_cart = (ArrayList<String>) session.getAttribute("shopping_cart");
 if (shopping_cart == null) {
 	response.sendRedirect("login.jsp");
 }
+
+if(role.equals("Guest") ){ 
+	
+	response.sendRedirect("home.jsp?c=false&m=You%20are%20not%20logged%20in!");
+}
+
+
 %>
 
 
