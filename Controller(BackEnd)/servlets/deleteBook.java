@@ -64,7 +64,7 @@ public class deleteBook extends HttpServlet {
 	    	     		+ "  <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>\r\n"
 	    	     		+ "</div>";
 	        	out.print(message);  
-	            RequestDispatcher rd=request.getRequestDispatcher("/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel.jsp");  
+	            RequestDispatcher rd=request.getRequestDispatcher("/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel/Books/deleteBook/deleteBookFeature.jsp");  
 	            rd.include(request, response);  
 	            
 	        }catch(Exception ex) {
@@ -82,7 +82,7 @@ public class deleteBook extends HttpServlet {
 	    	     		+ "</div>";
 	        	
 	        	out.print(message);  
-	            RequestDispatcher rd = request.getRequestDispatcher("/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel.jsp");  
+	            RequestDispatcher rd = request.getRequestDispatcher("/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel/Books/deleteBook/deleteBookFeature.jsp");  
 	            rd.include(request, response);  
 	        }
 		}

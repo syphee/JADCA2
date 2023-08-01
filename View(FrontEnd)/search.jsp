@@ -6,24 +6,15 @@
 <%@page import="java.sql.*"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dbDAO.sqlPassword"%>
+<%@page import="java.sql.*"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@page import="dbDAO.UserDAO"%>
+<%@page import="dbDAO.sqlPassword"%>
 
-<%	
-String user = "";
-String role = "";
-String pic = "";
+<%@ include file="../View(FrontEnd)/AdminPanel/scriplets/UserLoginValidation.jsp"%>
 
 
-
-try {
-			user = session.getAttribute("username").toString();
-			role = session.getAttribute("role").toString();
-			pic = session.getAttribute("pic").toString();
-
-		} catch (Exception ex) {
-			System.out.println("login failed.");
-			response.sendRedirect("login.jsp");
-		}
-%>
 
 <%
 // init cart function

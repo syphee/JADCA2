@@ -97,6 +97,11 @@ public class BookDAO {
 		
 	}
 	
+	// James --
+	// to redo verify fields in CA2 to take in hashmap values, that way I can just do 1 param instead of needing to put all fields required,
+	// to differentiate inputs from hashmap by doing a switch case
+	// refer to ESDE switch case filtering ive done
+	
 	public static void verifyFields(String INPUT_title, String INPUT_author, String INPUT_price, String INPUT_quantity,
 			String INPUT_genre_id,String INPUT_ISBN, String INPUT_description
 			)throws Exception {
@@ -107,6 +112,11 @@ public class BookDAO {
                 INPUT_genre_id.isBlank() || INPUT_ISBN.isBlank() ;
 		
 
+		// literally just ORM ( Object related mapping ), but without the use of an external class cuz its more convenient lol
+		// its literally just temporarily storing info to be passed on to the query so i dont see the use of making a separate class
+		
+		// but it is arguable that making another class for this ORM thingy is preferred cuz if table values are complex its harder to 
+		// manage in terms of scalability, but for small stuff like these i think its much more efficient
 		Map<String, Boolean> list = new HashMap<>();
 		
 		list.put("title", INPUT_title.trim().isBlank());
@@ -123,6 +133,8 @@ public class BookDAO {
 		// reference : https://stackabuse.com/java-how-to-get-keys-and-values-from-a-map/
 		String output = "";
 
+		
+		// for each loop to go through each value in the hashmap
 			for (Map.Entry<String, Boolean> pair : list.entrySet()) {
 			    System.out.println(String.format("Key (name) is: %s, Value is : %s", pair.getKey(), pair.getValue()));   
 			    if(pair.getValue() == true) {
@@ -162,7 +174,7 @@ public class BookDAO {
         return "";
     }
 	
-    
+    // request map here
     public static void deleteBook(String INPUT_ISBN) throws Exception{
     	String ISBN = INPUT_ISBN;
     	
@@ -198,6 +210,7 @@ public class BookDAO {
     	
     }
 	// should validate for empty pic
+    // request map here
 	public static void AddBook(String INPUT_title, String INPUT_author, String INPUT_price, String INPUT_quantity,
 			String INPUT_pub_date, String INPUT_genre_id,String INPUT_ISBN, String INPUT_description,
 			Part filePart) throws Exception {
@@ -377,6 +390,9 @@ public class BookDAO {
 
 	}
 	
+	// to redo in CA2 cuz it just nullifies when one input is blank --  i think this is related to the verifyFields input i did
+	// related to editBook function, when user wants to only change 1 aspect of the book info
+	
 	public static String constructSQL(String INPUT_title, String INPUT_author, String INPUT_price, 
 			String INPUT_pub_date, String INPUT_genre_id,String INPUT_ISBN, String INPUT_description
 			) throws Exception {
@@ -419,7 +435,7 @@ public class BookDAO {
 		valueList.put("ISBN", ISBN);
 		valueList.put("description", description);
 		
-		
+		// if query list values matching keys are true, valuelist will be the factor that concatenates the string into the final SQL query
 		
 		
 		
@@ -481,6 +497,8 @@ public class BookDAO {
 		    return str;
 		
 	}
+	
+	// request map here
 	public static void manageBookQuantity(String INPUT_ISBN,String INPUT_quantity)throws Exception {
 		
 		// init variables
@@ -536,6 +554,7 @@ public class BookDAO {
 		
 	}
 	
+	// request map here
 	public static void editBook(String INPUT_title, String INPUT_author, String INPUT_price, 
 			String INPUT_quantity,String INPUT_pub_date, String INPUT_genre_id,String INPUT_ISBN,String INPUT_rating, String INPUT_description,String default_description,int book_id
 			) throws Exception {
@@ -640,6 +659,10 @@ public class BookDAO {
 
 	}
 	
+	// responsible for removing the books from DB based on how much a user has ordered
+	// might have to redo for CA2 if user decides to get 2 of the same book
+	// currently if user orders 2 books, they are shown in separate rows, instead of quantity = 2
+	// refer to shopping cart page
 	public static void editBookStock(ArrayList<String> INPUT_cart) throws Exception{
 		
 		

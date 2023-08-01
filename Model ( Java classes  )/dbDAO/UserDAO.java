@@ -27,10 +27,11 @@ public class UserDAO {
 	// added in throws exception to catch database errors
 	
 	//returns username and role of logged user
-	public static Map<String, String> VerifyLogin(String INPUT_id, String INPUT_password) throws Exception {
+	// request map here
+	public static Map<String, Integer> VerifyLogin(String INPUT_id, String INPUT_password) throws Exception {
 
 		// declaration of hashmap
-		Map<String, String> userDetails = new HashMap<>();
+		Map<String, Integer> userDetails = new HashMap<>();
 
 		// login boolean validation
 		// boolean output = false;
@@ -39,7 +40,8 @@ public class UserDAO {
 		String password;
 		String role;
 		String pic;
-		int id;
+		int userid = 0 ;
+		
 
 		// get users
 		try {
@@ -70,6 +72,7 @@ public class UserDAO {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
+				userid = rs.getInt("userid");
 				name = rs.getString("email");
 				password = rs.getString("password");
 				role = rs.getString("role");
@@ -77,14 +80,26 @@ public class UserDAO {
 
 				if (INPUT_id.equals(name) && INPUT_password.equals(password)) {
 					// store the values that match into hashmap, later to be returned
-					userDetails.put("username", name);
-					userDetails.put("role", role);
-					userDetails.put("pic", pic);
+					
+					// #########################
+					// Main login of getting current logged user
+					// #########################
+//					userDetails.put("username", name);
+//					userDetails.put("role", role);
+//					userDetails.put("pic", pic);
+//					userDetails.put("userid",userid);
+					
+					
+					// CA2
+					// store userid instead
+					userDetails.put("userid",userid);
 
 					break;
 				}
 
 			}
+			
+			System.out.println("User ID Logged in : " + userid);
 			// Step 7: Close connection
 			conn.close();
 		} catch (Exception e) {
@@ -95,6 +110,7 @@ public class UserDAO {
 		return userDetails;
 	}
 
+	//request map here
 	public static String RegisterNewUser(String INPUT_email, String INPUT_password) throws Exception {
 
 		
@@ -225,7 +241,7 @@ public class UserDAO {
 		return doesExist;
 	}
 
-	
+	// request map here
 	public static void deleteUser(String INPUT_id) throws Exception {
 		String i = INPUT_id;
 		
@@ -261,6 +277,7 @@ public class UserDAO {
 		conn.close();
 	}
 	
+	// request map here
 	public static void editUser(String INPUT_id,String INPUT_role) throws Exception{
 		String i = INPUT_id;
 		String USER_ROLE = "";
@@ -303,7 +320,7 @@ public class UserDAO {
 		// Step 7: Close connection
 		conn.close();
 	}
-	public static void saveSession(String session_id,String INPUT_username, String INPUT_role) throws Exception {
+	public static void saveSession(String session_id,int INPUT_userid) throws Exception {
 			
 			
 			// login boolean validation
@@ -340,8 +357,8 @@ public class UserDAO {
 				// store query
 				// 1 stands for the name,2 for id
 				pstmt.setString(1, session_id);
-				pstmt.setString(2, INPUT_username);
-				pstmt.setString(3, INPUT_role);
+				//pstmt.setString(2, INPUT_username);
+				//pstmt.setString(3, INPUT_role);
 	
 				// exec
 				affectedRows = pstmt.executeUpdate();
@@ -409,7 +426,7 @@ public class UserDAO {
 	
 		
 	}
-	public static Map<String, String> loadSession(String session_id) throws Exception {
+	public static Map<String, Integer> loadSession(String session_id) throws Exception {
 		
 		
 		// login boolean validation
@@ -420,9 +437,10 @@ public class UserDAO {
 		int affectedRows = 0;
 		String username = "";
 		String role = "";
+		int userid = 0;
 		
 		
-		Map<String, String> userDetails = new HashMap<>();
+		Map<String, Integer> userDetails = new HashMap<>();
 
 	
 	
@@ -456,18 +474,20 @@ public class UserDAO {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				username = rs.getString("username");
-				role = rs.getString("role");
-
+//				username = rs.getString("username");
+//				role = rs.getString("role");
+				userid = rs.getInt("userid");
+				
 
 			}
 			System.out.println("UserDAO: Username - " + username);
 			System.out.println("UserDAO: role - " + username);
+			System.out.println("UserDAO: ID - " + userid);
 			
 			// store the values that match into hashmap, later to be returned
-			userDetails.put("username",username);
-			userDetails.put("role", role);
-
+//			userDetails.put("username",username);
+//			userDetails.put("role", role);
+			userDetails.put("userid", userid);
 
 
 			// Step 7: Close connection

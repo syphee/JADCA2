@@ -1,44 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dbDAO.UserDAO"%>
 <%@page import="dbDAO.sqlPassword"%>
 <%@page import="java.sql.*"%>
+
 
 <%
 //change ur sql password here
 	final String SQLpassword = sqlPassword.getSQLPassword();
 %>
 
+
+
 <%
 // init cart function
 ArrayList<String> shopping_cart = (ArrayList<String>)session.getAttribute("shopping_cart");
+
+//quantity cache
+
+// Book title is key, book quantity added to cart is value
+HashMap<String,Integer> book_quantity = new HashMap<String,Integer>();
+
 if(shopping_cart.size() < 1){
 	String message = "Shopping cart is empty!";
 	
 	response.sendRedirect(request.getContextPath()+"/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp"+ "?c=false&m=" + message );
+}else{
+	//compile all books with quantities user has added
+	
+	// round robin method of searching the same book
+	for(String a :  shopping_cart){
+		// initial quantity, set to 1 because each book in arraylist does not have the "quantity" that user has put in
+		int increment = 0;
+		for(String b : shopping_cart){
+			
+			//if book B on query is equal to index in A, override the quantity
+			if(b.equals(a)){
+				book_quantity.put(b, ++increment);
+			}
+		}
+	}
+	
 }
 
 %>
 
-<%	
-String user = "";
-String role = "";
-String pic = "";
+<%@ include file="../View(FrontEnd)/AdminPanel/scriplets/UserLoginValidation.jsp"%>
 
-
-
-try {
-			user = session.getAttribute("username").toString();
-			role = session.getAttribute("role").toString();
-			pic = session.getAttribute("pic").toString();
-
-		} catch (Exception ex) {
-			System.out.println("login failed.");
-			response.sendRedirect("login.jsp");
-		}
-%>
 
 <!DOCTYPE html>
 <html>
@@ -114,7 +125,7 @@ try {
 int total = 0;
 
 // this quantity variable to retrieve amount of books added to cart by user
-int quantity = 1;
+
 
 // delivery fee lol
 int delivery_fee = 10;
@@ -122,13 +133,15 @@ int delivery_fee = 10;
 // number of books found
 int count = 0;
 
-for(String a :  shopping_cart){
-	String title = "";
+// for each loop to go through each book
+//book_quantity.forEach((title,quantity)->{
+for(String title:book_quantity.keySet()){
 	String author = "";
 	String genre = "";
 	String desc = "";
 	String pictureURI = "";
 	double price = 0;
+
 try{
 
 	// for every item in shopping cart
@@ -149,7 +162,7 @@ try{
 				CallableStatement cs = conn.prepareCall(simpleProc);
 
 				// insert book values
-				cs.setString(1, a);
+				cs.setString(1, title);
 				
 				
 				// Step 5: Execute SQL Command
@@ -172,11 +185,9 @@ try{
 		
 		
 		// to add up in total
-		total += price;
+		total += price * book_quantity.get(title);
 		
-		// to add in for each entry 
-		count++;
-				System.out.println(count);
+
 		
 }
 %>
@@ -210,19 +221,27 @@ try{
        $<%=price%>
     </div>
     <div class="col">
-        1
+        <%=book_quantity.get(title)%>
     </div>
     <div class="col">
-    	<form action="<%=request.getContextPath() %>/removeItem" method="post">
+    	<div class="row">
+    	    	<form action="<%=request.getContextPath() %>/removeItem" method="post" class="col">
 	    	
-	        <input type="submit" class="btn btn-danger" value="Remove">
+	        <input type="submit" class="btn btn-danger" value="-">
 	        <input type="hidden" name="book_title" value="<%=title %>"/>
     	</form>
         
-        </form>
+       	<form action="<%=request.getContextPath() %>/addItem" method="post" class="col">
+	    	
+	        <input type="submit" class="btn btn-danger" value="+">
+	        <input type="hidden" name="book_title" value="<%=title %>"/>
+    	</form>
+    	
+    	</div>
+
     </div>
     <div class="col">
-        <%=price * quantity %>
+        <%=price * book_quantity.get(title) %>
     </div>
 
 
@@ -235,9 +254,8 @@ try{
 
 
 }catch (Exception e) {
-	out.println("Error : " + e);
-}
-}
+	System.out.println("Error : " + e);
+}};
 %>
         
 

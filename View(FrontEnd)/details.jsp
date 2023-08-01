@@ -7,24 +7,12 @@
     <!--  imports here -->
 <%@page import="java.sql.*"%>
 <%@page import="dbDAO.sqlPassword"%>
+<%@page import="dbDAO.UserDAO"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
 
-<%	
-String user = "";
-String role = "";
-String pic = "";
+<%@ include file="../View(FrontEnd)/AdminPanel/scriplets/UserLoginValidation.jsp"%>
 
-
-
-try {
-			user = session.getAttribute("username").toString();
-			role = session.getAttribute("role").toString();
-			pic = session.getAttribute("pic").toString();
-
-		} catch (Exception ex) {
-			System.out.println("login failed.");
-			response.sendRedirect("login.jsp");
-		}
-%>
 
 <%
 //change ur sql password here

@@ -101,6 +101,9 @@ public class VerifyUserLogin extends HttpServlet {
 					System.out.println("Logged in as guest.");
 					loginid = "Guest";
 					role = "Guest";
+					
+					int userid =0;
+					session.setAttribute("userid", userid);
 
 					session.setAttribute("username", "Guest");
 					session.setAttribute("role", "Guest");
@@ -146,26 +149,30 @@ public class VerifyUserLogin extends HttpServlet {
 			try {
 
 				// the returned result from Database
-				Map<String, String> userDetails = UserDAO.VerifyLogin(loginid, password);
+				Map<String, Integer> userDetails = UserDAO.VerifyLogin(loginid, password);
 
 				// if there is content
 				if (userDetails.isEmpty() != true) {
 
 					// store login and role attribute of user here
-					String username = userDetails.get("username");
-					role = userDetails.get("role");
-					String pic = userDetails.get("pic");
+//					String username = userDetails.get("username");
+//					role = userDetails.get("role");
+//					String pic = userDetails.get("pic");
 
-					session.setAttribute("username", username);
-					session.setAttribute("role", role);
-					session.setAttribute("pic", pic);
-
+//					session.setAttribute("username", username);
+//					session.setAttribute("role", role);
+//					session.setAttribute("pic", pic);
+					
+					// CA2
+					// Store userid instead
+					int userid = userDetails.get("userid");
+					session.setAttribute("userid", userid);
 					// if user has selected to remember login
 					// TODO - store user details ( username and role ) in SQL and link it with
 					// JSESSIONID
 					if (result != null && rememberMe == true) {
 						// session.setAttribute("rememberMe", true);
-						createCookie(response, cookies, username, role);
+						createCookie(response, cookies, userid);
 
 					}
 
@@ -210,7 +217,7 @@ public class VerifyUserLogin extends HttpServlet {
 
 	}
 
-	private void createCookie(HttpServletResponse response, Cookie[] cookies, String username, String role)
+	private void createCookie(HttpServletResponse response, Cookie[] cookies, int userid)
 			throws Exception {
 
 		String INPUT_sessionid = "";
@@ -230,8 +237,10 @@ public class VerifyUserLogin extends HttpServlet {
 		Cookie session_id = new Cookie("session_id", INPUT_sessionid);
 		response.addCookie(session_id);
 
+		
+		// disabled for CA2 for now
 		// then insert into sql db with these sesh, link user and role
-		UserDAO.saveSession(INPUT_sessionid, username, role);
+		//UserDAO.saveSession(INPUT_sessionid, username, role);
 
 	}
 

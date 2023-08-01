@@ -1,53 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@page import="java.sql.*"%>
-<%@page import="java.util.HashMap"%>
-<%@page import="java.util.Map"%>
-<%@page import="dbDAO.UserDAO"%>
-<%@page import="dbDAO.sqlPassword"%>
+<!-- wrapper1 is hyperlinks to adminpanel features -->
 
-<%@ include file="../View(FrontEnd)/AdminPanel/scriplets/UserLoginValidation.jsp"%>
-
-
-<%
-final String SQLpassword = sqlPassword.getSQLPassword();
-String path = request.getContextPath();
-
-System.out.println(request.getContextPath());
-String output = "";
-
-try {
-	user = session.getAttribute("username").toString();
-	role = session.getAttribute("role").toString();
-	pic = session.getAttribute("pic").toString();
-	if (role.equals("admin") != true || role == null) {
-		System.out.println("No permissions!");
-		response.sendRedirect("home.jsp");
-	}
-
-} catch (Exception ex) {
-	System.out.println("No permissions!");
-	response.sendRedirect("/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp");
-}
-%>
-
-<%
-String URI = "";
-
-//constructing bootstrap card
-String color = "";
-String output2 = "";
-String message = "";
-color = request.getParameter("c");
-output2 = request.getParameter("o");
-if (color != null || output2 != null) {
-	message = "<div class=\"alert " + color + " role=\"alert\">\r\n" + output2 + "\r\n"
-	+ "  <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>\r\n"
-	+ "</div>";
-	
-	
-}
-%>
 <!DOCTYPE html>
 <html lang="en">
 <!-- To add cookie / role scriptlet validation here -->
@@ -125,11 +77,9 @@ html, body {
 
 							<!-- Dashboard -->
 							<div class="accordion-body">
-								<button
-									class="btn btn-toggle align-items-center rounded hover-underline-animation text-black collapsed text-center"
-									type="button" data-bs-toggle="collapse"
-									data-bs-target="#manageDashboard" aria-expanded="false"
-									aria-controls="collapseThree">Dashboard</button>
+								<a	href="<%=request.getContextPath() %>/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel/AdminPanel.jsp"
+									class="btn align-items-center rounded hover-underline-animation text-black text-center"
+									type="button">Dashboard</a>
 							</div>
 
 
@@ -143,25 +93,28 @@ html, body {
 									<!-- Manage Books -->
 									<div>
 										<h2 class="accordion-header">
-											<button class="accordion-button collapsed" type="button"
+											<a class="accordion-button collapsed" type="button"
 												data-bs-toggle="collapse" data-bs-target="#manageBooks"
 												aria-expanded="false" aria-controls="collapseThree">
-												Manage Books</button>
+												Manage Books</a>
 										</h2>
 										<div id="manageBooks" class="accordion-collapse collapse"
 											data-bs-parent="#accordionExample">
 											<div class="accordion-body">
 												<ul
 													class="btn-toggle-nav list-unstyled fw-normal pb-1 small ">
-													<li class="my-4 link-hover"><a href="#"
+
+													<li class="my-4 link-hover">
+													<a href="<%=request.getContextPath() %>/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel/Books/addBook/addBookFeature.jsp"
 														class="link-dark rounded hover-underline-animation text-dark"
-														data-bs-toggle="collapse" data-bs-target="#addBook">Add</a></li>
-													<li class="my-4 link-hover" data-bs-toggle="collapse"
-														data-bs-target="#editBook"><a href="#"
+													>Add</a></li>
+													
+													<li class="my-4 link-hover"
+														><a href="<%=request.getContextPath() %>/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel/Books/editBook/editBookFeature.jsp"
 														class="link-dark rounded hover-underline-animation text-dark">Edit
 													</a></li>
-													<li class="my-4 link-hover" data-bs-toggle="collapse"
-														data-bs-target="#deleteBook"><a href="#"
+													<li class="my-4 link-hover" 
+														><a href="<%=request.getContextPath() %>/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel/Books/deleteBook/deleteBookFeature.jsp"
 														class="link-dark rounded hover-underline-animation text-dark">Delete</a></li>
 													<hr class="bg-dark my-1 opacity-100">
 
@@ -189,16 +142,17 @@ html, body {
 											<div class="accordion-body">
 												<ul
 													class="btn-toggle-nav list-unstyled fw-normal pb-1 small ">
-													<li class="my-4 link-hover"><a href="#"
+													<li class="my-4 link-hover">
+													<a href="<%=request.getContextPath() %>/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel/Users/addUser/addUserFeature.jsp"
 														class="link-dark rounded hover-underline-animation text-dark"
-														data-bs-toggle="collapse" data-bs-target="#addUser">Add</a></li>
-													<li class="my-4 link-hover"><a href="#"
+														>Add</a></li>
+													<li class="my-4 link-hover"><a href="<%=request.getContextPath() %>/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel/Users/editUser/editUserFeature.jsp"
 														class="link-dark rounded hover-underline-animation text-dark"
-														data-bs-toggle="collapse" data-bs-target="#editUser">Edit
+														>Edit
 													</a></li>
-													<li class="my-4 link-hover"><a href="#"
+													<li class="my-4 link-hover"><a href="<%=request.getContextPath() %>/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel/Users/deleteUser/deleteUserFeature.jsp"
 														class="link-dark rounded hover-underline-animation text-dark"
-														data-bs-toggle="collapse" data-bs-target="#deleteUser">Delete</a></li>
+														>Delete</a></li>
 													<hr class="bg-dark my-1 opacity-100">
 
 												</ul>
@@ -225,7 +179,8 @@ html, body {
 												<ul
 												
 													class="btn-toggle-nav list-unstyled fw-normal pb-1 small ">
-													<li class="my-4 link-hover"><a href="#"  data-bs-toggle="collapse" data-bs-target="#manageStocks"
+													<li class="my-4 link-hover">
+													<a href="<%=request.getContextPath() %>/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel/Inventory/manageInventory/manageInventoryFeature.jsp" 
 														class="link-dark rounded hover-underline-animation text-dark">Manage stocks</a></li>
 													<li class="my-4 link-hover"><a href="#"
 														class="link-dark rounded hover-underline-animation text-dark">Order Stocks 
@@ -341,74 +296,3 @@ html, body {
 				<hr class="bg-secondary my-1 opacity-100">
 				<div id="arkCONTENT" class="accordion">
 					<!-- Dashboard -->
-					<div
-						class="row text-center accordion-body accordion-collapse collapse show"
-						id="manageDashboard" data-bs-parent="#arkCONTENT">
-						<header>
-							<h1>Dashboard</h1>
-						</header>
-						<div class="col">a</div>
-						<div class="col">b</div>
-						<div class="col">c</div>
-						<div class="col">d</div>
-						<div class="col">e</div>
-						<div class="col">f</div>
-					</div>
-
-
-					<!-- Manage Books -->
-
-					<!-- https://www.javatpoint.com/java-io -->
-					<!-- Link for reference, to upload / get img -->
-
-					<!-- Add Book -->
-					<!-- To add form here -->
-					<%@ include file="assets/bookPanel/addBook/addBookFeature.jsp"%>
-					<!-- Edit Book -->
-					<%@ include file="assets/bookPanel/editBook/editBookFeature.jsp"%>
-					
-					<!-- Delete Book -->
-
-					<%@ include file="assets/bookPanel/deleteBook/deleteBookFeature.jsp"%>
-					
-					<!-- add user -->
-					<%@ include file="assets/userPanel/addUser/addUserFeature.jsp"%>
-					
-					<!-- edit user -->
-					<%@ include file="assets/userPanel/deleteUser/deleteUserFeature.jsp"%>
-					
-					<!-- delete user -->
-					<%@ include file="assets/userPanel/editUser/editUserFeature.jsp"%>
-					
-					<!-- manage stocks -->
-					<%@ include file="assets/inventoryPanel/manageInventory/manageInventoryFeature.jsp"%>
-					
-					
-					
-			</main>
-
-			<!-- Main content -->
-
-		</div>
-	</div>
-
-
-
-
-	<script>
-		function previewImage(event) {
-			var input = event.target;
-			if (input.files && input.files[0]) {
-				var reader = new FileReader();
-				reader.onload = function(e) {
-					var preview = document.getElementById('preview');
-					preview.src = e.target.result;
-					preview.style.display = 'block';
-				};
-				reader.readAsDataURL(input.files[0]);
-			}
-		}
-	</script>
-</body>
-
-</html>

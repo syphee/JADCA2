@@ -1,19 +1,43 @@
+<%@ include file="../../scriplets/validationScriptlet.jsp"%>
+<%
+String search = "";
+try{
+	search = request.getParameter("search");
+	
+	// set search to blankspace upon page load
+	if(search == null){
+		search = "";
+	}
+	System.out.println("\nSearching for " + search + " in DELETEBOOK.jsp");
+}catch(Exception ex){
+	ex.printStackTrace();
+}
 
-<div class="row accordion-body accordion-collapse collapse"
-	id="deleteBook" data-bs-parent="#arkCONTENT">
+
+
+%>
+<%@ include file="../../wrapper/wrapper1.jsp"%>
+
+
 	<div>
 		<header>
 			<h1 class="fs-1">Delete Book</h1>
 		</header>
 		<hr class="bg-secondary my-1 opacity-100">
 		<form method="post" action="<%=request.getContextPath() %>/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel/Books/deleteBook/deleteBookFeature.jsp">
-			<input type="text" 
-					placeholder="Search for book" name="author_query" aria-label="Username"
-					aria-describedby="basic-addon1" form="search">
-			<input type="submit">
+			<input type="text" id="search"
+					placeholder="Search for book" name="search" aria-label="Username"
+					aria-describedby="basic-addon1">
+			
+			<select name="search-filter" class="btn btn-danger dropdown-toggle col-3"
+			form="search">
+			<option id="1" value="Sort by" selected>Sort By</option>
+			<option id="2"  value="best-selling">Best Selling</option>
+			<option id="3"  value="least-selling">Least selling</option>
+
+		</select> <input type="submit">
 		
 		</form>
-
 
 
 		<table class="table border col">
@@ -37,10 +61,8 @@
 				<%
                         // to retrieve all genres from DB
                         try {
-
-                        		// get search query
-                        		String search = request.getParameter("search");
-                        		
+                        	// get search query
+	
 								// Step1: Load JDBC Driver
 								Class.forName("com.mysql.jdbc.Driver");
 					
@@ -75,7 +97,6 @@
 								PreparedStatement pstmt = conn.prepareStatement(simpleProc);
 								
 								pstmt.setString(1,search);
-								
 								
 								// execute query
 								rs = pstmt.executeQuery();
@@ -140,4 +161,3 @@
 
 
 
-</div>

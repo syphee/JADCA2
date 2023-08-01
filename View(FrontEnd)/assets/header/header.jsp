@@ -102,7 +102,7 @@
 				if(role.equals("admin")){
 					%>
 							<li><a class="dropdown-item"
-								href="<%=request.getContextPath() %>/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel.jsp">Admin
+								href="<%=request.getContextPath() %>/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel/AdminPanel.jsp">Admin
 									Panel</a></li>
 
 							<%} %>
