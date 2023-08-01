@@ -1,0 +1,93 @@
+
+a{
+    text-decoration: none;
+}
+footer{
+	position:fixed;
+	
+	bottom:0;
+}
+
+html{
+	height:100%;
+	
+}
+
+body {
+	position:relative;
+	overflow:auto;
+}
+
+
+.book-img {
+    background-color: black;
+    border: none;
+    opacity: 1;
+    transition: 0.3s;
+}
+.book-img:hover{
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.book-text{
+	opacity:0;
+	background-color:black;
+}
+
+.book-text:hover{
+	opacity:0.5
+}
+
+
+/* Styling for the table */
+table {
+    width: 400px;
+    border-collapse: collapse;
+    margin: 20px;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    text-align: left;
+}
+
+/* Styling for the form */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+/* Styling for the input fields */
+input[type="text"] {
+    width: 150px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    color: black;
+}
+
+/* Styling for the submit button */
+input[type="submit"] {
+    width: 150px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+/* Styling for the total amount row */
+.total-row {
+    font-weight: bold;
+}
