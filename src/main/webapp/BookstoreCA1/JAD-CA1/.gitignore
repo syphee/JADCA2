@@ -1,0 +1,38 @@
+# JSP development
+
+# Compiled JSP files
+*.class
+
+# Logs
+*.log
+
+# Build directories
+/target/
+/out/
+
+# Dependency directories
+/lib/
+/web/WEB-INF/lib/
+
+# Application server-specific files
+/.idea/
+/.classpath
+/.project
+/.settings/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.swp
+*.swo
+*.bak
+
+# IDE-specific files
+/.vscode/
+/.eclipse/
+/.netbeans/
+/.idea/
+*.iml
+/bin/
