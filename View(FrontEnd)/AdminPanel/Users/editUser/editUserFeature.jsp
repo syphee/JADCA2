@@ -6,6 +6,24 @@
 <%@ include file="../../scriplets/AdminLoginValidation.jsp"%>
 <%@ include file="../../scriplets/validationScriptlet.jsp"%>
 <%@ include file="../../wrapper/wrapper1.jsp"%>
+
+<%
+String search = "";
+try{
+	search = request.getParameter("search");
+	
+	// set search to blankspace upon page load
+	if(search == null){
+		search = "";
+	}
+	System.out.println("\nSearching for " + search + " in DELETEUSER.jsp");
+}catch(Exception ex){
+	ex.printStackTrace();
+}
+
+
+
+%>
 <%
 String output = "";
 %>
@@ -14,6 +32,14 @@ String output = "";
 			<h1 class="fs-1">Edit User</h1>
 		</header>
 		<hr class="bg-secondary my-1 opacity-100">
+		<form method="post" action="<%=request.getContextPath() %>/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel/Users/editUser/editUserFeature.jsp">
+			<input type="text" id="search"
+					placeholder="Search for User" name="search" aria-label="Username"
+					aria-describedby="basic-addon1">
+			
+			 <input type="submit">
+		
+		</form>
 
 		<!-- https://stackoverflow.com/questions/5967564/form-inside-a-table -->
 		<!-- table below associated with form -->
@@ -63,10 +89,11 @@ String output = "";
 					// Step 4: Create Statement object
 					Statement stmt2 = conn2.createStatement();
 					// Step 5: Execute SQL Command
-					String sqlStr = "SELECT * from users";
+					String sqlStr = "SELECT * from users where email like CONCAT('%', ? , '%')";
 					//
 					PreparedStatement pstmt2 = conn2.prepareStatement(sqlStr);
-
+					
+					pstmt2.setString(1, search);
 					// execute query
 					rs2 = pstmt2.executeQuery();
 

@@ -6,7 +6,7 @@
 <%@page import="dbDAO.sqlPassword"%>
 <%@ include file="../../scriplets/AdminLoginValidation.jsp"%>
 <%@ include file="../../scriplets/validationScriptlet.jsp"%>
-<%@ include file="../../wrapper/wrapper1.jsp"%>
+
 <%
 String output ="";
 
