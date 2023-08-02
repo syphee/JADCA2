@@ -12,19 +12,70 @@
 <%@page import="java.util.Map"%>
 
 <%@ include file="../View(FrontEnd)/AdminPanel/scriplets/UserLoginValidation.jsp"%>
+<%
+// init cart function
+ArrayList<String> shopping_cart = new ArrayList<String>();
+try{
+	shopping_cart = (ArrayList<String>)session.getAttribute("shopping_cart");
+}catch(Exception ex){
+	ex.printStackTrace();
+}
 
+
+
+%>
+<%
+
+String viewed_book = request.getParameter("view");
+ArrayList<String> recently_viewed = new ArrayList<String>();
+ArrayList<String> temp_array_cache = new ArrayList<String>();
+int PARSED_viewed_book = 0;
+
+
+try{
+    recently_viewed = (ArrayList<String>) session.getAttribute("recently_viewed");
+}catch(Exception ex){
+    ex.printStackTrace();
+}
+
+// max to display is 3, this is adjustable
+if(recently_viewed.size() > 2){
+
+    // remove last index before pushing
+    recently_viewed.remove(recently_viewed.size()-1);
+
+    // shift the 2 items by +1 to make way for the latest viewed
+
+    // store them first into a temp arraylist
+    for(int j = 0 ; j < recently_viewed.size() ; j++){
+        temp_array_cache.add(recently_viewed.get(j));
+    }
+
+    // remove all indexes of recently viewed
+    recently_viewed.clear();
+
+    // then add the new book
+    recently_viewed.add(viewed_book);
+
+    // then add the stored books
+    recently_viewed.addAll(temp_array_cache);
+    session.setAttribute("recently_viewed",recently_viewed);
+    // clear the cache
+    temp_array_cache.clear();
+
+}else{
+    recently_viewed.add(viewed_book);
+    session.setAttribute("recently_viewed",recently_viewed);
+}
+
+%>
 
 <%
 //change ur sql password here
 	final String SQLpassword = sqlPassword.getSQLPassword();
 	
 %>
-<%
-// init cart function
-ArrayList<String> shopping_cart = (ArrayList<String>)session.getAttribute("shopping_cart");
 
-
-%>
 
 
 <!DOCTYPE html>
@@ -80,7 +131,7 @@ text-size: 1rem;
 String book_query = "";
 try{
 
-book_query = request.getParameter("s");
+book_query = request.getParameter("view");
 
 int PARSED_book_query = Integer.parseInt(book_query);
 
@@ -120,6 +171,7 @@ Genre: <%=genre %> </h2>
 
 <%
 }
+conn.close();
 
 
 

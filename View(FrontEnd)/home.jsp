@@ -17,13 +17,21 @@ final String SQLpassword = sqlPassword.getSQLPassword();
 
 <%
 // init cart function
-ArrayList<String> shopping_cart;
+ArrayList<String> shopping_cart =  new ArrayList<String>();
+ArrayList<String> recently_viewed = new ArrayList<String>();
 
-shopping_cart = (ArrayList<String>) session.getAttribute("shopping_cart");
+try{
+	shopping_cart = (ArrayList) session.getAttribute("shopping_cart");
+	recently_viewed = (ArrayList) session.getAttribute("recently_viewed");
+	
+}catch(Exception ex){
+	ex.printStackTrace();
+}
+
 // get cart
 
 // to setattribute shopping_cart again
-if (shopping_cart == null) {
+if (shopping_cart == null ) {
 	response.sendRedirect("login.jsp");
 }
 %>
@@ -106,6 +114,7 @@ if (shopping_cart == null) {
 
 				<%
 				}
+					conn.close();
 
 				} catch (Exception e) {
 				out.print("Error : " + e);
@@ -157,6 +166,7 @@ if (shopping_cart == null) {
 
 				<%
 				}
+					conn.close();
 
 				} catch (Exception e) {
 				out.print("Error : " + e);
@@ -173,11 +183,13 @@ if (shopping_cart == null) {
 		<h1 class="text-white fs-1">Recently viewed</h1>
 		<div class=" rounded-1 px-2 ">
 			<ul class="row ">
+			<!-- go thru shopping cart, then query -->
 				<%
 				//connecting to database to get the details first
-
-				try {
-
+				
+				try{
+					for (String a : recently_viewed) {
+						System.out.println("recently viewed : " + recently_viewed.indexOf(a));
 					//step 1 Load jdbc driver
 					Class.forName("com.mysql.jdbc.Driver");
 
@@ -188,8 +200,10 @@ if (shopping_cart == null) {
 					Connection conn = DriverManager.getConnection(connURL);
 
 					//step 4 create prepared statement + ResultSet
-					PreparedStatement stmt = conn.prepareStatement("select * from books  ORDER BY rating DESC LIMIT 3");
-
+					PreparedStatement stmt = conn.prepareStatement("select * from books where book_id = ?");
+					
+					stmt.setInt(1, Integer.parseInt(a));
+					
 					ResultSet rs = stmt.executeQuery();
 
 					while (rs.next()) {
@@ -206,8 +220,12 @@ if (shopping_cart == null) {
 
 
 				<%
+				
 				}
-
+					
+					conn.close();}
+					
+				
 				} catch (Exception e) {
 				out.print("Error : " + e);
 				}

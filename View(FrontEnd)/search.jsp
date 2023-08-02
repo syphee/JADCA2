@@ -61,16 +61,19 @@ System.out.println(book_query);
 System.out.println(genre_query);
 System.out.println(author_query);
 
-if(book_query == null || book_query == "" ){
-	book_query = "";
-}else{
+if(book_query == "null" ){
+
 	q3 = "and title LIKE CONCAT('%'," +  "\"" + book_query + "\"" +  " , '%')";
+}else{
+	book_query = "";
+	q3 = "and title LIKE CONCAT('%'," +  "\"" + book_query + "\"" +  " , '%')";
+	
 }
 
 
 
 // if default option
-if(genre_query.equals("Select genre")){
+if(genre_query.equals("Select genre") || genre_query == "null"){
 	genre_query = "";
 }
 else{
@@ -80,7 +83,7 @@ else{
 // else find book with specified genre
 
 
-if(author_query == null  || author_query == ""){
+if(author_query == "null"  || author_query == ""){
 	author_query = "";
 }else{
 	q2 = "and author LIKE CONCAT('%', " + "\"" + author_query  + "\"" + " , '%')";

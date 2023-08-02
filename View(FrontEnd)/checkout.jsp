@@ -284,6 +284,9 @@ try{
                     Shipping
                 </div>
                 <div class="row">
+                    Grand Total ( No Tax )
+                </div>
+                <div class="row">
                     Grand Total 
                 </div>
             </div>
@@ -296,6 +299,9 @@ try{
                 </div>
                 <div class="row">
                     <%=delivery_fee %>
+                </div>
+                <div class="row">
+                    <%=total + delivery_fee %> 
                 </div>
                 <div class="row">
                     <%=total + (total * 0.08) + delivery_fee %> 

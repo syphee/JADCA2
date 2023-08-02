@@ -1,4 +1,15 @@
 <%@ include file="../../scriplets/validationScriptlet.jsp"%>
+<%@page import="java.sql.*"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@page import="dbDAO.UserDAO"%>
+<%@page import="dbDAO.sqlPassword"%>
+<%
+String output ="";
+
+%>
+
+<%@ include file="../../scriplets/UserLoginValidation.jsp"%>
 <%
 String search = "";
 try{

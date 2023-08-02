@@ -28,7 +28,7 @@ try{
 	}
 	
 }catch(Exception x){
-	x.printStackTrace();
+	System.out.println(x);
 	
 }
 

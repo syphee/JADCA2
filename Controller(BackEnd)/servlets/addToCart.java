@@ -148,17 +148,14 @@ public class addToCart extends HttpServlet {
 		
 		if(hasBooks == true) {
 		try {
-					// if quick rent
-					if(isQuickRent.equals("true")) {
-						session.setAttribute("quick_rent",title);
-					}
+
 					
 					// if its just add to cart
 					// update new cart
-					else {
+					
 						shopping_cart.add(title);
 						session.setAttribute("shopping_cart",shopping_cart);
-					}
+					
 			
 		        	
 		        
@@ -180,7 +177,7 @@ public class addToCart extends HttpServlet {
 		        		String redirect = (request.getContextPath() + currentPage + "?c=success&m=" + output).toString();
 			        	response.sendRedirect(redirect);
 		        	}else {
-		        		String redirect = (request.getContextPath() + currentPage + "?c=success&m=" + output + "&search=" + search_query + "&genre=" + genre_query + "&author_query=" + author_query + "&sortBy=" + sort_query).toString();
+		        		String redirect = (request.getContextPath() + currentPage + "?c=success&m=" + output + "&s=" + search_query + "&genre=" + genre_query + "&author_query=" + author_query + "&sortBy=" + sort_query).toString();
 			        	response.sendRedirect(redirect);
 		        	}
 		        	
@@ -201,7 +198,7 @@ public class addToCart extends HttpServlet {
 		    	     		+ "</div>";
 		        	
 		        	out.print(message);  
-		        	String redirect = (request.getContextPath() + currentPage + "?c=failed&m=" + output).toString();
+		        	String redirect = (request.getContextPath() + currentPage + "?c=false&m=" + output).toString();
 		            response.sendRedirect(redirect);
 		        }
 	}

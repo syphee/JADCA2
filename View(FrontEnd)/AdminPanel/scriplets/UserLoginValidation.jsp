@@ -9,6 +9,7 @@ String pic = "";
 String first_name = "";
 String last_name = "";
 String contactNumber = "";
+String address = "";
 
 int userid = 0;
 
@@ -86,7 +87,7 @@ if (cookies != null && rememberMe == true) {
 			first_name = LoggedUserInformation.get("first_name");
 			last_name = LoggedUserInformation.get("last_name");
 			contactNumber = LoggedUserInformation.get("contact_number");
-			
+			address = LoggedUserInformation.get("address");
 			
 		} catch (Exception ex) {
 			System.out.println("login failed.");
@@ -127,6 +128,7 @@ if (cookies != null && rememberMe == true) {
 			first_name = LoggedUserInformation.get("first_name");
 			last_name = LoggedUserInformation.get("last_name");
 			contactNumber = LoggedUserInformation.get("contact_number");
+			address = LoggedUserInformation.get("address");
 
 			
 		}
@@ -154,7 +156,8 @@ if (cookies != null && rememberMe == true) {
 		String first_name = "";
 		String last_name = "";
 		String contactNumber = "";
-
+		String address = "";
+		
 		try {
 
 			// Step1: Load JDBC Driver
@@ -189,8 +192,9 @@ if (cookies != null && rememberMe == true) {
 				first_name = rs.getString("first_name");
 				last_name = rs.getString("last_name");
 				contactNumber = rs.getString("contact_number");
-
+				address = rs.getString("address");
 			}
+			
 			System.out.println("Username - " + user);
 			System.out.println("role - " + role);
 			System.out.println("ID - " + userid);
@@ -202,7 +206,7 @@ if (cookies != null && rememberMe == true) {
 			userDetails.put("first_name",first_name);
 			userDetails.put("last_name",last_name);
 			userDetails.put("contact_number",contactNumber);
-			
+			userDetails.put("address",address);
 			// Step 7: Close connection
 			conn.close();
 			return userDetails;

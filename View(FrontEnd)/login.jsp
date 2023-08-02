@@ -8,11 +8,14 @@
 <%
 // init cart function
 ArrayList<String> shopping_cart = new ArrayList<String>();
+ArrayList<String> recently_viewed = new ArrayList<String>();
 session.setAttribute("shopping_cart",shopping_cart);
+session.setAttribute("recently_viewed",shopping_cart);
 
 %>
 
 <%
+int userid = 0;
 // the automatic login feature
 // to check for cookies
 
@@ -41,18 +44,18 @@ if (cookies != null) {
     		System.out.println(cookie2.getName());
     		if(cookie2.getName().equals("session_id")){
     			String session_id = cookie2.getValue();
-    			Map<String, String> userDetails = UserDAO.loadSession(session_id);
+    			Map<String, Integer> userDetails = UserDAO.loadSession(session_id);
     			
     			// to query db about sesh id and link values
     			
-    				String username = userDetails.get("username");
+    				userid = userDetails.get("userid");
     				
-                    String role = userDetails.get("role");
-                if (username.isEmpty() != true || role.isEmpty() != true) {
-                    System.out.println("Current logged by cookie : " + username);
+
+                if (userid == 0 ) {
+                    System.out.println("Current logged by id : " + userid);
                     
-                    session.setAttribute("username",username);
-                    session.setAttribute("role",role);
+                    session.setAttribute("userid",userid);
+                    
                     
                     // then redirect
                     response.sendRedirect("home.jsp");

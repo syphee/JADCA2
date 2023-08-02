@@ -105,7 +105,7 @@ public class addItem extends HttpServlet {
 			hasBooks = false;
 		}
 
-		// search the cart for the same book , then delete and break out from loop;
+		// search the cart for the same book , then add and break out from loop;
 		if (hasBooks) {
 			for (String a : shopping_cart) {
 				if (a.equals(add_book)) {

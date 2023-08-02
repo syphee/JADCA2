@@ -1,6 +1,11 @@
 package dbDAO;
+import javax.servlet.http.Part;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
@@ -22,6 +27,9 @@ public class UserDAO {
 	
 	// change ur sql password here
 	final static String SQLpassword = sqlPassword.getSQLPassword();
+	
+	// book directory
+	final static String bookImgFolderDir = "D:\\Eclipse\\school work\\CA1\\CA1\\src\\main\\webapp\\BookstoreCA1\\JAD-CA1\\View(FrontEnd)\\assets\\user-imgs\\";
 	
 
 	// added in throws exception to catch database errors
@@ -277,18 +285,56 @@ public class UserDAO {
 		conn.close();
 	}
 	
+	private static String getFileName(Part part) {
+        String contentDisposition = part.getHeader("content-disposition");
+        String[] elements = contentDisposition.split(";");
+        for (String element : elements) {
+            if (element.trim().startsWith("filename")) {
+                return element.substring(element.indexOf('=') + 1).trim().replace("\"", "");
+            }
+        }
+        return "";
+    }
+	
 	// request map here
-	public static void editUser(String INPUT_id,String INPUT_role) throws Exception{
+	public static void editUser(String INPUT_id,String INPUT_email, Part user_pic, String user_first_name, String user_last_name, String user_contact, String user_address) throws Exception{
+		Part filePart = user_pic;
+		//process picture
+		 String fileName = getFileName(filePart); 
+	        System.out.println("Selected Picture : " + fileName);
+	        
+			String picture = fileName;
+			
+			// if has no picture input from user
+			if(picture.trim().isBlank()) {
+				picture = "default_cover.png";
+			}
+			
+			// Save the file to book-imgs folder
+	        File outputFile = new File(bookImgFolderDir + picture);
+	        System.out.println("BookDAO - File is being stored at directory : " + outputFile.getAbsolutePath());
+	        
+		
+	        try (InputStream inputStream = filePart.getInputStream()) {
+	            Files.copy(inputStream, outputFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+	        }
+		
 		String i = INPUT_id;
-		String USER_ROLE = "";
+		
+		
 		
 		int USER_ID = Integer.parseInt(i);
 		
-		if(INPUT_role.equals("admin") || INPUT_role.equals("user")){
-			USER_ROLE = INPUT_role;
-		}else {
-			throw new Exception("Input was not admin / user!");
-		}
+		
+		
+		String USER_EMAIL = INPUT_email;
+
+		Part USER_PIC = user_pic;
+		String USER_FIRST_NAME = user_first_name;
+		String USER_LAST_NAME = user_last_name;
+		String USER_CONTACT = user_contact;
+		String USER_ADDRESS = user_address;
+		
     	
     	Class.forName("com.mysql.jdbc.Driver");
 
@@ -300,13 +346,19 @@ public class UserDAO {
 		// Step 4: Create Statement object
 
 		// Call routine
-		String simpleProc = "{ call editUser(?,?) }";
+		String simpleProc = "{ call editUser(?,?,?,?,?,?,?) }";
 		CallableStatement cs = conn.prepareCall(simpleProc);
 
 		// insert book values
 		cs.setInt(1, USER_ID);
-		cs.setString(2, USER_ROLE);
 		
+		cs.setString(2, USER_EMAIL);
+
+		cs.setString(3, fileName);
+		cs.setString(4, USER_FIRST_NAME);
+		cs.setString(5, USER_LAST_NAME);
+		cs.setString(6, USER_CONTACT);
+		cs.setString(7, USER_ADDRESS);
 		
 		// Step 5: Execute SQL Command
 		//String sqlStr = "SELECT * FROM member";         
