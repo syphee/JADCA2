@@ -1,18 +1,20 @@
-<%@ include file="../../scriplets/validationScriptlet.jsp"%>
 
 <%@page import="java.sql.*"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="dbDAO.UserDAO"%>
 <%@page import="dbDAO.sqlPassword"%>
+<%@ include file="../../scriplets/AdminLoginValidation.jsp"%>
+<%@ include file="../../scriplets/validationScriptlet.jsp"%>
+<%@ include file="../../wrapper/wrapper1.jsp"%>
 <%
 String output ="";
 
 %>
 
-<%@ include file="../../scriplets/UserLoginValidation.jsp"%>
 
-<%@ include file="../../wrapper/wrapper1.jsp"%>
+
+
 <div>
 	<header>
 		<h1 class="fs-1">Add Book</h1>
