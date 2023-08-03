@@ -1,9 +1,10 @@
-package orderDAO;
+package model;
 
 import java.sql.*;
-import dbDAO.DBConnection;
 
-public class orderDetails {
+import model.DBConnection;
+
+public class OrderDAO {
     public int createOrder(int userid, float total) throws SQLException, ClassNotFoundException {
         int record = 0;
         int nrow = 0;

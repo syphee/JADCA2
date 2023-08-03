@@ -6,7 +6,7 @@
 	pageEncoding="UTF-8"%>
     <!--  imports here -->
 <%@page import="java.sql.*"%>
-<%@page import="dbDAO.sqlPassword"%>
+<%@page import="model.sqlPassword"%>
 
 <%	
 String user = "";

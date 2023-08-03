@@ -12,6 +12,11 @@ import com.paypal.base.rest.PayPalRESTException;
 public class ExecutePaymentServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
  
+    //after the user has clicked on the pay now button
+    //the orderDetails DAO will also be called and
+    //the orderDetails should be captured and saved
+    //to database
+    
     public ExecutePaymentServlet() {
     }
  

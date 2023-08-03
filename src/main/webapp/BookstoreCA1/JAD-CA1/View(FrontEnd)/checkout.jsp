@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="dbDAO.UserDAO"%>
-<%@page import="dbDAO.sqlPassword"%>
+<%@page import="model.UserDAO"%>
+<%@page import="model.sqlPassword"%>
 <%@page import="java.sql.*"%>
 
 <%
@@ -69,62 +69,6 @@ try {
 	href="/CA2/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/styles.css">
 <link rel="stylesheet"
 	href="/CA2/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/animations.css">
-	
-	<!-- test for styling then convert over into the other page -->
-	<style>
-    /* Styling for the table */
-    table {
-        width: 400px;
-        border-collapse: collapse;
-        margin: 20px;
-    }
-
-    th, td {
-        padding: 10px;
-        border-bottom: 1px solid #ddd;
-    }
-
-    th {
-        text-align: left;
-    }
-
-    /* Styling for the form */
-    form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 30px;
-    }
-
-    /* Styling for the input fields */
-    input[type="text"] {
-        width: 150px;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 14px;
-        color: black;
-    }
-
-    /* Styling for the submit button */
-    input[type="submit"] {
-        width: 150px;
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        background-color: #4CAF50;
-        color: white;
-        font-size: 16px;
-        cursor: pointer;
-        margin-top: 20px;
-    }
-
-    /* Styling for the total amount row */
-    .total-row {
-        font-weight: bold;
-    }
-</style>
-	
 	
 
 </head>

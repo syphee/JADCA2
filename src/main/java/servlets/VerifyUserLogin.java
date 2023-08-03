@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Cookie;
 
-// import userDAO class
-import dbDAO.UserDAO;
+import model.UserDAO;
+
+import javax.servlet.http.Cookie;
 
 /**
  * Servlet implementation class VerifyUser
@@ -147,6 +147,7 @@ public class VerifyUserLogin extends HttpServlet {
 
 				// the returned result from Database
 				Map<String, String> userDetails = UserDAO.VerifyLogin(loginid, password);
+				
 
 				// if there is content
 				if (userDetails.isEmpty() != true) {
@@ -155,7 +156,13 @@ public class VerifyUserLogin extends HttpServlet {
 					String username = userDetails.get("username");
 					role = userDetails.get("role");
 					String pic = userDetails.get("pic");
-
+					int id = Integer.parseInt(userDetails.get("userid"));
+					System.out.println(id);
+					
+					//when calling this as session.getAttribute("user_id")
+					//already converted to INT
+					
+					session.setAttribute("user_id", id );
 					session.setAttribute("username", username);
 					session.setAttribute("role", role);
 					session.setAttribute("pic", pic);
@@ -181,7 +188,7 @@ public class VerifyUserLogin extends HttpServlet {
 					// if wrong password input , userDAO will return a null object
 					output = "You have entered an invalid ID/Password";
 					response.sendRedirect(
-							request.getContextPath() + "/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=invalidLogin");
+					request.getContextPath() + "/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp?c=invalidLogin");
 					System.out.println(output);
 				}
 			} catch (IOException e) {
@@ -229,6 +236,8 @@ public class VerifyUserLogin extends HttpServlet {
 
 		Cookie session_id = new Cookie("session_id", INPUT_sessionid);
 		response.addCookie(session_id);
+		
+		
 
 		// then insert into sql db with these sesh, link user and role
 		UserDAO.saveSession(INPUT_sessionid, username, role);

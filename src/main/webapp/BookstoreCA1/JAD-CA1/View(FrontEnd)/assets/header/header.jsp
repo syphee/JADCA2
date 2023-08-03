@@ -31,6 +31,21 @@
 					class="nav-link text-black fw-semibold hover-underline-animation"
 					href="my_career.html">Popular</a></li>
 
+<% 
+if (role.equals("admin")) {
+%>
+<li class="nav-item mb-0 mx-1 my-0">
+    <a href="<%= request.getContextPath() %>/BookstoreCA1/JAD-CA1/View(FrontEnd)/SalesInquiry.jsp"
+        class="nav-link text-black fw-semibold hover-underline-animation">
+        Sales Inquiry
+    </a>
+</li>
+<%
+}
+%>
+
+					
+					
 			</ul>
 
 			<!-- Search bar -->
