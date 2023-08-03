@@ -2,9 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="dbDAO.UserDAO"%>
+<%@page import="model.UserDAO"%>
 <%@page import="java.sql.*"%>
-<%@page import="dbDAO.sqlPassword" %>
+<%@page import="model.sqlPassword" %>
 
 
 <%

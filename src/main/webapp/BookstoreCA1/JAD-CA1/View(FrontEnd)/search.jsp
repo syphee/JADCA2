@@ -5,7 +5,7 @@
 <!--  imports here -->
 <%@page import="java.sql.*"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="dbDAO.sqlPassword"%>
+<%@page import="model.sqlPassword"%>
 
 <%	
 String user = "";

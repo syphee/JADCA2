@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dbDAO.BookDAO;
+import model.BookDAO;
 
 /**
  * Servlet implementation class deleteBook

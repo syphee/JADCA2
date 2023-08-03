@@ -1,4 +1,4 @@
-package dbDAO;
+package model;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -39,7 +39,7 @@ public class UserDAO {
 		String password;
 		String role;
 		String pic;
-		int id;
+		String id;
 
 		// get users
 		try {
@@ -74,12 +74,15 @@ public class UserDAO {
 				password = rs.getString("password");
 				role = rs.getString("role");
 				pic = rs.getString("pic");
+				id= rs.getString("userid");
 
 				if (INPUT_id.equals(name) && INPUT_password.equals(password)) {
 					// store the values that match into hashmap, later to be returned
 					userDetails.put("username", name);
 					userDetails.put("role", role);
 					userDetails.put("pic", pic);
+					//convert to Int when (parseInt)session.getAttribute(userid);
+					userDetails.put("userid", id);
 
 					break;
 				}
@@ -490,7 +493,7 @@ public class UserDAO {
 	        // Retrieve the username or email from the session
 	        String username = (String) session.getAttribute("username");
 	        String email = (String) session.getAttribute("email");
-
+	        
 	        // Create a database connection
 
 	        
