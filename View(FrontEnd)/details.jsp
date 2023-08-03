@@ -13,14 +13,36 @@
 
 <%@ include file="../View(FrontEnd)/AdminPanel/scriplets/UserLoginValidation.jsp"%>
 
+
+<%
+//change ur sql password here
+	final String SQLpassword = sqlPassword.getSQLPassword();
+	
+%>
+
+<%
+ArrayList<String> shopping_cart = new ArrayList<String>();
+int PARSED_viewed_book = 0;
+
+
+try{
+	shopping_cart = (ArrayList<String>)session.getAttribute("shopping_cart");
+    
+    System.out.println("Shopping cart size : " + shopping_cart.size());
+
+}catch(Exception ex){
+    ex.printStackTrace();
+}
+
+%>
+
+
 <%
 
 
 String viewed_book = request.getParameter("view");
 ArrayList<String> recently_viewed = new ArrayList<String>();
 ArrayList<String> temp_array_cache = new ArrayList<String>();
-ArrayList<String> shopping_cart = new ArrayList<String>();
-int PARSED_viewed_book = 0;
 
 
 try{
@@ -65,11 +87,6 @@ if(recently_viewed.size() > 2){
 
 %>
 
-<%
-//change ur sql password here
-	final String SQLpassword = sqlPassword.getSQLPassword();
-	
-%>
 
 
 

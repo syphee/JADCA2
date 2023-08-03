@@ -10,7 +10,12 @@
 ArrayList<String> shopping_cart = new ArrayList<String>();
 ArrayList<String> recently_viewed = new ArrayList<String>();
 session.setAttribute("shopping_cart",shopping_cart);
-session.setAttribute("recently_viewed",shopping_cart);
+session.setAttribute("recently_viewed",recently_viewed);
+
+// the cause of 13 hours of my misery below 
+//session.setAttribute("ViewRecent",shopping_cart);
+
+
 
 %>
 
