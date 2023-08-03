@@ -39,6 +39,8 @@ try{
 			<h1 class="fs-1">Delete Book</h1>
 		</header>
 		<hr class="bg-secondary my-1 opacity-100">
+		<label>Search Query for : <%=search %></label>
+		
 		<form method="post" action="<%=request.getContextPath() %>/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel/Books/deleteBook/deleteBookFeature.jsp">
 			<input type="text" id="search"
 					placeholder="Search for book" name="search" aria-label="Username"

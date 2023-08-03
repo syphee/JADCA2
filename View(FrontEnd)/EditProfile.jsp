@@ -179,8 +179,9 @@ if(role.equals("Guest") ){
 		</form>
 		<!-- End of modal for edit profile -->
 
-		<form action="" method="post" class="row"
-			enctype="multipart/form-data">
+		<form action="<%=request.getContextPath() %>/changePassword" method="post" class="row"
+			>
+			<input type="hidden" name="user_id" value="<%=(Integer) session.getAttribute("userid") %>">
 			<div class="modal fade" id="changePassword" tabindex="-1"
 				aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
@@ -201,7 +202,7 @@ if(role.equals("Guest") ){
 									<div class="form-group">
 										<label for="firstName">Enter old Password</label> <input type="text"
 											class="form-control" id="InputFName"
-											placeholder="Enter old Password" value="">
+											placeholder="Enter old Password" name="old-password" value="">
 									</div>
 
 								</div>
@@ -209,7 +210,7 @@ if(role.equals("Guest") ){
 									<div class="form-group">
 										<label for="firstName">Enter New Password</label> <input type="text"
 											class="form-control" id="InputFName"
-											placeholder="Enter New Password" value="">
+											placeholder="Enter New Password" name="new-password" value="">
 									</div>
 
 								</div>
@@ -221,7 +222,7 @@ if(role.equals("Guest") ){
 										<label for="firstName">Confirm Password</label> <input
 											type="text" class="form-control" id="InputFName"
 											placeholder="Confirm Password"
-											value="">
+											value="" name="confirm-password">
 									</div>
 
 								</div>

@@ -20,6 +20,7 @@ String output ="";
 		<h1 class="fs-1">Add Book</h1>
 	</header>
 	<hr class="bg-secondary my-1 opacity-100">
+	
 
 	<div class="container col align-items-center">
 		<form action="<%= request.getContextPath()%>/addBook" name="form1"

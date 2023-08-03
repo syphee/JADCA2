@@ -12,27 +12,18 @@
 <%@page import="java.util.Map"%>
 
 <%@ include file="../View(FrontEnd)/AdminPanel/scriplets/UserLoginValidation.jsp"%>
-<%
-// init cart function
-ArrayList<String> shopping_cart = new ArrayList<String>();
-try{
-	shopping_cart = (ArrayList<String>)session.getAttribute("shopping_cart");
-}catch(Exception ex){
-	ex.printStackTrace();
-}
 
-
-
-%>
 <%
 
 String viewed_book = request.getParameter("view");
 ArrayList<String> recently_viewed = new ArrayList<String>();
 ArrayList<String> temp_array_cache = new ArrayList<String>();
+ArrayList<String> shopping_cart = new ArrayList<String>();
 int PARSED_viewed_book = 0;
 
 
 try{
+	shopping_cart = (ArrayList<String>)session.getAttribute("shopping_cart");
     recently_viewed = (ArrayList<String>) session.getAttribute("recently_viewed");
 }catch(Exception ex){
     ex.printStackTrace();

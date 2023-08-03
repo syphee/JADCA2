@@ -16,14 +16,39 @@ String output ="";
 
 <%
 String search = "";
+String sort_by = "";
+String with_Filter = "";
+
 try{
 	search = request.getParameter("search");
+	sort_by = request.getParameter("search-filter");
 	
 	// set search to blankspace upon page load
 	if(search == null){
 		search = "";
 	}
-	System.out.println("\nSearching for " + search + " in DELETEBOOK.jsp");
+	if(sort_by == "null"){
+		search = "";
+	}else{
+		switch(sort_by){
+			case("Sort-by"):{
+				with_Filter = "";
+			}
+			case("best-selling"):{
+				with_Filter = "";
+			}
+			case("least-selling"):{
+				with_Filter = "";
+			}
+			case("most-stock"):{
+				with_Filter = "order by quantity desc";	
+			}
+			case("least-stock"):{
+				with_Filter = "order by quantity asc";	
+			}
+		}
+	}
+	System.out.println("\nSearching for " + search + "and search filter " + sort_by +  " in DELETEBOOK.jsp");
 }catch(Exception ex){
 	ex.printStackTrace();
 }
@@ -39,6 +64,7 @@ try{
 		<h1 class="fs-1">Edit Book</h1>
 	</header>
 	<hr class="bg-secondary my-1 opacity-100">
+	<label>Search Query for : <%=search %></label>
 	<form method="post"
 		action="<%=request.getContextPath() %>/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel/Books/editBook/editBookFeature.jsp">
 		<input type="text" id="search" placeholder="Search for book"
@@ -46,10 +72,11 @@ try{
 
 		<select name="search-filter" class="btn btn-danger dropdown-toggle col-3"
 			form="search">
-			<option id="1" value="Sort by" selected>Sort By</option>
+			<option id="1" value="Sort-by" selected>Sort By</option>
 			<option id="2"  value="best-selling">Best Selling</option>
 			<option id="3"  value="least-selling">Least selling</option>
-
+			<option id="4"  value="most-stock">Most Stock</option>
+			<option id="4"  value="least-stock">Least Stock</option>
 		</select> <input type="submit">
 
 	</form>
@@ -158,7 +185,7 @@ try{
 										Statement stmt = conn.createStatement();
 										// Step 5: Execute SQL Command
 
-										String simpleProc = "call jadca1.selectBookByTitle(?);";
+										String simpleProc = "SELECT books.*, genres.name as genre from books right JOIN genres ON genres.genre_id = books.genre_id where books.book_id is not null and title LIKE CONCAT('%', ? , '%') order by quantity asc;" + with_Filter + " ;" ;
 										PreparedStatement pstmt = conn.prepareStatement(simpleProc);
 										
 										pstmt.setString(1,search);

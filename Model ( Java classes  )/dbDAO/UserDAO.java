@@ -187,11 +187,9 @@ public class UserDAO {
 		// validate if does exists , reject creation of new user
 		boolean doesExist = false;
 		
-		// declaration of hashmap
-		Map<String, String> userDetails = new HashMap<>();
-
+	
 		// login boolean validation
-		// boolean output = false;
+
 		ResultSet rs;
 		
 		// SELECT COUNT(*) AS count FROM users WHERE email = ? AND password = ? returns the number of rows that are the same when condition is met.
@@ -216,7 +214,7 @@ public class UserDAO {
 			// Step 4: Create Statement object
 			Statement stmt = conn.createStatement();
 			// Step 5: Execute SQL Command
-			String sqlStr = "SELECT COUNT(*) AS count FROM users WHERE email = ? AND password = ?";
+			String sqlStr = "SELECT COUNT(*) AS count FROM users WHERE userid = ? AND password = ?";
 			
 			//
 			PreparedStatement pstmt = conn.prepareStatement(sqlStr);
@@ -295,6 +293,75 @@ public class UserDAO {
         }
         return "";
     }
+	
+	public static void changePassword(String INPUT_id,String INPUT_old_password, String INPUT_new_password,String INPUT_confirm_password)throws Exception {
+		// to be parseint'ed
+		int user_id = Integer.parseInt(INPUT_id);
+		
+		String old_password = INPUT_old_password;
+		String new_password = INPUT_new_password;
+		String confirm_password = INPUT_confirm_password;
+		
+		System.out.println("USERDAO - Changing password of user id : " + user_id);
+		
+		
+		boolean doesMatch = false;
+		boolean hasVerified = false;
+		
+		//check if has inputs 
+		if(old_password == "" || new_password == "" || confirm_password == "") {
+			throw new Exception("Missing Fields!");
+		}else {
+			// verify if confirm password inputs are the same
+			if(new_password.equals(confirm_password)) {
+				doesMatch = true;
+			}else {
+				throw new Exception("New password and confirm password do not match!");
+			}
+		}
+		
+		
+		// check if input correct password
+		hasVerified = ValidateExists(INPUT_id,old_password);
+		System.out.println("UserDAO - User has inputted correct password : " + hasVerified);
+		
+		if(doesMatch == true && hasVerified == true) {
+			Class.forName("com.mysql.jdbc.Driver");
+
+			// Step 2: Define Connection URL
+			String connURL = "jdbc:mysql://localhost/jadca1?user=root&password="+ SQLpassword + "&serverTimezone=UTC";
+
+			// Step 3: Establish connection to URL
+			Connection conn = DriverManager.getConnection(connURL);
+			// Step 4: Create Statement object
+
+			// Call routine
+			String simpleProc = "update users set password = ? where userid = ?";
+			PreparedStatement cs = conn.prepareStatement(simpleProc);
+
+			// insert book values
+			cs.setString(1,new_password);
+			
+			cs.setInt(2, user_id);
+
+			
+			// Step 5: Execute SQL Command
+			//String sqlStr = "SELECT * FROM member";         
+			
+			
+			
+			int affectedRows = cs.executeUpdate();
+			System.out.println("USERDAO - " + affectedRows + " row(s) found successfully.");
+			
+			
+			// Step 7: Close connection
+			conn.close();
+		}else {
+			throw new Exception("Incorrect Password!");
+		}
+		
+		
+	}
 	
 	// request map here
 	public static void editUser(String INPUT_id,String INPUT_email, Part user_pic, String user_first_name, String user_last_name, String user_contact, String user_address) throws Exception{

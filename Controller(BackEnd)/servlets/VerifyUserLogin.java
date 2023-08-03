@@ -56,6 +56,7 @@ public class VerifyUserLogin extends HttpServlet {
 		// if username / password is null, expression tag displayed in home.jsp will be
 		// "Guest", else it will follow the user's login details
 		HttpSession session = request.getSession();
+		
 
 		// to call class verification
 		String loginid = request.getParameter("loginid");
