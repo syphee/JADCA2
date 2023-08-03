@@ -273,24 +273,48 @@ try{
             <div class="d-flex align-items-end flex-column col">
                 
             </div>
-            <div class="d-flex align-items-end flex-column col">
-                <div class="row">
-                    Subtotal
-                </div>
-                <div class="row">
-                    Tax (%8)
-                </div>
-                <div class="row">
-                    Shipping
-                </div>
-                <div class="row">
-                    Grand Total ( No Tax )
-                </div>
-                <div class="row">
-                    Grand Total 
-                </div>
+            <div class="d-flex align-items-start flex-column col">
+            
+            	<form action="<%=request.getContextPath() %>/AuthorizePaymentServlet" method="post">
+			    <table>
+			    
+			            <tr>
+			            <td>Payment Summary:</td>
+			            <td><input type="hidden" name="product" value="Book Order" /></td>
+			        </tr>
+			    
+			        <tr>
+			            <td>Sub Total:</td>
+			            <td><input type="text" name="subtotal" readonly value="<%=total %>" style="color: black;" /></td>
+			        </tr>
+			        <tr>
+			            <td>Shipping:</td>
+			            <td><input type="text" name="shipping" readonly value="<%=delivery_fee %>" style="color: black;" /></td>
+			        </tr>    
+			        <tr>
+			            <td>Tax:</td>
+			            <td><input type="text" name="tax" readonly value="<%=total * 0.08 %>" style="color: black;" /></td>
+			        </tr>    
+			        <tr>
+			            <td>Total Amount:</td>
+			            <td><input type="text" name="total" readonly value="<%=total + (total * 0.08) + delivery_fee %>" style="color: black;" /></td>
+			        </tr>
+			    </table>
+
+
+       
+                
+                
+<%--                     <form method="post" action="<%=request.getContextPath()%>/bookPayment">
+ --%>            			
+ 					<input type="submit" class="btn btn-danger" value="Pay with PayPal">
+         		</form>
+            
+            
             </div>
-            <div class="d-flex align-items-center flex-column col">
+            
+            
+            <!--  <div class="d-flex align-items-center flex-column col">
                 <div class="row">
                     <%=total %>
                 </div>
@@ -313,7 +337,11 @@ try{
             		</form>
                 </div>
                
-            </div>
+            </div>-->
+            
+            
+            
+            
         </div>
         
 

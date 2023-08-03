@@ -15,6 +15,7 @@
 
 <%
 
+
 String viewed_book = request.getParameter("view");
 ArrayList<String> recently_viewed = new ArrayList<String>();
 ArrayList<String> temp_array_cache = new ArrayList<String>();
@@ -25,13 +26,16 @@ int PARSED_viewed_book = 0;
 try{
 	shopping_cart = (ArrayList<String>)session.getAttribute("shopping_cart");
     recently_viewed = (ArrayList<String>) session.getAttribute("recently_viewed");
+    
+    System.out.println("Shopping cart size : " + shopping_cart.size());
+
 }catch(Exception ex){
     ex.printStackTrace();
 }
 
 // max to display is 3, this is adjustable
 if(recently_viewed.size() > 2){
-
+	
     // remove last index before pushing
     recently_viewed.remove(recently_viewed.size()-1);
 

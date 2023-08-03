@@ -89,7 +89,7 @@ public class InvalidateSession extends HttpServlet {
 		session = request.getSession(false);
 
 		// response.getWriter().println("Session : " + session);
-		response.sendRedirect("/../../../../CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp");
+		response.sendRedirect(request.getContextPath() + "/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp");
 	}
 
 }

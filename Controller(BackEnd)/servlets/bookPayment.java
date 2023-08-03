@@ -55,7 +55,7 @@ public class bookPayment extends HttpServlet {
 	    		shopping_cart = new ArrayList<String>();
 	    		session.setAttribute("shopping_cart",shopping_cart);
 	    		
-	    		String message = "Thank you for using SP ARK Rental system!";
+	    		String message = "Thank you for purchasing!";
 
 	    		
 	    		response.sendRedirect(request.getContextPath()+"/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp"+ "?c=success&m=" + message );
