@@ -120,7 +120,7 @@ String output = "";
 				%>
 
 				<form class="form form-login"
-					action="<%=request.getContextPath()%>/editUser" method="post"
+					action="<%=request.getContextPath()%>/editUserInformation" method="post"
 					>
 
 					<tr class="row">
@@ -130,7 +130,7 @@ String output = "";
 							style="max-width: 100px;" /></td>
 							<td class="col"><%=edit_user_id %></td>
 
-						<td class="col"><input type="text" id="custId" name="email"
+						<td class="col"><input type="text" id="custId" name="user_email"
 							value="<%=edit_email%>" disabled></td>
 						<td class="col">
 							  <div class="form-check">
@@ -138,7 +138,7 @@ String output = "";
 							  <%
 							  if(edit_user_role.equals("admin")){
 							  %>
-                                <input class="form-check-input" type="radio" name="userRole" value="admin" id="flexRadioDefault1" checked>
+                                <input class="form-check-input" type="radio" name="user_role" value="admin" id="flexRadioDefault1" checked>
                                 <label class="form-check-label" for="flexRadioDefault1">
                                   Admin
                                 </label>
@@ -154,13 +154,13 @@ String output = "";
                               <%
                               if(edit_user_role.equals("user")){
 							  %>
-                                <input class="form-check-input" type="radio" name="userRole" value="admin" id="flexRadioDefault1">
+                                <input class="form-check-input" type="radio" name="user_role" value="admin" id="flexRadioDefault1">
                                 <label class="form-check-label" for="flexRadioDefault1">
                                   Admin
                                 </label>
                               </div>
                               <div class="form-check">
-                                <input class="form-check-input" type="radio" name="userRole" value="user"  id="flexRadioDefault2" checked>
+                                <input class="form-check-input" type="radio" name="user_role" value="user"  id="flexRadioDefault2" checked>
                                 <label class="form-check-label" for="flexRadioDefault2">
                                   User
                                 </label>
@@ -169,16 +169,16 @@ String output = "";
                               
                               
 						</td>
-						<td class="col"><input type="text" id="custId" name="email"
+						<td class="col"><input type="text" id="custId" name="user_first_name"
 							value="<%=edit_first_name%>" ></td>
 						
-						<td class="col"><input type="text" id="custId" name="email"
+						<td class="col"><input type="text" id="custId" name="user_last_name"
 							value="<%=edit_last_name%>" ></td>
 						
-						<td class="col"><input type="text" id="custId" name="email"
+						<td class="col"><input type="text" id="custId" name="user_contact"
 							value="<%=edit_contact_number%>"></td>
 						
-						<td class="col"><input type="text" id="custId" name="email"
+						<td class="col"><input type="text" id="custId" name="user_address"
 							value="<%=edit_address%>"></td>
 						
 

@@ -364,7 +364,7 @@ public class UserDAO {
 	}
 	
 	// request map here
-	public static void editUser(String INPUT_id,String INPUT_email, Part user_pic, String user_first_name, String user_last_name, String user_contact, String user_address) throws Exception{
+	public static void editProfile(String INPUT_id,String INPUT_email, Part user_pic, String user_first_name, String user_last_name, String user_contact, String user_address) throws Exception{
 		Part filePart = user_pic;
 		//process picture
 		 String fileName = getFileName(filePart); 
@@ -401,44 +401,106 @@ public class UserDAO {
 		String USER_LAST_NAME = user_last_name;
 		String USER_CONTACT = user_contact;
 		String USER_ADDRESS = user_address;
+
 		
+
+    		Class.forName("com.mysql.jdbc.Driver");
+
+    		// Step 2: Define Connection URL
+    		String connURL = "jdbc:mysql://localhost/jadca1?user=root&password="+ SQLpassword + "&serverTimezone=UTC";
+
+    		// Step 3: Establish connection to URL
+    		Connection conn = DriverManager.getConnection(connURL);
+    		// Step 4: Create Statement object
+
+    		// Call routine
+    		String simpleProc = "{ call editUser(?,?,?,?,?,?,?) }";
+    		CallableStatement cs = conn.prepareCall(simpleProc);
+
+    		// insert book values
+    		cs.setInt(1, USER_ID);
+    		
+    		cs.setString(2, USER_EMAIL);
+
+    		cs.setString(3, fileName);
+    		cs.setString(4, USER_FIRST_NAME);
+    		cs.setString(5, USER_LAST_NAME);
+    		cs.setString(6, USER_CONTACT);
+    		cs.setString(7, USER_ADDRESS);
+    		
+    		// Step 5: Execute SQL Command
+    		//String sqlStr = "SELECT * FROM member";         
+    		
+    		
+    		
+    		int affectedRows = cs.executeUpdate();
+    		System.out.println("USERDAO - " + affectedRows + " row(s) deleted successfully.");
+    		
+    		
+    		// Step 7: Close connection
+    		conn.close();
+    	}
     	
-    	Class.forName("com.mysql.jdbc.Driver");
+	
+	public static void editUser(String INPUT_id,String INPUT_email, String user_first_name, String user_last_name, String user_contact, String user_address,String user_role) throws Exception{
 
-		// Step 2: Define Connection URL
-		String connURL = "jdbc:mysql://localhost/jadca1?user=root&password="+ SQLpassword + "&serverTimezone=UTC";
+		
+		String i = INPUT_id;
+		
+		
+		
+		int USER_ID = Integer.parseInt(i);
+		
+		
+		
+		String USER_EMAIL = INPUT_email;
 
-		// Step 3: Establish connection to URL
-		Connection conn = DriverManager.getConnection(connURL);
-		// Step 4: Create Statement object
 
-		// Call routine
-		String simpleProc = "{ call editUser(?,?,?,?,?,?,?) }";
-		CallableStatement cs = conn.prepareCall(simpleProc);
+		String USER_FIRST_NAME = user_first_name;
+		String USER_LAST_NAME = user_last_name;
+		String USER_CONTACT = user_contact;
+		String USER_ADDRESS = user_address;
+		String USER_ROLE = user_role;
+		
+    
+    		Class.forName("com.mysql.jdbc.Driver");
 
-		// insert book values
-		cs.setInt(1, USER_ID);
-		
-		cs.setString(2, USER_EMAIL);
+    		// Step 2: Define Connection URL
+    		String connURL = "jdbc:mysql://localhost/jadca1?user=root&password="+ SQLpassword + "&serverTimezone=UTC";
 
-		cs.setString(3, fileName);
-		cs.setString(4, USER_FIRST_NAME);
-		cs.setString(5, USER_LAST_NAME);
-		cs.setString(6, USER_CONTACT);
-		cs.setString(7, USER_ADDRESS);
-		
-		// Step 5: Execute SQL Command
-		//String sqlStr = "SELECT * FROM member";         
-		
-		
-		
-		int affectedRows = cs.executeUpdate();
-		System.out.println("USERDAO - " + affectedRows + " row(s) deleted successfully.");
-		
-		
-		// Step 7: Close connection
-		conn.close();
-	}
+    		// Step 3: Establish connection to URL
+    		Connection conn = DriverManager.getConnection(connURL);
+    		// Step 4: Create Statement object
+
+    		// Call routine
+    		String simpleProc = "{ call editUserWithRole(?,?,?,?,?,?,?,?) }";
+    		CallableStatement cs = conn.prepareCall(simpleProc);
+
+    		// insert book values
+    		cs.setInt(1, USER_ID);
+    		
+    		cs.setString(2, USER_EMAIL);
+
+    	
+    		cs.setString(3, USER_FIRST_NAME);
+    		cs.setString(4, USER_LAST_NAME);
+    		cs.setString(5, USER_CONTACT);
+    		cs.setString(6, USER_ADDRESS);
+    		cs.setString(7, USER_ROLE);
+    		// Step 5: Execute SQL Command
+    		//String sqlStr = "SELECT * FROM member";         
+    		
+    		
+    		
+    		int affectedRows = cs.executeUpdate();
+    		System.out.println("USERDAO - " + affectedRows + " row(s) deleted successfully.");
+    		
+    		
+    		// Step 7: Close connection
+    		conn.close();
+    	}
+    	
+	
 	public static void saveSession(String session_id,int INPUT_userid) throws Exception {
 			
 			
