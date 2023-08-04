@@ -144,7 +144,7 @@ String output = "";
                                 </label>
                               </div>
                               <div class="form-check">
-                                <input class="form-check-input" type="radio" name="userRole" value="user"  id="flexRadioDefault2" >
+                                <input class="form-check-input" type="radio" name="user_role" value="user"  id="flexRadioDefault2" >
                                 <label class="form-check-label" for="flexRadioDefault2">
                                   User
                                 </label>

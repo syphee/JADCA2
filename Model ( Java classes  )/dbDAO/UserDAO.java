@@ -442,7 +442,7 @@ public class UserDAO {
     	}
     	
 	
-	public static void editUser(String INPUT_id,String INPUT_email, String user_first_name, String user_last_name, String user_contact, String user_address,String user_role) throws Exception{
+	public static void editUser(String INPUT_id, String user_first_name, String user_last_name, String user_contact, String user_address,String user_role) throws Exception{
 
 		
 		String i = INPUT_id;
@@ -453,7 +453,7 @@ public class UserDAO {
 		
 		
 		
-		String USER_EMAIL = INPUT_email;
+		
 
 
 		String USER_FIRST_NAME = user_first_name;
@@ -473,20 +473,20 @@ public class UserDAO {
     		// Step 4: Create Statement object
 
     		// Call routine
-    		String simpleProc = "{ call editUserWithRole(?,?,?,?,?,?,?,?) }";
+    		String simpleProc = "{ call editUserWithRole(?,?,?,?,?,?) }";
     		CallableStatement cs = conn.prepareCall(simpleProc);
 
     		// insert book values
     		cs.setInt(1, USER_ID);
     		
-    		cs.setString(2, USER_EMAIL);
+    	
 
     	
-    		cs.setString(3, USER_FIRST_NAME);
-    		cs.setString(4, USER_LAST_NAME);
-    		cs.setString(5, USER_CONTACT);
-    		cs.setString(6, USER_ADDRESS);
-    		cs.setString(7, USER_ROLE);
+    		cs.setString(2, USER_FIRST_NAME);
+    		cs.setString(3, USER_LAST_NAME);
+    		cs.setString(4, USER_CONTACT);
+    		cs.setString(5, USER_ADDRESS);
+    		cs.setString(6, USER_ROLE);
     		// Step 5: Execute SQL Command
     		//String sqlStr = "SELECT * FROM member";         
     		

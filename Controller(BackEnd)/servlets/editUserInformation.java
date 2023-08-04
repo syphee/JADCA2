@@ -42,7 +42,6 @@ public class editUserInformation extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
 
 		String user_id = request.getParameter("user_id");
 		 
@@ -95,7 +94,7 @@ public class editUserInformation extends HttpServlet {
 			// retrieval of info
 			 
 			 
-			 UserDAO.editUser(user_id,user_email,user_first_name,user_last_name,user_contact,user_address,user_role);
+			 UserDAO.editUser(user_id,user_first_name,user_last_name,user_contact,user_address,user_role);
 			 
 			//String output = "Added book successfully!";
 	        	String output2 = "Editted user with user ID :" + user_id + " successfully!";
@@ -108,17 +107,11 @@ public class editUserInformation extends HttpServlet {
 	    	     		+ output2 + "\r\n"
 	    	     		+ "  <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>\r\n"
 	    	     		+ "</div>";
+	        	
+	        	
 	        	out.print(message);  
-	        	
-	        	
-	        	if(currentPage.equals("/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel/Users/editUser/editUserFeature.jsp")) {
-	        		RequestDispatcher rd=request.getRequestDispatcher("/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel/Users/editUser/editUserFeature.jsp");  
-		            rd.include(request, response);  
-	        	}else {
-	        		String output = "Successfully editted profile!";
-	        		String redirect = (request.getContextPath() + currentPage + "?c=success&m=" + output).toString();
-	        		response.sendRedirect(redirect);
-	        	}
+	            RequestDispatcher rd=request.getRequestDispatcher("/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel/Users/editUser/editUserFeature.jsp");  
+	            rd.include(request, response);  
 	            
 			 
 		}catch(Exception ex) {
@@ -138,17 +131,11 @@ public class editUserInformation extends HttpServlet {
     	     		+ output + "\r\n"
     	     		+ "  <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>\r\n"
     	     		+ "</div>";
-        	
+
         	out.print(message);  
-        	
-        	if(currentPage.equals("/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel/Users/editUser/editUserFeature.jsp")) {
-        		RequestDispatcher rd=request.getRequestDispatcher("/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel/Users/editUser/editUserFeature.jsp");  
-	            rd.include(request, response);  
-        	}else {
-        		String output2 = "Edit profile failed! Reason : " + ex;
-        		String redirect = (request.getContextPath() + currentPage + "?c=false&m=" + output2).toString();
-        		response.sendRedirect(redirect);
-        	}
+            RequestDispatcher rd=request.getRequestDispatcher("/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel/Users/editUser/editUserFeature.jsp");  
+            rd.include(request, response);  
+            
 		}
 	}
 
