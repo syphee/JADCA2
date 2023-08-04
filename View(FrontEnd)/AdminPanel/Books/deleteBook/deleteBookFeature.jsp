@@ -13,17 +13,56 @@ String output ="";
 %>
 
 
+
 <%
 String search = "";
+String sort_by = "";
+String SQLFilter = "";
+
 try{
 	search = request.getParameter("search");
+	sort_by = request.getParameter("search_filter");
 	
 	// set search to blankspace upon page load
-	
 	if(search == null){
 		search = "";
 	}
-	System.out.println("\nSearching for " + search + " in DELETEBOOK.jsp");
+	if(sort_by == null){
+		sort_by = "";
+	}else{
+		switch(sort_by){
+			case("Sort-by"):{
+				SQLFilter = "";
+				sort_by = "";
+				break;
+			}
+			case("best-selling"):{
+				SQLFilter = "";
+				sort_by = "Best selling";
+				break;
+			}
+			case("least-selling"):{
+				SQLFilter = "";
+				sort_by = "Least selling";
+				break;
+			}
+			case("most-stock"):{
+				SQLFilter = "order by quantity desc";	
+				sort_by = "Most stock";
+				break;
+			}
+			case("least-stock"):{
+				SQLFilter = "order by quantity asc";
+				sort_by = "Least stock";
+				break;
+			}
+			default:{
+				SQLFilter = "";
+				break;
+			}
+		}
+	}
+	System.out.println("\nSearching for " + search + " and search filter " + sort_by +  " in DELETEBOOK.jsp");
 }catch(Exception ex){
 	ex.printStackTrace();
 }
@@ -39,18 +78,25 @@ try{
 			<h1 class="fs-1">Delete Book</h1>
 		</header>
 		<hr class="bg-secondary my-1 opacity-100">
-		<label>Search Query for : <%=search %></label>
+		<label>Search Query for : <%=search %> <%if(sort_by.isEmpty() != true){
+		%>
 		
+		and filter : <%=sort_by %>
+	
+	<%} %>
+	</label>
 		<form method="post" action="<%=request.getContextPath() %>/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel/Books/deleteBook/deleteBookFeature.jsp">
 			<input type="text" id="search"
 					placeholder="Search for book" name="search" aria-label="Username"
 					aria-describedby="basic-addon1">
 			
-			<select name="search-filter" class="btn btn-danger dropdown-toggle col-3"
-			form="search">
-			<option id="1" value="Sort by" selected>Sort By</option>
+			<select name="search_filter" class="btn btn-danger dropdown-toggle col-3"
+			>
+			<option id="1" value="Sort-by" selected>Sort By</option>
 			<option id="2"  value="best-selling">Best Selling</option>
 			<option id="3"  value="least-selling">Least selling</option>
+			<option id="4"  value="most-stock">Most Stock</option>
+			<option id="4"  value="least-stock">Least Stock</option>
 
 		</select> <input type="submit">
 		
@@ -76,62 +122,66 @@ try{
 
 				<!-- scriplet here -->
 				<%
-                        // to retrieve all genres from DB
-                        try {
-                        	// get search query
-	
-								// Step1: Load JDBC Driver
-								Class.forName("com.mysql.jdbc.Driver");
-					
-								// Step 2: Define Connection URL
-								// to change password whenever accessing
-								String connURL = "jdbc:mysql://localhost/jadca1?user=root&password="+ SQLpassword + "&serverTimezone=UTC";
-								
-								ResultSet rs;
-								String title ="";
-								String author = "";
-								double price = 0;
-								String date = "";
-								String isbn = "";
-								String genre = "";
-								String pictureURI = "";
-								double rating = 0;
-								String description = "";
-								
-								String contextPath = request.getContextPath();
-												
-								
-								// to display all
-								output = "";
-					
-								// Step 3: Establish connection to URL
-								Connection conn = DriverManager.getConnection(connURL);
-								// Step 4: Create Statement object
-								Statement stmt = conn.createStatement();
-								// Step 5: Execute SQL Command
-								
-								String simpleProc = "call jadca1.selectBookByTitle(?);";
-								PreparedStatement pstmt = conn.prepareStatement(simpleProc);
-								
-								pstmt.setString(1,search);
-								
-								// execute query
-								rs = pstmt.executeQuery();
-					
-								while (rs.next()) {
-									
-									
-									pictureURI = rs.getString("pic");
-									title = rs.getString("title");
-									author = rs.getString("author");
-									price = rs.getDouble("price");
-									date = rs.getString("publication_date");
-									genre = rs.getString("genre");
-									isbn = rs.getString("ISBN");
-									rating = rs.getDouble("rating");
-									description = rs.getString("description");
-									
-									
+									// to retrieve all genres from DB
+									try {
+
+										// Step1: Load JDBC Driver
+										Class.forName("com.mysql.jdbc.Driver");
+
+										// Step 2: Define Connection URL
+										// to change password whenever accessing
+										String connURL = "jdbc:mysql://localhost/jadca1?user=root&password=" + SQLpassword + "&serverTimezone=UTC";
+
+										ResultSet rs;
+										String title = "";
+										String author = "";
+										double price = 0;
+										String date = "";
+										String isbn = "";
+										String genre = "";
+										String pictureURI = "";
+										double rating = 0;
+										String description = "";
+										int genre_id = 0;
+										int book_id = 0;
+										int quantity = 0;
+
+										String contextPath = request.getContextPath();
+
+										// to display all
+										output = "";
+
+										// Step 3: Establish connection to URL
+										Connection conn = DriverManager.getConnection(connURL);
+										// Step 4: Create Statement object
+										Statement stmt = conn.createStatement();
+										// Step 5: Execute SQL Command
+
+										
+										
+										String simpleProc = "SELECT books.*, genres.name as genre from books right JOIN genres ON genres.genre_id = books.genre_id where books.book_id is not null and title LIKE CONCAT('%', ? , '%') " + SQLFilter + " ;" ;
+										System.out.println("Final SQL Statement : " + simpleProc);
+										
+										PreparedStatement pstmt = conn.prepareStatement(simpleProc);
+										
+										pstmt.setString(1,search);
+										// execute query
+										rs = pstmt.executeQuery();
+
+										while (rs.next()) {
+
+											pictureURI = rs.getString("pic");
+											title = rs.getString("title");
+											author = rs.getString("author");
+											price = rs.getDouble("price");
+											date = rs.getString("publication_date");
+											genre = rs.getString("genre");
+											isbn = rs.getString("ISBN");
+											rating = rs.getDouble("rating");
+											description = rs.getString("description");
+											genre_id = rs.getInt("genre_id");
+											book_id = rs.getInt("book_id");
+											quantity = rs.getInt("quantity");
 									%>
 
 				<tr class="row">

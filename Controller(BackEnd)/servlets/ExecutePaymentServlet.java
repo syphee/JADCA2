@@ -2,6 +2,8 @@ package servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,8 +37,14 @@ public class ExecutePaymentServlet extends HttpServlet {
         String paymentId = request.getParameter("paymentId");
         String payerId = request.getParameter("PayerID");
         int userid = 0;
+        
+        HashMap<String,Integer> book_list = new HashMap<String,Integer>();
+
         try {
+        	book_list = (HashMap<String,Integer>) session.getAttribute("book_list");
         	userid = (Integer) session.getAttribute("userid");
+        	
+        	
         	System.out.println("Payment recieved with userid : " + userid);
         	
             PaymentServices paymentServices = new PaymentServices();
@@ -53,7 +61,7 @@ public class ExecutePaymentServlet extends HttpServlet {
 
             float TotalAmount = Float.parseFloat(transaction.getAmount().getTotal());
             
-            int orderID = Orders.createOrder(userid,TotalAmount);
+            int orderID = Orders.createOrder(userid,TotalAmount,book_list);
             
             System.out.println("ExecutePaymentServlet - Order ID Captured : " + orderID);
             

@@ -22,7 +22,7 @@ import dbDAO.UserDAO;
         fileSizeThreshold   = 1024 * 1024 * 1,  // 1 MB
         maxFileSize         = 1024 * 1024 * 10, // 10 MB
         maxRequestSize      = 1024 * 1024 * 15, // 15 MB
-        location            = "D:\\Eclipse\\school work\\CA1\\CA1\\src\\main\\webapp\\BookstoreCA1\\JAD-CA1\\View(FrontEnd)\\assets\\user-imgs"
+        location            = "D:\\Eclipse\\school work\\CA2\\jadca2\\jadca2\\src\\main\\webapp\\BookstoreCA1\\JAD-CA1\\View(FrontEnd)\\assets\\user-imgs"
 )
 public class editUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;

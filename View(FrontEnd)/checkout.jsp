@@ -45,6 +45,11 @@ if(shopping_cart.size() < 1){
 		}
 	}
 	
+	// then set the list to be sent after payment is successful
+	session.setAttribute("book_list", book_quantity);
+	
+	
+	
 }
 
 %>

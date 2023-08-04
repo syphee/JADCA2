@@ -49,12 +49,18 @@ String output = "";
 		<table class="table border col">
 			<thead>
 				<tr class="row">
-					<td class="col">Picture</td>
+					<td class="col" >Picture</td>
 					<td class="col">User ID</td>
 
 					<td class="col">Email</td>
 					<td class="col">Role</td>
-					<td class="col"></td>
+					<td class="col">First Name</td>
+					<td class="col">Last Name</td>
+					<td class="col">Contact Number</td>
+					<td class="col">Address</td>
+					<td class="col">
+
+
 
 					<!-- to add statistics of book rentals here in the future, will need to rework on SQL table -->
 				</tr>
@@ -68,6 +74,10 @@ String output = "";
 				String edit_email = "";
 				String edit_user_role = "";
 				String edit_user_pic = "";
+				String edit_first_name = "";
+				String edit_last_name = "";
+				String edit_contact_number = "";
+				String edit_address = "";
 				// to retrieve all genres from DB
 				try {
 
@@ -103,6 +113,10 @@ String output = "";
 						edit_email = rs2.getString("email");
 						edit_user_role = rs2.getString("role");
 						edit_user_pic = rs2.getString("pic");
+						edit_first_name = rs2.getString("first_name");
+						edit_last_name = rs2.getString("last_name");
+						edit_contact_number = rs2.getString("contact_number");
+						edit_address = rs2.getString("address");
 				%>
 
 				<form class="form form-login"
@@ -155,6 +169,17 @@ String output = "";
                               
                               
 						</td>
+						<td class="col"><input type="text" id="custId" name="email"
+							value="<%=edit_first_name%>" ></td>
+						
+						<td class="col"><input type="text" id="custId" name="email"
+							value="<%=edit_last_name%>" ></td>
+						
+						<td class="col"><input type="text" id="custId" name="email"
+							value="<%=edit_contact_number%>"></td>
+						
+						<td class="col"><input type="text" id="custId" name="email"
+							value="<%=edit_address%>"></td>
 						
 
 						<td class="col">
