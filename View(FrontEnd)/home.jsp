@@ -62,9 +62,9 @@ if (shopping_cart == null ) {
 
 
 <link rel="stylesheet"
-	href="/CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/styles.css">
+	href="/jadca2_jadca2/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/styles.css">
 <link rel="stylesheet"
-	href="/CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/animations.css">
+	href="/jadca2_jadca2/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/animations.css">
 
 </head>
 <body class="bg-black" style="overflow-y: auto;">

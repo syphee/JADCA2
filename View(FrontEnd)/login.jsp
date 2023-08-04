@@ -87,7 +87,7 @@ if (cookies != null) {
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link rel="stylesheet" type="text/css" href="/CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/login.css" />
+<link rel="stylesheet" type="text/css" href="/jadca2_jadca2/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/login.css" />
 
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
@@ -96,7 +96,12 @@ if (cookies != null) {
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 	
 <link rel="stylesheet"
+<<<<<<< Updated upstream
 	href="/CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/styles.css">
+=======
+	href= "/jadca2_jadca2/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/styles.css">
+	
+>>>>>>> Stashed changes
 <link rel="stylesheet"
 	href="/CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/animations.css">
 

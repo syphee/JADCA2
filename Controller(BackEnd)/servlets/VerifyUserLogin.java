@@ -103,7 +103,7 @@ public class VerifyUserLogin extends HttpServlet {
 					loginid = "Guest";
 					role = "Guest";
 					
-					int userid =0;
+					int userid = 0;
 					session.setAttribute("userid", userid);
 
 					session.setAttribute("username", "Guest");
