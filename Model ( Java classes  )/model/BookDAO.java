@@ -1,4 +1,4 @@
-package dbDAO;
+package model;
 
 import java.io.File;
 import java.io.InputStream;
@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.text.SimpleDateFormat;  
 
 import javax.servlet.http.Part;
+
 import java.util.HashMap;
 import java.util.Map;
 

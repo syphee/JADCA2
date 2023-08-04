@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Cookie;
 
-// import userDAO class
-import dbDAO.UserDAO;
+import model.UserDAO;
+
+import javax.servlet.http.Cookie;
 
 /**
  * Servlet implementation class VerifyUser

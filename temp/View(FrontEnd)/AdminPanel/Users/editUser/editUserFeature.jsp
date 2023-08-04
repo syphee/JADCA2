@@ -1,8 +1,8 @@
 <%@page import="java.sql.*"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
-<%@page import="dbDAO.UserDAO"%>
-<%@page import="dbDAO.sqlPassword"%>
+<%@page import="model.UserDAO"%>
+<%@page import="model.sqlPassword"%>
 <%@ include file="../../scriplets/AdminLoginValidation.jsp"%>
 <%@ include file="../../scriplets/validationScriptlet.jsp"%>
 <%@ include file="../../wrapper/wrapper1.jsp"%>

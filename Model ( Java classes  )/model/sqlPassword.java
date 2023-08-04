@@ -1,4 +1,4 @@
-package dbDAO;
+package model;
 
 public class sqlPassword {
 	static String SQLPass = "Minecrafr@09";

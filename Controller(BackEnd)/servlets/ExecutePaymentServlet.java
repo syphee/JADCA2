@@ -12,7 +12,7 @@ import javax.servlet.http.*;
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.PayPalRESTException;
 
-import orderDAO.OrderDAO;
+import model.OrderDAO;
 
 import javax.servlet.http.HttpSession;
  

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
-<%@page import="dbDAO.UserDAO"%>
+<%@page import="model.UserDAO"%>
 <%@page import="java.util.ArrayList"%>
 
 <%

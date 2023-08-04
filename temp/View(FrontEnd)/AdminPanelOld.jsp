@@ -3,8 +3,8 @@
 <%@page import="java.sql.*"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
-<%@page import="dbDAO.UserDAO"%>
-<%@page import="dbDAO.sqlPassword"%>
+<%@page import="model.UserDAO"%>
+<%@page import="model.sqlPassword"%>
 
 <%@ include file="../View(FrontEnd)/AdminPanel/scriplets/UserLoginValidation.jsp"%>
 

@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import dbDAO.BookDAO;
+import model.BookDAO;
 
 /**
  * Servlet implementation class addBook

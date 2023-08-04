@@ -1,4 +1,4 @@
-package dbDAO;
+package model;
 import javax.servlet.http.Part;
 
 import java.io.File;

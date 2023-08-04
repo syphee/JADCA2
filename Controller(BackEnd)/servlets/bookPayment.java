@@ -2,7 +2,8 @@ package servlets;
 
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.PayPalRESTException;
- 
+
+import model.BookDAO;
 
 import java.io.IOException;
 
@@ -13,8 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import dbDAO.BookDAO;
 
 import java.util.ArrayList;
 /**

@@ -1,10 +1,8 @@
-package orderDAO;
+package model;
 
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
-
-import dbDAO.DBConnection;
 
 public class OrderDAO {
     public int createOrder(int userid, float total,HashMap<String,Integer> order_items) throws SQLException, ClassNotFoundException {
