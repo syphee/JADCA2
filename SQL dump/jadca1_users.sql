@@ -28,11 +28,15 @@ CREATE TABLE `users` (
   `password` varchar(45) NOT NULL,
   `role` varchar(45) NOT NULL,
   `pic` varchar(255) NOT NULL DEFAULT 'default_profile_pic.png',
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(45) DEFAULT NULL,
+  `contact_number` varchar(45) DEFAULT NULL,
+  `address` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`userid`),
   UNIQUE KEY `user_id_UNIQUE` (`userid`),
   UNIQUE KEY `email_UNIQUE` (`email`),
   CONSTRAINT `chk_role` CHECK ((`role` in (_utf8mb4'user',_utf8mb4'admin')))
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Will only accept either "admin", or "user" explicitly.';
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Will only accept either "admin", or "user" explicitly.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +45,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'SkyeRyan.21@gmail.com','Skye123','admin','default_profile_pic.png'),(2,'JamesEvans@gmail.com','James123','user','default_profile_pic.png'),(3,'CustomerTest@example.com','Customer123','user','default_profile_pic.png'),(4,'testing123','abc123','admin','default_profile_pic.png'),(5,'oogabooga@gmail.com','urmom','user','default_profile_pic.png'),(8,'a@a','test123','user','default_profile_pic.png'),(9,'a2@a','test123','user','default_profile_pic.png'),(10,'a@e','tester123','user','default_profile_pic.png'),(11,'e@e','testmouse','user','default_profile_pic.png'),(12,'r@r','test123','user','default_profile_pic.png'),(14,'P@p','ppp123','user','default_profile_pic.png'),(15,'l@l','lll123','user','default_profile_pic.png'),(16,'k@kkk','kek123','user','default_profile_pic.png');
+INSERT INTO `users` VALUES (1,'SkyeRyan.21@gmail.com','Skye123','admin','20221202_214226.jpg','asd','asd','asd','aaaaaaa'),(2,'JamesEvans@gmail.com','James123','admin','default_profile_pic.png',NULL,NULL,NULL,NULL),(3,'CustomerTest@example.com','Customer123','user','default_profile_pic.png',NULL,NULL,NULL,NULL),(4,'testing123','abc123','admin','default_profile_pic.png',NULL,NULL,NULL,NULL),(5,'oogabooga@gmail.com','urmom','user','default_profile_pic.png',NULL,NULL,NULL,NULL),(8,'a@a','test123','user','default_profile_pic.png',NULL,NULL,NULL,NULL),(9,'a2@a','test123','user','default_profile_pic.png',NULL,NULL,NULL,NULL),(10,'a@e','tester123','user','default_profile_pic.png',NULL,NULL,NULL,NULL),(11,'e@e','testmouse','user','default_profile_pic.png',NULL,NULL,NULL,NULL),(12,'r@r','test123','user','default_profile_pic.png',NULL,NULL,NULL,NULL),(14,'P@p','ppp123','user','default_profile_pic.png',NULL,NULL,NULL,NULL),(15,'l@l','lll123','user','default_profile_pic.png',NULL,NULL,NULL,NULL),(16,'k@kkk','kek123','user','default_profile_pic.png',NULL,NULL,NULL,NULL),(18,'u1@gmail.com','p1','user','default_profile_pic.png',NULL,NULL,NULL,NULL),(20,'at@at.com','at123','user','default_profile_pic.png',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-16 18:50:24
+-- Dump completed on 2023-08-04 14:05:52
