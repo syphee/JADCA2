@@ -1,0 +1,134 @@
+package servlets;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+import java.sql.*;
+
+/**
+ * Servlet implementation class VerifyUserServlet
+ */
+@WebServlet("/VerifyUser")
+public class VerifyUser extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public VerifyUser() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+		
+		// verification ----------------------------------
+		String loginid = request.getParameter("loginid");
+		String password = request.getParameter("password");
+		
+		String output = "";
+
+		//to redirect user if tries to bypass login by entering http://localhost:8080/Practical_2/Practical%202/VerifyUser.jsp without logging in
+		if(loginid == null || password == null){
+			response.sendRedirect("login.jsp");
+		}else{
+			
+			// for loop to check here
+			if (VerifyLogin(loginid,password)) {
+
+				System.out.println("Logged in!");
+
+				response.sendRedirect("./../View(FrontEnd)/home.jsp?id=" + loginid);
+			}else{
+				
+				output = "You have entered an invalid ID/Password";
+				response.sendRedirect("./../View(FrontEnd)/login.jsp?errCode=invalidLogin");
+				System.out.println(output);
+			}
+		}
+		
+		
+		
+	}
+	
+	public boolean VerifyLogin(String INPUT_id,String INPUT_password){
+		
+		// login boolean validation
+		//boolean output = false;
+		ResultSet rs;
+		String name;
+		String password;
+		int id;
+		boolean output = false;
+		
+		
+		// get users
+		try {
+	    	
+	        // Step1: Load JDBC Driver
+	         Class.forName("com.mysql.jdbc.Driver");  
+
+	        // Step 2: Define Connection URL
+	        String connURL = "jdbc:mysql://localhost/db1?user=root&password=spJEAL602336&serverTimezone=UTC";
+
+	        // Step 3: Establish connection to URL
+	        Connection conn = DriverManager.getConnection(connURL); 
+	       // Step 4: Create Statement object
+	        Statement stmt = conn.createStatement();
+	        // Step 5: Execute SQL Command
+	        String sqlStr = "SELECT * FROM member WHERE name=? AND password=?";         
+	        //
+	        PreparedStatement pstmt = conn.prepareStatement(sqlStr);
+	    
+		    // store query
+		    // 1 stands for the name,2 for id
+		    pstmt.setString(1,INPUT_id);
+		    pstmt.setString(2,INPUT_password);
+		    
+		 
+		    // exec
+		    rs = pstmt.executeQuery();
+		    
+		    while (rs.next()) {                                
+		    	 name = rs.getString("name");     
+		    	 password = rs.getString("password");
+	        
+	          
+		       if(INPUT_id.equals(name) && INPUT_password.equals(password) ){
+
+				output = true ;
+				break;
+		        }
+
+		    }
+	        // Step 7: Close connection
+	        conn.close();
+	   } catch (Exception e) {
+	      System.out.println("Error :" + e);
+	   }
+		
+		// return the redirect
+		return output;
+	}
+}

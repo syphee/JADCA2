@@ -3,8 +3,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import dbDAO.sqlPassword;
-
 public class DBConnection {
 
 //	public DBConnection() {
@@ -13,11 +11,9 @@ public class DBConnection {
 
 	public static Connection getConnection() {
 		
-		String password = sqlPassword.getSQLPassword();
-		
-		String dbUrl = "jdbc:mysql://localhost/jadca1";
+		String dbUrl = "jdbc:mysql://localhost/db1";
 		String dbUser = "root";
-		String dbPassword = password;
+		String dbPassword = "Minecrafr@09";
 		String dbClass = "com.mysql.jdbc.Driver";
 		
 		Connection connection = null;

@@ -8,7 +8,7 @@ public class OrderDAO {
     public int createOrder(int userid, float total) throws SQLException, ClassNotFoundException {
         int record = 0;
         int nrow = 0;
-        Connection conn;
+        Connection conn = null;
         try {
             conn = DBConnection.getConnection();
             String sqlString = "INSERT INTO orders (userid, order_date, total_amount) VALUES (?, CURDATE(), ?)";
@@ -26,7 +26,11 @@ public class OrderDAO {
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
-        } 
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+        }
         return record;
     }
 }

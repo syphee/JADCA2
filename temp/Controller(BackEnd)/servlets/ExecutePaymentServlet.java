@@ -11,8 +11,7 @@ import com.paypal.api.payments.*;
 import com.paypal.base.rest.PayPalRESTException;
 
 import orderDAO.OrderDAO;
-
-import javax.servlet.http.HttpSession;
+import orderDAO.orders;
  
 @WebServlet("/ExecutePaymentServlet")
 public class ExecutePaymentServlet extends HttpServlet {
@@ -28,52 +27,52 @@ public class ExecutePaymentServlet extends HttpServlet {
  
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    	
     	HttpSession session = request.getSession();
-		
-
+    	
         String paymentId = request.getParameter("paymentId");
         String payerId = request.getParameter("PayerID");
-        int userid = 0;
+        
+        int userid = (Integer)session.getAttribute("user_id");
+ 
         try {
-        	userid = (Integer) session.getAttribute("userid");
-        	System.out.println("Payment recieved with userid : " + userid);
-        	
             PaymentServices paymentServices = new PaymentServices();
             Payment payment = paymentServices.executePayment(paymentId, payerId);
              
             PayerInfo payerInfo = payment.getPayer().getPayerInfo();
             Transaction transaction = payment.getTransactions().get(0);
             
-            // Get the current date
-
-            // Convert the java.util.Date to java.sql.Date
-
-            OrderDAO Orders = new OrderDAO();
-
-            float TotalAmount = Float.parseFloat(transaction.getAmount().getTotal());
-            
-            int orderID = Orders.createOrder(userid,TotalAmount);
-            
-            System.out.println("ExecutePaymentServlet - Order ID Captured : " + orderID);
-            
-            
-             
             request.setAttribute("payer", payerInfo);
-            request.setAttribute("transaction", transaction);          
- 
+            request.setAttribute("transaction",transaction);
+            
+            // Get the current date
+            
+            // Convert the java.util.Date to java.sql.Date
+            
+            OrderDAO Orders = new OrderDAO();
+            
+            //order capturing commences here.
+            float TotalAmount = Float.parseFloat(transaction.getAmount().getTotal());
+            int orderID = Orders.createOrder((userid),TotalAmount);
+             
+                 
+            
+     
             request.getRequestDispatcher("/BookstoreCA1/JAD-CA1/View(FrontEnd)/receipt.jsp").forward(request, response);
              	
+            //error handling exceptions: 
+            
         } catch (PayPalRESTException ex) {
             request.setAttribute("errorMessage", ex.getMessage());
             ex.printStackTrace();
             request.getRequestDispatcher("/BookstoreCA1/JAD-CA1/View(FrontEnd)/error.jsp").forward(request, response);
-        } catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch(Exception ex) {
-			ex.printStackTrace();
-		}
+        } catch (ClassNotFoundException ex) {
+            // Handle the ClassNotFoundException here
+            ex.printStackTrace();
+            request.getRequestDispatcher("/BookstoreCA1/JAD-CA1/View(FrontEnd)/error.jsp").forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.getRequestDispatcher("/BookstoreCA1/JAD-CA1/View(FrontEnd)/error.jsp").forward(request, response);
+        }
     }
  
 }

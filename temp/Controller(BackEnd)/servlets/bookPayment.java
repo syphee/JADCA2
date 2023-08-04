@@ -1,9 +1,5 @@
 package servlets;
 
-import com.paypal.api.payments.*;
-import com.paypal.base.rest.PayPalRESTException;
- 
-
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -48,9 +44,6 @@ public class bookPayment extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		// for now its just redirect to home, reset cart
-		
-		PayerInfo payerInfo = (PayerInfo)request.getAttribute("payer");
-		Transaction transaction = (Transaction)request.getAttribute("transaction");
 		
 		// load the cart
 		ArrayList<String> shopping_cart = (ArrayList<String>)session.getAttribute("shopping_cart");

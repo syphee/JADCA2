@@ -1,12 +1,6 @@
 package servlets;
 
-import com.paypal.api.payments.*;
-import com.paypal.base.rest.PayPalRESTException;
- 
-
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,20 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dbDAO.BookDAO;
-
 import java.util.ArrayList;
+
 /**
- * Servlet implementation class bookPayment
+ * Servlet implementation class removeItem
  */
-@WebServlet("/bookPayment")
-public class bookPayment extends HttpServlet {
+@WebServlet("/removeItem")
+public class removeItem extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public bookPayment() {
+    public removeItem() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,34 +38,31 @@ public class bookPayment extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
 		HttpSession session = request.getSession();
-		// for now its just redirect to home, reset cart
 		
-		PayerInfo payerInfo = (PayerInfo)request.getAttribute("payer");
-		Transaction transaction = (Transaction)request.getAttribute("transaction");
-		
-		// load the cart
+		// get current cart
 		ArrayList<String> shopping_cart = (ArrayList<String>)session.getAttribute("shopping_cart");
-		// then clear stock
-		  try {
-	        	
-	        	BookDAO.editBookStock(shopping_cart);
-	    		// then clear cart
-	    		shopping_cart = new ArrayList<String>();
-	    		session.setAttribute("shopping_cart",shopping_cart);
-	    		
-	    		String message = "Thank you for purchasing!";
+		
+		
+		// get deleted book name
+		String remove_book = request.getParameter("book_id");
+		
+		// search the cart for the same book , then delete and break out from loop;
+		for(String a :  shopping_cart ) {
+			if(a.equals(remove_book)) {
+				
+				int b = shopping_cart.indexOf(remove_book);
+				System.out.println("Removing book : " + shopping_cart.get(b));
+				shopping_cart.remove(b);
+				break;
+			}
+		}
+		
+		// then set updated shopping cart
+		session.setAttribute("shopping_cart",shopping_cart);
 
-	    		
-	    		response.sendRedirect(request.getContextPath()+"/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp"+ "?c=success&m=" + message );
-	    	
-	            
-	        }catch(Exception ex) {
-	        	String message = "Book payment failed!";
-	    		response.sendRedirect(request.getContextPath()+"/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp"+ "?c=false&m=" + message );
-
-	        }
+		
+		response.sendRedirect(request.getContextPath()+"/BookstoreCA1/JAD-CA1/View(FrontEnd)/checkout.jsp");
 		
 
 	}

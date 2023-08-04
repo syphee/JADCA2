@@ -6,7 +6,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.paypal.base.rest.PayPalRESTException;
 //import com.paypal.base.rest.*;
@@ -48,26 +47,13 @@ public class AuthorizePaymentServlet extends HttpServlet {
 		//store the queried data into a variable
 		//
 		
-			String contextPath = request.getContentType();
+			String contextPath = request.getContextPath();
 		  	String product = request.getParameter("product");
 	        String subtotal = request.getParameter("subtotal");
 	        String shipping = request.getParameter("shipping");
 	        String tax = request.getParameter("tax");
 	        String total = request.getParameter("total");
-	        
-	        //set userid 
-	        HttpSession session = request.getSession();
-	        int userid = 0;
-	        try {
-	        	userid = (Integer) session.getAttribute("userid");
-	        	System.out.println("Payment being authorized with userid : " + userid);
-	        	request.setAttribute("userid",userid);
-	    		
-	        }catch(Exception ex) {
-	        	ex.printStackTrace();	        
-	        	}
-	        
-	        
+		
 	        OrderDetail orderDetail = new OrderDetail(product, subtotal, shipping, tax, total);
 
 	        try {
