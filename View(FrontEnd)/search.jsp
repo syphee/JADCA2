@@ -61,7 +61,7 @@ System.out.println(book_query);
 System.out.println(genre_query);
 System.out.println(author_query);
 
-if(book_query == "null" ){
+if(book_query == null ){
 	book_query = "";
 	q3 = "and title LIKE CONCAT('%'," +  "\"" + book_query + "\"" +  " , '%')";
 }else{

@@ -27,19 +27,7 @@
               // if book has more than 1 quantity
               if(quantity > 10){
               %>
-                <div class="col">
-                 <form action="<%=request.getContextPath()%>/addToCart" method="post">
-	                	<input type="hidden" name="s" value="<%=title%>"/>
-	                	<input type="hidden" name="book_id" value="<%=id%>"/>
-	                	<input type="hidden" name="quick_rent" value="true"/>
-	                  	<input type="submit" class="btn btn-danger rounded rounded-pill" value="Quick rent">
-	                  	<input
-				type="hidden" value="<%=request.getParameter("s") %>" name="search" /> <input
-				type="hidden" value="<%=request.getParameter("genre") %>" name="genre" /> <input
-				type="hidden" value="<%=request.getParameter("author_query") %>" name="author_query" /> <input
-				type="hidden" value="<%=request.getParameter("sortBy") %>" name="sortBy" />
-                 </form>
-                </div>
+                
                 <div class="col">
                 	<form action="<%=request.getContextPath()%>/addToCart" method="post">
 	                	<input type="hidden" name="s" value="<%=id%>"/>
@@ -60,19 +48,7 @@
               // if book has more than 1 quantity
               if(quantity > 0){
               %>
-                <div class="col">
-                 <form action="<%=request.getContextPath()%>/addToCart" method="post">
-	                	<input type="hidden" name="s" value="<%=title%>"/>
-	                	<input type="hidden" name="book_id" value="<%=id%>"/>
-	                	<input type="hidden" name="quick_rent" value="true"/>
-	                  	<input type="submit" class="btn btn-danger rounded rounded-pill" value="Quick rent">
-	                  	<input
-				type="hidden" value="<%=request.getParameter("s") %>" name="search" /> <input
-				type="hidden" value="<%=request.getParameter("genre") %>" name="genre" /> <input
-				type="hidden" value="<%=request.getParameter("author_query") %>" name="author_query" /> <input
-				type="hidden" value="<%=request.getParameter("sortBy") %>" name="sortBy" />
-                 </form>
-                </div>
+                
                 <div class="col">
                 	<form action="<%=request.getContextPath()%>/addToCart" method="post">
 	                	<input type="hidden" name="s" value="<%=id%>"/>
