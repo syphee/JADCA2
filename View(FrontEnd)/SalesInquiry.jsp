@@ -32,10 +32,11 @@ if (shopping_cart == null) {
 	response.sendRedirect("login.jsp");
 }
 
+/* 
 if(role.equals("Guest") ){ 
 	
 	response.sendRedirect("home.jsp?c=false&m=You%20are%20not%20logged%20in!");
-}
+} */
 
 
 %>
@@ -125,7 +126,7 @@ if(role.equals("Guest") ){
 <body>
 	<%@include file="assets/header/header.jsp"%>
 	<%@include file="assets/messagePopUp.jsp"%>
-	
+		
 	
 	<!--  do the date range later -->
 	<!--  for now just get the data to display -->
@@ -144,9 +145,6 @@ if(role.equals("Guest") ){
   <input type="submit">
   
   
-  
-  
-  
 </form> --%>
 
 <table>
@@ -159,8 +157,8 @@ if(role.equals("Guest") ){
     </tr>
     
     <%
-        @SuppressWarnings("unchecked")
-        ArrayList<Sales> salesList = (ArrayList<Sales>) request.getAttribute("salesList");
+/*         @SuppressWarnings("unchecked")
+ */        ArrayList<Sales> salesList = (ArrayList<Sales>) session.getAttribute("Sales");
 		  
           
         if (salesList != null) {
@@ -172,7 +170,8 @@ if(role.equals("Guest") ){
         <td><%= salesList.get(i).getLast_name() %></td>
         <td><%= salesList.get(i).getOrder_date() %></td>
         <td><%= salesList.get(i).getTotal_amount() %></td>
-        <% out.println(salesList);%>
+      
+        
     </tr>
     <%
             }
@@ -183,7 +182,7 @@ if(role.equals("Guest") ){
     </tr>
     <%
     
-    	System.out.println("data no print im sad");
+    	System.out.println("data no print i am sad for REAL");
         }
     %>
 </table>

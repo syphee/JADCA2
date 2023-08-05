@@ -27,12 +27,20 @@ public class SalesDAO {
       		
       		while(rs.next()) {
       			Sales sale = new Sales();
+      			
       			sale.setOrderid(rs.getInt("order_id"));
       			sale.setFirst_name(rs.getString("first_name"));
       			sale.setLast_name(rs.getString("last_name"));
       			sale.setOrder_date(rs.getString("order_date"));
       			sale.setTotal_amount(rs.getFloat("total_amount"));
       			
+      			//debugging
+      			System.out.println(sale.getFirst_name());
+      			System.out.println(sale.getLast_name());
+      			System.out.println(sale.getOrder_date());
+      			System.out.println(sale.getOrder_date());
+      			System.out.println(sale.getTotal_amount());
+
       			
       			//pushing the rs into the arrayList
       			sales.add(sale);
@@ -70,7 +78,7 @@ public class SalesDAO {
 			conn.close();
 		}
 		//returns sales everything the method is called :)
-		System.out.println(sales);
+		
 		return sales;
 		
 		
