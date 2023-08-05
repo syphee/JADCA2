@@ -6,6 +6,8 @@
 <%@ page import="model.UserDAO"%>
 <%@ page import="java.sql.*"%>
 <%@ page import="model.sqlPassword"%>
+<%@ page import="model.Sales" %>
+<%@ page import="model.SalesDAO" %>
 
 <%@ include
 	file="../View(FrontEnd)/AdminPanel/scriplets/UserLoginValidation.jsp"%>
@@ -20,6 +22,7 @@ String URI = "";
 <%
 // init cart function
 ArrayList<String> shopping_cart;
+
 
 shopping_cart = (ArrayList<String>) session.getAttribute("shopping_cart");
 
@@ -124,7 +127,9 @@ if(role.equals("Guest") ){
 	<%@include file="assets/messagePopUp.jsp"%>
 	
 	
-	<h1>Choose Date Range</h1>
+	<!--  do the date range later -->
+	<!--  for now just get the data to display -->
+<%-- 	<h1>Choose Date Range</h1>
 
 		<!-- wrap in form for Date pick -->
           <form action="<%=request.getContextPath()%>/DatePicker" method="post">
@@ -141,7 +146,50 @@ if(role.equals("Guest") ){
   
   
   
-</form>
+  
+</form> --%>
+
+<table>
+    <tr>
+        <th>Order ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Order Date</th>
+        <th>Total Amount</th>
+    </tr>
+    
+    <%
+        @SuppressWarnings("unchecked")
+        ArrayList<Sales> salesList = (ArrayList<Sales>) request.getAttribute("salesList");
+		  
+          
+        if (salesList != null) {
+            for (int i = 0; i < salesList.size(); i++) {
+    %>
+    <tr>
+        <td><%= salesList.get(i).getOrderid() %></td>
+        <td><%= salesList.get(i).getFirst_name() %></td>
+        <td><%= salesList.get(i).getLast_name() %></td>
+        <td><%= salesList.get(i).getOrder_date() %></td>
+        <td><%= salesList.get(i).getTotal_amount() %></td>
+        <% out.println(salesList);%>
+    </tr>
+    <%
+            }
+        } else {
+    %>
+    <tr>
+        <td colspan="5">No sales data available.</td>
+    </tr>
+    <%
+    
+    	System.out.println("data no print im sad");
+        }
+    %>
+</table>
+
+
+
 	
 	
 	

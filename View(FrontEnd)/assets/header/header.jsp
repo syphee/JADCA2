@@ -33,18 +33,22 @@
 					
 					<!--  if admin, See Sales Inquiry Link -->
 				<% 
+				
 				if (role.equals("admin")) {
 				%>
+				
+				<form action="<%= request.getContextPath()%>/SalesReportServlet" method="post">
 					<li class="nav-item mb-0 mx-1 my-0">
     				<a href="<%= request.getContextPath() %>/BookstoreCA1/JAD-CA1/View(FrontEnd)/SalesInquiry.jsp"
         			class="nav-link text-black fw-semibold hover-underline-animation">
         			Sales Inquiry
     				</a>
 						</li>
+						</form>
+						
 						<%
 						}
 						%>	
-					
 
 			</ul>
 

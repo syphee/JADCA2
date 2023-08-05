@@ -10,15 +10,16 @@ import model.DBConnection;
 public class SalesDAO {
 
 	public ArrayList<Sales> getSales() throws SQLException, ClassNotFoundException{
+		
+		//intialize into sales variable
 		ArrayList<Sales> sales = new ArrayList<Sales>();
 		
 		Connection conn = null;
 		
+		
 		try {
 			conn = DBConnection.getConnection();
-			String sqlString = "select a.userid as order_id, b.first_name, b.last_name, "
-					+ "a.order_date, a.total_amount"
-					+ " FROM orders a, users b where a.userid = b.userid;";	
+			String sqlString = "select a.userid as order_id, b.first_name, b.last_name, a.order_date, a.total_amount FROM orders a, users b where a.userid = b.userid;";	
 					
       		PreparedStatement pstmt = conn.prepareStatement(sqlString);
       		ResultSet rs = pstmt.executeQuery();
@@ -31,6 +32,10 @@ public class SalesDAO {
       			sale.setLast_name(rs.getString("last_name"));
       			sale.setOrder_date(rs.getString("order_date"));
       			sale.setTotal_amount(rs.getFloat("total_amount"));
+      			
+      			
+      			//pushing the rs into the arrayList
+      			sales.add(sale);
       			
       			
       				 // can try to later make convert it to a DATETIME data 
@@ -52,17 +57,26 @@ public class SalesDAO {
       			
       			
       		}
+      		
+      		//catch any error
+      		
 		}catch (Exception e) {
 			System.out.println("not working");
 			System.out.println("...UserDetails" + e);
-			
+			e.printStackTrace();
+			System.out.println();
 			
 		} finally {
 			conn.close();
 		}
-		
+		//returns sales everything the method is called :)
+		System.out.println(sales);
 		return sales;
 		
+		
 	}
+	
+	
+	
 	
 }
