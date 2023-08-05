@@ -174,9 +174,9 @@ System.out.println("Number of books found in DB : " + amtOfResults);
 
 
 <link rel="stylesheet"
-	href="/CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/styles.css">
+	href="/jadca2_jadca2/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/styles.css">
 <link rel="stylesheet"
-	href="/CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/animations.css">
+	href="/jadca2_jadca2/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/styles.css">
 
 
 <style type="text/css">
