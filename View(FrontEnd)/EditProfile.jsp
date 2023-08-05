@@ -68,7 +68,7 @@ if (role.equals("Guest")) {
 <body class="bg-black">
 	<%@include file="assets/header/header.jsp"%>
 	<%@include file="assets/messagePopUp.jsp"%>
-	<div class="container ">
+	<div class="container-md">
 		<h1 class="text-light">
 			My Profile
 			<button type="button" class="btn btn-light  text-black"
@@ -330,7 +330,7 @@ if (role.equals("Guest")) {
 
 		<!-- End of modal -->
 
-		<div class="row">
+		<div class="row container">
 
 
 
@@ -360,11 +360,11 @@ if (role.equals("Guest")) {
 							<!-- Order History -->
 							<div class="tab-pane fade show active" id="home-tab-pane"
 								role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-								<div class="container">
+								<div >
 									<div class="tab-content" id="myTabContent">
 										<div class="tab-pane fade show active" id="home-tab-pane"
 											role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-											<div class="row">
+											
 
 								<%
 								ArrayList<Integer> order_ids = new ArrayList<Integer>();
@@ -409,11 +409,14 @@ if (role.equals("Guest")) {
 								// query for user's bought books, grouping according to order id
 								for (Integer a : order_ids) {
 									%>
+									<div class="row">
 									<hr class="bg-danger my-1 opacity-100">
 																					<div class="col">
 													<h1 class="text-light">Order #<%=order_ids.indexOf(a)+1 %></h1>
 												</div>
+																							</div>
 												<% 
+												
 									try {
 										int order_id_number = 0;
 										int book_id = 0;
@@ -481,7 +484,7 @@ if (role.equals("Guest")) {
 												%>
 
 
-											</div>
+											
 
 											
 											<div class="row">
@@ -551,14 +554,14 @@ if (role.equals("Guest")) {
 
 
 
-										</div>
+										
 
 
 
 
 
 
-									</div>
+									
 
 								
 												<%} 
@@ -579,6 +582,8 @@ if (role.equals("Guest")) {
 								}
 								%>
 								</div>
+								</div>
+								</div>
 								<div class="tab-pane fade" id="profile-tab-pane"
 											role="tabpanel" aria-labelledby="profile-tab" tabindex="0">...</div>
 
@@ -586,9 +591,11 @@ if (role.equals("Guest")) {
 
 							</div>
 
+
+
 							<!-- Checkout codes -->
 							<div class="tab-pane fade " id="profile-tab-pane" role="tabpanel"
-								aria-labelledby="profile-tab" tabindex="0">...</div>
+								aria-labelledby="profile-tab" tabindex="0">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
 
 						</div>
 
@@ -608,9 +615,6 @@ if (role.equals("Guest")) {
 
 
 
-	</div>
-
-	</div>
 
 
 	<%@ include file="assets/footer/footer.jsp"%>
