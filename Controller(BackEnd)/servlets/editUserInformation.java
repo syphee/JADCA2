@@ -15,22 +15,16 @@ import javax.servlet.http.Part;
 import dbDAO.UserDAO;
 
 /**
- * Servlet implementation class editUser
+ * Servlet implementation class editUserInformation
  */
-@WebServlet("/editUser")
-@MultipartConfig(
-        fileSizeThreshold   = 1024 * 1024 * 1,  // 1 MB
-        maxFileSize         = 1024 * 1024 * 10, // 10 MB
-        maxRequestSize      = 1024 * 1024 * 15, // 15 MB
-        location            = "D:\\Eclipse\\school work\\CA2\\jadca2\\jadca2\\src\\main\\webapp\\BookstoreCA1\\JAD-CA1\\View(FrontEnd)\\assets\\user-imgs"
-)
-public class editUser extends HttpServlet {
+@WebServlet("/editUserInformation")
+public class editUserInformation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public editUser() {
+    public editUserInformation() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -48,14 +42,14 @@ public class editUser extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	
+
 		String user_id = request.getParameter("user_id");
 		 
 		 
 		 
 		 String user_email = request.getParameter("user_email");
 		
-		 Part user_pic = request.getPart("user_pic");
+
 		 String user_first_name = request.getParameter("user_first_name");
 		 String user_role = request.getParameter("user_role");
 		 String user_last_name = request.getParameter("user_last_name");
@@ -92,7 +86,7 @@ public class editUser extends HttpServlet {
 			System.out.println("user_id: " + user_id);
 
 			System.out.println("user_email: " + user_email);
-			System.out.println("user_pic: " + user_pic);
+
 			System.out.println("user_first_name: " + user_first_name);
 			System.out.println("user_last_name: " + user_last_name);
 			System.out.println("user_contact: " + user_contact);
@@ -100,7 +94,7 @@ public class editUser extends HttpServlet {
 			// retrieval of info
 			 
 			 
-			 UserDAO.editProfile(user_id,user_email,user_pic,user_first_name,user_last_name,user_contact,user_address);
+			 UserDAO.editUser(user_id,user_first_name,user_last_name,user_contact,user_address,user_role);
 			 
 			//String output = "Added book successfully!";
 	        	String output2 = "Editted user with user ID :" + user_id + " successfully!";
@@ -113,17 +107,11 @@ public class editUser extends HttpServlet {
 	    	     		+ output2 + "\r\n"
 	    	     		+ "  <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>\r\n"
 	    	     		+ "</div>";
+	        	
+	        	
 	        	out.print(message);  
-	        	
-	        	
-	        	if(currentPage.equals("/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel/Users/editUser/editUserFeature.jsp")) {
-	        		RequestDispatcher rd=request.getRequestDispatcher("/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel/Users/editUser/editUserFeature.jsp");  
-		            rd.include(request, response);  
-	        	}else {
-	        		String output = "Successfully editted profile!";
-	        		String redirect = (request.getContextPath() + currentPage + "?c=success&m=" + output).toString();
-	        		response.sendRedirect(redirect);
-	        	}
+	            RequestDispatcher rd=request.getRequestDispatcher("/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel/Users/editUser/editUserFeature.jsp");  
+	            rd.include(request, response);  
 	            
 			 
 		}catch(Exception ex) {
@@ -143,19 +131,11 @@ public class editUser extends HttpServlet {
     	     		+ output + "\r\n"
     	     		+ "  <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>\r\n"
     	     		+ "</div>";
-        	
+
         	out.print(message);  
-        	
-        	if(currentPage.equals("/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel/Users/editUser/editUserFeature.jsp")) {
-        		RequestDispatcher rd=request.getRequestDispatcher("/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel/Users/editUser/editUserFeature.jsp");  
-	            rd.include(request, response);  
-        	}else {
-        		String output2 = "Edit profile failed! Reason : " + ex;
-        		String redirect = (request.getContextPath() + currentPage + "?c=false&m=" + output2).toString();
-        		response.sendRedirect(redirect);
-        	}
-             
-			
+            RequestDispatcher rd=request.getRequestDispatcher("/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel/Users/editUser/editUserFeature.jsp");  
+            rd.include(request, response);  
+            
 		}
 	}
 

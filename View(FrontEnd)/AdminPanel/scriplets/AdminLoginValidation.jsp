@@ -67,7 +67,7 @@ if (cookies != null && rememberMe == true) {
 			break;
 
 		} else {
-			response.sendRedirect("login.jsp");
+			response.sendRedirect(request.getContextPath() + "/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp");
 			break;
 		}
 
@@ -93,7 +93,7 @@ if (cookies != null && rememberMe == true) {
 			}
 		} catch (Exception ex) {
 			System.out.println("login failed.");
-			response.sendRedirect("login.jsp");
+			response.sendRedirect(request.getContextPath() + "/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp");
 		}
 
 	}
@@ -131,7 +131,7 @@ if (cookies != null && rememberMe == true) {
 		
 	} catch (Exception ex) {
 		System.out.println("login failed.");
-		response.sendRedirect("login.jsp");
+		response.sendRedirect(request.getContextPath()+"/BookstoreCA1/JAD-CA1/View(FrontEnd)/login.jsp");
 	}
 }
 %>
