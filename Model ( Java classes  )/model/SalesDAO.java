@@ -63,7 +63,7 @@ public class SalesDAO {
 //      		    // Add the sale to the ArrayList
 //      		    sales.add(sale);
       			
-      			
+      				
       			
       		}
       		

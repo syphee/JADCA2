@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import com.paypal.base.rest.PayPalRESTException;
 //import com.paypal.base.rest.*;
 
+import model.OrderDetail;
+
 /**
  * Servlet implementation class AuthorizePaymentServlet
  */
