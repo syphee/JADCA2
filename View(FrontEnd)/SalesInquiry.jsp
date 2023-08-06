@@ -213,8 +213,15 @@ if(role.equals("Guest") ){
     if (topSalesList != null && !topSalesList.isEmpty()) {
 %>
 
+
 <div class="center-fuck">
 <h2>Top 10 Sales</h2>
+</div>
+
+<div class="center-fuck">
+<a href="<%= request.getContextPath() %>/DownloadPDFServlet?filePath=<%= session.getAttribute("topSalesPDFFilePath") %>">
+    Download Top Sales PDF
+</a>
 </div>
 <div class="table-container">
 
