@@ -71,55 +71,47 @@ if(role.equals("Guest") ){
 <link rel="stylesheet"
 	href="/jadca2_jadca2/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/animations.css">
 	
-	<!--  <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            position: relative;
-        }
-        h1 {
-            color: #333;
-            text-align: center;
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #fff;
-            padding: 10px 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
+	  <style>
+	  
+    .table-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
         table {
             width: 80%;
             border-collapse: collapse;
-            margin-top: 60px; /* Adjust as needed */
+            margin-top: 20px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             background-color: #fff;
             border-radius: 10px;
             overflow: hidden;
         }
+
         th, td {
             border: 1px solid #ddd;
             padding: 10px;
             text-align: left;
         }
+
         th {
             background-color: #f2f2f2;
+            font-weight: bold;
         }
+
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
+
         tr:hover {
             background-color: #e0e0e0;
         }
+        
+        
     </style>
-	 -->
+
 	
 </head>
 <body>
@@ -146,7 +138,7 @@ if(role.equals("Guest") ){
   
   
 </form> --%>
-
+<div class="table-container">
 <table>
     <tr>
         <th>Order ID</th>
@@ -155,10 +147,16 @@ if(role.equals("Guest") ){
         <th>Order Date</th>
         <th>Total Amount</th>
     </tr>
-    
+    	
     <%
-/*         @SuppressWarnings("unchecked")
- */        ArrayList<Sales> salesList = (ArrayList<Sales>) session.getAttribute("Sales");
+   /*     @SuppressWarnings("unchecked")
+   	 ArrayList<Sales> salesList = (ArrayList<Sales>) session.getAttribute("salesList"); */
+		  
+		  try {
+		         // Calling the data access object
+	            SalesDAO salesDAO = new SalesDAO();
+	            ArrayList<Sales> salesList = salesDAO.getSales();
+		  
 		  
           
         if (salesList != null) {
@@ -166,10 +164,10 @@ if(role.equals("Guest") ){
     %>
     <tr>
         <td><%= salesList.get(i).getOrderid() %></td>
-        <td><%= salesList.get(i).getFirst_name() %></td>
-        <td><%= salesList.get(i).getLast_name() %></td>
-        <td><%= salesList.get(i).getOrder_date() %></td>
-        <td><%= salesList.get(i).getTotal_amount() %></td>
+        <td><%= salesList.get(i).getFirstname() %></td>
+        <td><%= salesList.get(i).getLastname() %></td>
+        <td><%= salesList.get(i).getOrderdate() %></td>
+        <td><%= salesList.get(i).getTotalamount() %></td>
       
         
     </tr>
@@ -182,10 +180,18 @@ if(role.equals("Guest") ){
     </tr>
     <%
     
-    	System.out.println("data no print i am sad for REAL");
+    	out.println("data no print i am sad for REAL");
         }
-    %>
+        
+        
+	        } catch (Exception e) {
+	            out.println("An error occurred: " + e.getMessage());
+	        }
+	    %>
+    
 </table>
+</div>
+
 
 
 

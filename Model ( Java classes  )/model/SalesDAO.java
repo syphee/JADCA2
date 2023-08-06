@@ -15,12 +15,15 @@ public class SalesDAO {
 		ArrayList<Sales> sales = new ArrayList<Sales>();
 		
 		Connection conn = null;
+	
 		
 		
 		try {
+			
 			conn = DBConnection.getConnection();
 			String sqlString = "select a.userid as order_id, b.first_name, b.last_name, a.order_date, a.total_amount FROM orders a, users b where a.userid = b.userid;";	
 					
+			
       		PreparedStatement pstmt = conn.prepareStatement(sqlString);
       		ResultSet rs = pstmt.executeQuery();
       		
@@ -29,17 +32,15 @@ public class SalesDAO {
       			Sales sale = new Sales();
       			
       			sale.setOrderid(rs.getInt("order_id"));
-      			sale.setFirst_name(rs.getString("first_name"));
-      			sale.setLast_name(rs.getString("last_name"));
-      			sale.setOrder_date(rs.getString("order_date"));
-      			sale.setTotal_amount(rs.getFloat("total_amount"));
+      			sale.setFirstname(rs.getString("first_name"));
+      			sale.setLastname(rs.getString("last_name"));
+      			sale.setOrderdate(rs.getString("order_date"));
+      			sale.setTotalamount(rs.getFloat("total_amount"));
       			
-      			//debugging
-      			System.out.println(sale.getFirst_name());
-      			System.out.println(sale.getLast_name());
-      			System.out.println(sale.getOrder_date());
-      			System.out.println(sale.getOrder_date());
-      			System.out.println(sale.getTotal_amount());
+      	
+      			
+      
+      	       
 
       			
       			//pushing the rs into the arrayList

@@ -35,8 +35,8 @@
 		<% 
     if (role.equals("admin")) {
 	%>
-    	<form action="<%= request.getContextPath()%>/SalesReportServlet" method="post">
-        	<ul class="navbar-nav ml-auto">
+<%--     	<form action="<%= request.getContextPath()%>/" method="post">
+ --%>        	<ul class="navbar-nav ml-auto">
             	<li class="nav-item mb-0 mx-1 my-0">
                 	<a href="<%= request.getContextPath() %>/BookstoreCA1/JAD-CA1/View(FrontEnd)/SalesInquiry.jsp"
                 	class="nav-link text-black fw-semibold hover-underline-animation">
@@ -44,8 +44,8 @@
                 	</a>
             </li>
         </ul>
-    </form>
-<%
+<!--     </form>
+ --><%
     }
 %>
 
@@ -231,8 +231,8 @@
 												
 								}
 								// Step 7: Close connection
-								System.out.println("Genre output - \n" + output);
-								conn.close();
+/* 								System.out.println("Genre output - \n" + output);
+ */								conn.close();
 							} catch (Exception e) {
 								System.out.println("Error :" + e);
 							}

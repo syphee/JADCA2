@@ -1,39 +1,13 @@
 package model;
 
 public class Sales {
-
+	
 	private int orderid;
 	private int userid;
-	private String first_name;
-	private String last_name;
-	private String order_date;
-	private float total_amount;
-	
-	
-	/**
-	 * @return the first_name
-	 */
-	public String getFirst_name() {
-		return first_name;
-	}
-	/**
-	 * @param first_name the first_name to set
-	 */
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
-	}
-	/**
-	 * @return the last_name
-	 */
-	public String getLast_name() {
-		return last_name;
-	}
-	/**
-	 * @param last_name the last_name to set
-	 */
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
-	}
+	private String firstname;
+	private String lastname;
+	private float totalamount;
+	private String orderdate;
 	/**
 	 * @return the orderid
 	 */
@@ -59,29 +33,64 @@ public class Sales {
 		this.userid = userid;
 	}
 	/**
-	 * @return the order_date
+	 * @return the firstname
 	 */
-	public String getOrder_date() {
-		return order_date;
+	public String getFirstname() {
+		return firstname;
 	}
 	/**
-	 * @param order_date the order_date to set
+	 * @param firstname the firstname to set
 	 */
-	public void setOrder_date(String order_date) {
-		this.order_date = order_date;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 	/**
-	 * @return the total_amount
+	 * @return the lastname
 	 */
-	public float getTotal_amount() {
-		return total_amount;
+	public String getLastname() {
+		return lastname;
 	}
 	/**
-	 * @param total_amount the total_amount to set
+	 * @param lastname the lastname to set
 	 */
-	public void setTotal_amount(float total_amount) {
-		this.total_amount = total_amount;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
+	/**
+	 * @return the totalamount
+	 */
+	public float getTotalamount() {
+		return totalamount;
+	}
+	/**
+	 * @param totalamount the totalamount to set
+	 */
+	public void setTotalamount(float totalamount) {
+		this.totalamount = totalamount;
+	}
+	/**
+	 * @return the orderdate
+	 */
+	public String getOrderdate() {
+		return orderdate;
+	}
+	/**
+	 * @param orderdate the orderdate to set
+	 */
+	public void setOrderdate(String orderdate) {
+		this.orderdate = orderdate;
+	}
+	
+	 @Override
+	    public String toString() {
+	        return "Order{" +
+	                ", customerId=" + orderid +
+	                ", firstname=" + firstname +
+	                ", lastname=" + lastname +
+	                ", orderDate=" +  orderdate +
+	                ", totalAmount=" + totalamount +
+	                '}';
+	    }
 	
 	
 }
