@@ -149,6 +149,12 @@ String output = "";
                                   User
                                 </label>
                               </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="user_role" value="reseller"  id="flexRadioDefault2" >
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                  Reseller
+                                </label>
+                              </div>
                               <%} %>
                               
                               <%
@@ -163,6 +169,34 @@ String output = "";
                                 <input class="form-check-input" type="radio" name="user_role" value="user"  id="flexRadioDefault2" checked>
                                 <label class="form-check-label" for="flexRadioDefault2">
                                   User
+                                </label>
+                              </div>
+                               <div class="form-check">
+                                <input class="form-check-input" type="radio" name="user_role" value="reseller"  id="flexRadioDefault2" >
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                  Reseller
+                                </label>
+                              </div>
+                              <%} %>
+                              
+                               <%
+                              if(edit_user_role.equals("reseller")){
+							  %>
+                                <input class="form-check-input" type="radio" name="user_role" value="admin" id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                  Admin
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="user_role" value="user"  id="flexRadioDefault2" >
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                  User
+                                </label>
+                              </div>
+                               <div class="form-check">
+                                <input class="form-check-input" type="radio" name="user_role" value="reseller"  id="flexRadioDefault2" checked >
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                  Reseller
                                 </label>
                               </div>
                               <%} %>

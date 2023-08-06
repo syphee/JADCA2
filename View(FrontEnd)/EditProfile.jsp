@@ -458,8 +458,42 @@ if (role.equals("Guest")) {
 											%>
 
 												<div
-													class="col text-end d-flex align-items-center justify-content-end text-light">
-													Status : <%=status %>
+													class="col text-end d-flex align-items-center justify-content-end text-light p-1 rounded-pill">
+													<p class="<%
+													if(status.equals("IN_SHIPMENT")){
+													%>
+													 bg-danger
+													<%}%>
+													<%
+													if(status.equals("IN_TRANSPORT") || status.equals("IN_DELIVERY")){
+													%>
+													 bg-warning
+													<%}%>
+													<%
+													// if has delivered
+													if(status.equals("COMPLETED")){
+													%>
+													 bg-success
+													<%}%>
+													">
+													
+													Status : <%
+													if(status.equals("IN_SHIPMENT")){
+													%>
+													 Orders on transport
+													<%}%>
+													<%
+													if(status.equals("IN_TRANSPORT") || status.equals("IN_DELIVERY")){
+													%>
+													 Orders scheduled for Delivery
+													<%}%>
+													<%
+													// if has delivered
+													if(status.equals("COMPLETED")){
+													%>
+													 Completed
+													<%}%>
+													</p>
 													</div>
 											<% 
 											// query for book id 
