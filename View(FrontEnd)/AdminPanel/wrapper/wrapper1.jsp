@@ -205,15 +205,15 @@ html, body {
 											<button class="accordion-button collapsed" type="button"
 												data-bs-toggle="collapse" data-bs-target="#manageRentals"
 												aria-expanded="false" aria-controls="collapseThree">
-												Manage Rentals</button>
+												Manage Orders</button>
 										</h2>
 										<div id="manageRentals" class="accordion-collapse collapse"
 											data-bs-parent="#accordionExample">
 											<div class="accordion-body">
 												<ul
 													class="btn-toggle-nav list-unstyled fw-normal pb-1 small ">
-													<li class="my-4 link-hover"><a href="#"
-														class="link-dark rounded hover-underline-animation text-dark">Manage User Rentals</a></li>
+													<li class="my-4 link-hover"><a href="<%=request.getContextPath() %>/BookstoreCA1/JAD-CA1/View(FrontEnd)/AdminPanel/Orders/manageOrders/manageOrderFeature.jsp"
+														class="link-dark rounded hover-underline-animation text-dark">Manage User Orders</a></li>
 													<li class="my-4 link-hover"><a href="#"
 														class="link-dark rounded hover-underline-animation text-dark">Edit
 													</a></li>
