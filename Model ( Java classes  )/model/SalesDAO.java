@@ -84,8 +84,46 @@ public class SalesDAO {
 		
 		
 	}
-	
-	
-	
+
+	public ArrayList<Sales> getTopSales(int limit) throws SQLException, ClassNotFoundException {
+	    ArrayList<Sales> topSales = new ArrayList<>();
+	    Connection conn = null;
+
+	    try {
+	        conn = DBConnection.getConnection(); // You were missing the assignment here
+
+	        String sqlString = "SELECT a.userid AS order_id, b.first_name, b.last_name, a.order_date, a.total_amount "
+	                + "FROM orders a, users b "
+	                + "WHERE a.userid = b.userid "
+	                + "ORDER BY a.total_amount DESC "
+	                + "LIMIT ?";
+
+	        PreparedStatement pstmt = conn.prepareStatement(sqlString);
+	        pstmt.setInt(1, limit);
+
+	        ResultSet rs = pstmt.executeQuery();
+
+	        while (rs.next()) {
+	            Sales sale = new Sales();
+	            sale.setOrderid(rs.getInt("order_id"));
+	            sale.setFirstname(rs.getString("first_name"));
+	            sale.setLastname(rs.getString("last_name"));
+	            sale.setOrderdate(rs.getString("order_date"));
+	            sale.setTotalamount(rs.getFloat("total_amount"));
+	            topSales.add(sale);
+	        }
+	        //not 
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        throw e; // Rethrow the exception to handle it further up the call stack
+	    } finally {
+	        if (conn != null) {
+	            conn.close();
+	        }
+	    }
+
+	    return topSales;
+	}
+
 	
 }

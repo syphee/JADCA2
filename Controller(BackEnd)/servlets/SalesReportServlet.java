@@ -49,7 +49,8 @@ public class SalesReportServlet extends HttpServlet {
 		  
 		  //debugging System.out.println("Sales list size: " + salesList.size());
 		  
-		  } catch (SQLException | ClassNotFoundException e) { e.printStackTrace();
+		  } catch (SQLException | ClassNotFoundException e) {
+			  e.printStackTrace();
 		  request.setAttribute("errorMessage",
 		  "An error occurred while generating the sales report."); // 
 		  RequestDispatcher dispatcher = request.getRequestDispatcher("/BookstoreCA1/JAD-CA1/View(FrontEnd)/home.jsp"); //

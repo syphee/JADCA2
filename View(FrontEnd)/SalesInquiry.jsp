@@ -109,6 +109,11 @@ if(role.equals("Guest") ){
             background-color: #e0e0e0;
         }
         
+         .center-fuck {
+        text-align: center;
+        margin-top: 20px; /* Adjust margin as needed */
+    }
+        
         
     </style>
 
@@ -138,6 +143,8 @@ if(role.equals("Guest") ){
   
   
 </form> --%>
+
+<!--  dynamic table display for sales history -->
 <div class="table-container">
 <table>
     <tr>
@@ -192,7 +199,51 @@ if(role.equals("Guest") ){
 </table>
 </div>
 
+<!-- button click -->
+<!-- wrap in div -->
 
+<form action="<%= request.getContextPath()%>/TopSalesServlet" method="post">
+<div class="center-fuck">
+<button type="submit">Show Top 10 sales</button>
+</div>
+</form>
+
+<% 
+    ArrayList<Sales> topSalesList = (ArrayList<Sales>) session.getAttribute("topSalesList");
+    if (topSalesList != null && !topSalesList.isEmpty()) {
+%>
+
+<div class="center-fuck">
+<h2>Top 10 Sales</h2>
+</div>
+<div class="table-container">
+
+<table>
+    <tr>
+        <th>Order ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Order Date</th>
+        <th>Total Amount</th>
+    </tr>
+    <% 
+        for (Sales sale : topSalesList) {
+    %>
+    <tr>
+        <td><%= sale.getOrderid() %></td>
+        <td><%= sale.getFirstname() %></td>
+        <td><%= sale.getLastname() %></td>
+        <td><%= sale.getOrderdate() %></td>
+        <td><%= sale.getTotalamount() %></td>
+    </tr>
+    <% 
+        }
+    %>
+</table>
+<% 
+    }
+%>
+</div>
 
 
 	
