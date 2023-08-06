@@ -30,7 +30,7 @@ try{
 
 
 %>
-<%@ include file="../../wrapper/wrapper1.jsp"%>
+
 
 	<div>
 		<header>

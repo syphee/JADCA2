@@ -84,6 +84,7 @@ public class addToCart extends HttpServlet {
 		String title = "";
 		
 		title = request.getParameter("s");
+		String userSearch = request.getParameter("user_search");
 		String book_query = "";
 		String search_query = request.getParameter("search");
 		String genre_query = request.getParameter("genre");
@@ -176,7 +177,7 @@ public class addToCart extends HttpServlet {
 		        		String redirect = (request.getContextPath() + currentPage + "?c=success&m=" + output).toString();
 			        	response.sendRedirect(redirect);
 		        	}else {
-		        		String redirect = (request.getContextPath() + currentPage + "?c=success&m=" + output + "&s=" + search_query + "&genre=" + genre_query + "&author_query=" + author_query + "&sortBy=" + sort_query).toString();
+		        		String redirect = (request.getContextPath() + currentPage + "?c=success&m=" + output + "&s=" + userSearch + "&genre=" + genre_query + "&author_query=" + author_query + "&sortBy=" + sort_query).toString();
 			        	response.sendRedirect(redirect);
 		        	}
 		        	
@@ -196,8 +197,9 @@ public class addToCart extends HttpServlet {
 		    	     		+ "  <button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button>\r\n"
 		    	     		+ "</div>";
 		        	
+		        	
 		        	out.print(message);  
-		        	String redirect = (request.getContextPath() + currentPage + "?c=false&m=" + output).toString();
+		        	String redirect = (request.getContextPath() + currentPage + "?c=false&m=" + output + "&s=" + userSearch + "&genre=" + genre_query + "&author_query=" + author_query + "&sortBy=" + sort_query).toString();
 		            response.sendRedirect(redirect);
 		        }
 	}
@@ -216,7 +218,7 @@ public class addToCart extends HttpServlet {
 	     		+ "</div>";
     	
     	out.print(message);  
-    	String redirect = (request.getContextPath() + currentPage + "?c=false&m=" + output).toString();
+    	String redirect = (request.getContextPath() + currentPage + "?c=false&m=" + output + "&s=" + userSearch + "&genre=" + genre_query + "&author_query=" + author_query + "&sortBy=" + sort_query).toString();
         response.sendRedirect(redirect);
 	}
 
