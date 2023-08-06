@@ -1,4 +1,4 @@
-package servlets;
+package model;
 
 
 public class OrderDetail {

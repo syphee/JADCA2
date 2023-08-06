@@ -5,12 +5,12 @@
 <!--  imports here -->
 <%@page import="java.sql.*"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="dbDAO.sqlPassword"%>
+<%@page import="model.sqlPassword"%>
 <%@page import="java.sql.*"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
-<%@page import="dbDAO.UserDAO"%>
-<%@page import="dbDAO.sqlPassword"%>
+<%@page import="model.UserDAO"%>
+<%@page import="model.sqlPassword"%>
 
 <%@ include file="../View(FrontEnd)/AdminPanel/scriplets/UserLoginValidation.jsp"%>
 
@@ -174,9 +174,9 @@ System.out.println("Number of books found in DB : " + amtOfResults);
 
 
 <link rel="stylesheet"
-	href="/CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/styles.css">
+	href="/jadca2_jadca2/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/styles.css">
 <link rel="stylesheet"
-	href="/CA1/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/animations.css">
+	href="/jadca2_jadca2/BookstoreCA1/JAD-CA1/View(FrontEnd)/assets/css/styles.css">
 
 
 <style type="text/css">

@@ -1,4 +1,4 @@
-<%@page import="dbDAO.UserDAO"%>
+<%@page import="model.UserDAO"%>
 <%@ include file="../AdminPanel/scriplets/AdminLoginValidation.jsp"%>
 <%@ include file="scriplets/validationScriptlet.jsp"%>
 <%@ include file="wrapper/wrapper1.jsp"%>

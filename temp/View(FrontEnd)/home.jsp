@@ -3,8 +3,8 @@
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="dbDAO.UserDAO"%>
-<%@page import="dbDAO.sqlPassword"%>
+<%@page import="model.UserDAO"%>
+<%@page import="model.sqlPassword"%>
 <%@page import="java.sql.*"%>
 
 <%

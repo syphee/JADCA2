@@ -1,6 +1,7 @@
 package servlets;
 
-import dbDAO.sqlPassword;
+import model.BookDAO;
+import model.sqlPassword;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,8 +17,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import dbDAO.BookDAO;
 
 import java.util.ArrayList;
 

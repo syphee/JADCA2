@@ -1,4 +1,4 @@
-
+	
 
 <%@page import="java.util.ArrayList"%>
 
@@ -6,8 +6,8 @@
 	pageEncoding="UTF-8"%>
     <!--  imports here -->
 <%@page import="java.sql.*"%>
-<%@page import="dbDAO.sqlPassword"%>
-<%@page import="dbDAO.UserDAO"%>
+<%@page import="model.sqlPassword"%>
+<%@page import="model.UserDAO"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 
